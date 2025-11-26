@@ -3,12 +3,15 @@ FROM grammatech/ddisasm:latest
 ENV DEBIAN_FRONTEND noninteractive
 ENV ASAN_OPTIONS detect_leaks=0:verify_asan_link_order=false
 
-RUN apt-get update && \
+RUN apt update && \
     apt-get -y install \
     python3 python3-pip \
     build-essential make cmake gcc llvm clang git \
     binutils-dev libunwind-dev libblocksruntime-dev \
+    vim \
     && rm -rf /var/lib/apt/lists/*
+
+RUN cd /tmp && git clone --recursive https://github.com/pauljhan01/teapot.git
 
 ADD ./ /tmp/teapot
 ADD ./scripts /teapot-scripts
@@ -25,4 +28,5 @@ RUN cd /tmp/teapot/honggfuzz && make && make install && \
 RUN rm -rf /tmp/teapot
 
 RUN mkdir /workspace
+RUN cd /workspace && git clone --recursive https://github.com/pauljhan01/teapot.git && git clone https://github.com/pauljhan01/spectre-poc.git
 WORKDIR /workspace
