@@ -8,6 +8,14 @@ described in the paper "Teapot: Efficiently Uncovering Spectre Gadgets in COTS B
 This repository contains the Teapot binary rewriter. 
 The submodule `libcheckpoint_x64` contains the runtime library.
 
+## Spectre setup
+
+Assuming the newest Spectre executable is in the teapot directory
+
+Run usage.sh as `sh usage.sh`
+
+Then run spectre.inst as `./spectre.inst`
+
 ## Requirements
 
 Teapot static rewriter requires a Python version between 3.8 and 3.10.
@@ -84,10 +92,5 @@ $ ./a.inst input.txt
 
 See [TROUBLESHOOTING.md](https://github.com/lin-toto/teapot/blob/main/TROUBLESHOOTING.md) for common issues.
 
-## Spectre setup
-
-Move the Spectre executable into the teapot directory
-
-Run usage.sh as `sh usage.sh`
 
 
