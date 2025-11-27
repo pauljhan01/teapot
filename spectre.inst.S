@@ -4,7 +4,6 @@
 #===================================
 
 .align 8
-.L_0:
 #-----------------------------------
 .globl __data_start
 .type __data_start, @notype
@@ -15,6 +14,7 @@ __data_start:
 .type data_start, @notype
 #-----------------------------------
 data_start:
+.L_0:
           .zero 8
 #-----------------------------------
 .globl __dso_handle
@@ -59,13 +59,13 @@ __bss_start:
 #-----------------------------------
 completed.8061:
           .zero 4
-.L_4018:
 #-----------------------------------
 .globl __TMC_END__
 .hidden __TMC_END__
 .type __TMC_END__, @object
 #-----------------------------------
 __TMC_END__:
+.L_4018:
 #-----------------------------------
 .globl _end
 .type _end, @notype
@@ -78,6 +78,8 @@ _end:
 #===================================
 .section .teapot_transient, "ax"
 #===================================
+
+.__transient_start__teapot__:
 
 _start__teapot__:
 
@@ -107,8 +109,6 @@ _start__teapot__:
             movq (scratchpad+524312),%rax
             xorl %ebx,%ebx
             movb %bl,(dift_reg_tags+7)
-# WARNING: found overlapping blocks at address 318
-.set .__transient_start__teapot__, . - 57
 .L__dift_done__teapot___2:
 
             nop
@@ -433,19 +433,19 @@ _start__teapot__:
 deregister_tm_clones__teapot__:
 
             movq %rbx,(scratchpad+524288)
-            movq %rsp,%rdi
-            shrq $3,%rdi
-            leaq 2147450880(%rdi),%rdi
+            movq %rsp,%rax
+            shrq $3,%rax
+            leaq 2147450880(%rax),%rax
             movq (memory_history_top),%rbx
-            movq (%rdi),%rax
-            movq %rdi,(%rbx)
-            movq %rax,8(%rbx)
+            movq (%rax),%rdi
+            movq %rax,(%rbx)
+            movq %rdi,8(%rbx)
             leaq 16(%rbx),%rbx
             movq %rbx,(memory_history_top)
-            movb $255,(%rdi)
+            movb $255,(%rax)
             movq (scratchpad+524288),%rbx
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___19:
 
             nop
@@ -493,11 +493,11 @@ deregister_tm_clones__teapot__:
             movq (scratchpad+524288),%rax
             cmpq %rdi,%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__5d594b8d_9c60_4744_bb93_441ddbc388a5__teapot__)(%rip),%rax
+            leaq (.__trampoline__871aa948_cddd_4f5b_8eb7_1facbb9d78c1__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___23)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__5d594b8d_9c60_4744_bb93_441ddbc388a5__teapot__)(%rip),%rax
+            leaq (.__branch_counter__871aa948_cddd_4f5b_8eb7_1facbb9d78c1__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -505,7 +505,7 @@ deregister_tm_clones__teapot__:
 
             nop
             je .L_1278__teapot__
-.L__trampoline_target__ca04d35d_d303_453a_811a_57c7127756ba__teapot__:
+.L__trampoline_target__0f1a0ba5_030a_4d24_82a6_5dc94d3afaf7__teapot__:
 
             movq %rbx,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
@@ -563,11 +563,11 @@ deregister_tm_clones__teapot__:
             movq (scratchpad+524288),%rax
             testq %rax,%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__d3b52477_7339_4e5c_8604_1a905a450826__teapot__)(%rip),%rax
+            leaq (.__trampoline__9ed98da6_eadc_4929_9866_9d34a66fdecf__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___27)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__d3b52477_7339_4e5c_8604_1a905a450826__teapot__)(%rip),%rax
+            leaq (.__branch_counter__9ed98da6_eadc_4929_9866_9d34a66fdecf__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -575,7 +575,7 @@ deregister_tm_clones__teapot__:
 
             nop
             je .L_1278__teapot__
-.L__trampoline_target__6815feb0_69b3_43f8_ad66_f897050e3707__teapot__:
+.L__trampoline_target__3af905d6_372f_42e0_925a_313b2f99eda8__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
@@ -664,18 +664,18 @@ deregister_tm_clones__teapot__:
 .size deregister_tm_clones__teapot__, . - deregister_tm_clones__teapot__
 register_tm_clones__teapot__:
 
-            movq %rsp,%rsi
-            shrq $3,%rsi
-            leaq 2147450880(%rsi),%rsi
-            movq (memory_history_top),%rdi
-            movq (%rsi),%rax
-            movq %rsi,(%rdi)
-            movq %rax,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
-            movb $255,(%rsi)
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+5)
+            movq %rsp,%rdi
+            shrq $3,%rdi
+            leaq 2147450880(%rdi),%rdi
+            movq (memory_history_top),%rax
+            movq (%rdi),%rsi
+            movq %rdi,(%rax)
+            movq %rsi,8(%rax)
+            leaq 16(%rax),%rax
+            movq %rax,(memory_history_top)
+            movb $255,(%rdi)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___35:
 
             nop
@@ -753,11 +753,11 @@ register_tm_clones__teapot__:
             movq (scratchpad+524288),%rax
             sarq $1,%rsi
             movq %rax,(scratchpad)
-            leaq (.__trampoline__9ac67204_319e_4ae2_91e9_f61eb271235a__teapot__)(%rip),%rax
+            leaq (.__trampoline__9d890186_5d58_4dc5_b875_330870304b82__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___42)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__9ac67204_319e_4ae2_91e9_f61eb271235a__teapot__)(%rip),%rax
+            leaq (.__branch_counter__9d890186_5d58_4dc5_b875_330870304b82__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -765,7 +765,7 @@ register_tm_clones__teapot__:
 
             nop
             je .L_12b8__teapot__
-.L__trampoline_target__106fc191_6cd3_428a_a5ba_b764d82cb844__teapot__:
+.L__trampoline_target__6c1a7b2a_ea4f_4e65_be97_0007a1b2e15c__teapot__:
 
             movq %rbx,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
@@ -823,11 +823,11 @@ register_tm_clones__teapot__:
             movq (scratchpad+524288),%rax
             testq %rax,%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__b2af70a8_e632_45e0_9b18_0cfa40b8f6f7__teapot__)(%rip),%rax
+            leaq (.__trampoline__e7bf71ac_233e_4d96_a5d9_49bd4408bafb__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___46)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__b2af70a8_e632_45e0_9b18_0cfa40b8f6f7__teapot__)(%rip),%rax
+            leaq (.__branch_counter__e7bf71ac_233e_4d96_a5d9_49bd4408bafb__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -835,7 +835,7 @@ register_tm_clones__teapot__:
 
             nop
             je .L_12b8__teapot__
-.L__trampoline_target__7358b381_530a_4179_95eb_81a0f5f8940b__teapot__:
+.L__trampoline_target__fa7464de_d735_4681_a4c1_a729a17fce2a__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
@@ -979,11 +979,11 @@ __do_global_dtors_aux__teapot__:
             movq (scratchpad+524288),%rax
             cmpb $0,(completed.8061)(%rip)
             movq %rax,(scratchpad)
-            leaq (.__trampoline__f33be396_2d44_44e7_9619_c8311c70b7b1__teapot__)(%rip),%rax
+            leaq (.__trampoline__b9212420_fcfa_44cb_9e14_56097bdc3d1e__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___56)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__f33be396_2d44_44e7_9619_c8311c70b7b1__teapot__)(%rip),%rax
+            leaq (.__branch_counter__b9212420_fcfa_44cb_9e14_56097bdc3d1e__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -991,7 +991,7 @@ __do_global_dtors_aux__teapot__:
 
             nop
             jne .L_12f8__teapot__
-.L__trampoline_target__e75f3894_a53c_4971_9874_35810844b35d__teapot__:
+.L__trampoline_target__66486815_7f0e_4589_bda2_01ad7a9bed52__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
@@ -1084,31 +1084,31 @@ __do_global_dtors_aux__teapot__:
             movq (scratchpad+524304),%rax
             movq (scratchpad+524288),%rax
             movq %rsp,%rbp
-            leaq (.__trampoline__87aeb687_4660_45ad_932c_fb2b8e96e3d1__teapot__)(%rip),%rbp
+            leaq (.__trampoline__be456ae1_c16a_45bc_a4a9_14a207f75d95__teapot__)(%rip),%rbp
             movq %rbp,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___62)(%rip),%rbp
             movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__87aeb687_4660_45ad_932c_fb2b8e96e3d1__teapot__)(%rip),%rbp
+            leaq (.__branch_counter__be456ae1_c16a_45bc_a4a9_14a207f75d95__teapot__)(%rip),%rbp
             movq %rbp,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___62:
 
             nop
             je .L_12e7__teapot__
-.L__trampoline_target__2a5488ca_344b_4819_9609_a0ab54952ee5__teapot__:
+.L__trampoline_target__b617a250_9436_4534_8766_fd857a66a7a1__teapot__:
 
             movq %rax,(scratchpad+524288)
             leaq (.L_4008)(%rip),%rax
             btcq $45,%rax
-            xorl %ebp,%ebp
-            orb (%rax),%bpl
-            movb %bpl,(dift_reg_tags+5)
+            xorl %edi,%edi
+            orb (%rax),%dil
+            movb %dil,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___63
 
-            movb (dift_reg_queued_tag),%bpl
-            movzbq (dift_reg_queued_id),%rdi
-            orb %bpl,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%dil
+            movzbq (dift_reg_queued_id),%rbp
+            orb %dil,(dift_reg_tags)(%rbp)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___63:
@@ -1356,7 +1356,7 @@ set_heap_limit__teapot__:
             movq (scratchpad+524288),%rbx
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $69,(%rax)
+            movl $111,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -1385,8 +1385,8 @@ set_heap_limit__teapot__:
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
             xorl %esi,%esi
-            orb (dift_reg_tags),%sil
             orb (dift_reg_tags+6),%sil
+            orb (dift_reg_tags),%sil
             leaq 24(%rsp),%rbx
             btcq $45,%rbx
             movabsq $72340172838076673,%rcx
@@ -1429,8 +1429,8 @@ set_heap_limit__teapot__:
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
             xorl %esi,%esi
-            orb (dift_reg_tags+5),%sil
             orb (dift_reg_tags+6),%sil
+            orb (dift_reg_tags+5),%sil
             leaq (%rsp),%rbx
             btcq $45,%rbx
             movabsq $72340172838076673,%rcx
@@ -1465,8 +1465,8 @@ set_heap_limit__teapot__:
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
             xorl %esi,%esi
-            orb (dift_reg_tags+5),%sil
             orb (dift_reg_tags+6),%sil
+            orb (dift_reg_tags+5),%sil
             leaq 8(%rsp),%rbx
             btcq $45,%rbx
             movabsq $72340172838076673,%rcx
@@ -1528,11 +1528,11 @@ set_heap_limit__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq setrlimit__dift_wrapper__@PLT
-.L__ret_transform_target_set_heap_limit__e44ee5f2_11a6_488a_933d_6e9fe705b80f__teapot__:
+.L__ret_transform_target_set_heap_limit__0d648235_990a_4d62_8936_daa8a905a9db__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $71,(%rax)
+            movl $107,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -1570,22 +1570,22 @@ set_heap_limit__teapot__:
             movq %rax,(instruction_cnt)
             movq (scratchpad+524288),%rax
             testl %eax,%eax
-            leaq (.__trampoline__16e4af5c_3cad_4f07_aeec_3bd4fea41db9__teapot__)(%rip),%rax
+            leaq (.__trampoline__f87dc753_2ee9_4bd6_9821_e676ccd8147d__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___97)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__16e4af5c_3cad_4f07_aeec_3bd4fea41db9__teapot__)(%rip),%rax
+            leaq (.__branch_counter__f87dc753_2ee9_4bd6_9821_e676ccd8147d__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___97:
 
             nop
             jne .L_1350__teapot__
-.L__trampoline_target__4e91c35a_b4e0_479f_b2c5_4516a6c24503__teapot__:
+.L__trampoline_target__8102deb9_fe07_4f28_9772_f41855e0b4e1__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $72,(%rax)
+            movl $109,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -1755,11 +1755,11 @@ set_heap_limit__teapot__:
             movq (scratchpad+524288),%rax
             xorq %fs:40,%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__40b7015d_4669_404d_b802_18030b8b0e66__teapot__)(%rip),%rax
+            leaq (.__trampoline__8de62071_7928_4381_a7eb_0b62b6f1f7b7__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___104)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__40b7015d_4669_404d_b802_18030b8b0e66__teapot__)(%rip),%rax
+            leaq (.__branch_counter__8de62071_7928_4381_a7eb_0b62b6f1f7b7__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -1767,11 +1767,11 @@ set_heap_limit__teapot__:
 
             nop
             jne .L_1366__teapot__
-.L__trampoline_target__b59215fa_97a8_4ab9_8521_16f4401fb069__teapot__:
+.L__trampoline_target__fa5a5ad2_a4a8_48a5_a4d4_fc4b3fb8d23e__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $73,(%rax)
+            movl $110,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -1824,31 +1824,31 @@ set_heap_limit__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $74,(%rax)
+            movl $106,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r11d,%r11d
-            movb %r11b,(dift_reg_tags+5)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+5)
 .L__dift_done__teapot___110:
 
             nop
             leaq (.L_2004)(%rip),%rdi
-            leaq -8(%rsp),%r11
-            movq (memory_history_top),%r9
-            movq (%r11),%r14
-            movq %r11,(%r9)
-            movq %r14,8(%r9)
-            leaq 16(%r9),%r9
-            movq %r9,(memory_history_top)
+            leaq -8(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r11
+            movq %rsi,(%r12)
+            movq %r11,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq perror@PLT
-.L__ret_transform_target_set_heap_limit__067eda31_3f8e_41a7_b413_fb04f0e3adaa__teapot__:
+.L__ret_transform_target_set_heap_limit__7145636e_dc08_4f64_b62f_2ca04a333ff8__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $68,(%rax)
+            movl $108,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -1892,17 +1892,17 @@ set_heap_limit__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $70,(%rax)
+            movl $112,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq -8(%rsp),%r11
-            movq (memory_history_top),%r9
-            movq (%r11),%r14
-            movq %r11,(%r9)
-            movq %r14,8(%r9)
-            leaq 16(%r9),%r9
-            movq %r9,(memory_history_top)
+            leaq -8(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r11
+            movq %rsi,(%r12)
+            movq %r11,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __stack_chk_fail@PLT
@@ -1925,7 +1925,7 @@ secret_init__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $83,(%rax)
+            movl $64,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -1999,11 +1999,11 @@ secret_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq malloc@PLT
-.L__ret_transform_target_secret_init__71efcf50_9075_484f_bbdc_fc2f8248b26e__teapot__:
+.L__ret_transform_target_secret_init__47750739_4dbe_4b09_814d_88018b305708__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $87,(%rax)
+            movl $67,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2044,65 +2044,65 @@ secret_init__teapot__:
 
             movq %rdi,(instruction_cnt)
             testq %rax,%rax
-            leaq (.__trampoline__59d61923_598d_4b78_b74c_a7581c516310__teapot__)(%rip),%rdi
+            leaq (.__trampoline__2349f3b9_d480_4280_a9a2_353d9ea4c4c9__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___131)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__59d61923_598d_4b78_b74c_a7581c516310__teapot__)(%rip),%rdi
+            leaq (.__branch_counter__2349f3b9_d480_4280_a9a2_353d9ea4c4c9__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___131:
 
             nop
             je .L_13a6__teapot__
-.L__trampoline_target__f6344752_a25a_487e_be3f_06b2a67016ac__teapot__:
+.L__trampoline_target__9ff78411_1d6f_4341_bf42_3857855f3c85__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $82,(%rax)
+            movl $65,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
-            xorl %edx,%edx
-            orb (dift_reg_tags),%dl
+            xorl %esi,%esi
+            orb (dift_reg_tags),%sil
             leaq (%rax),%rdi
             btcq $45,%rdi
             movq (memory_history_top),%rax
-            movq (%rdi),%rsi
+            movq (%rdi),%rdx
             movq %rdi,(%rax)
-            movq %rsi,8(%rax)
+            movq %rdx,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
-            movb %dl,(%rdi)
+            movb %sil,(%rdi)
             addq $8,%rdi
 .L__dift_done__teapot___133:
 
             nop
             movq (scratchpad+524288),%rax
-            leaq (%rax),%rsi
+            leaq (%rax),%rdx
             movq (memory_history_top),%rdi
-            movq (%rsi),%rdx
-            movq %rsi,(%rdi)
-            movq %rdx,8(%rdi)
+            movq (%rdx),%rsi
+            movq %rdx,(%rdi)
+            movq %rsi,8(%rdi)
             leaq 16(%rdi),%rdi
             movq %rdi,(memory_history_top)
             movb $65,(%rax)
-            xorl %esi,%esi
-            orb (dift_reg_tags),%sil
-            movb %sil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            orb (dift_reg_tags),%dl
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___135:
 
             nop
             movq %rax,%rdx
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+4)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+4)
 .L__dift_done__teapot___136:
 
             nop
             leaq (.L_202b)(%rip),%rsi
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___137:
 
             nop
@@ -2129,12 +2129,12 @@ secret_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
+.L__ret_transform_target_secret_init__19814f19_28fe_401c_a0bd_cf2dca4fd3d5__teapot__:
 .L_13a1__teapot__:
-.L__ret_transform_target_secret_init__dd53baf1_7929_4b7b_8b8d_aaff38b8914f__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $86,(%rax)
+            movl $69,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2216,12 +2216,12 @@ secret_init__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $84,(%rax)
+            movl $68,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___148:
 
             nop
@@ -2240,11 +2240,11 @@ secret_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq perror@PLT
-.L__ret_transform_target_secret_init__02fdcc5d_efd7_45ac_a283_cd029cf2c509__teapot__:
+.L__ret_transform_target_secret_init__7cb22c7a_d2bd_47d1_a87a_953a40ef4a41__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $85,(%rax)
+            movl $66,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2274,7 +2274,7 @@ array_init__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $61,(%rax)
+            movl $102,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2348,11 +2348,11 @@ array_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq malloc@PLT
-.L__ret_transform_target_array_init__b23f1e21_ade1_4ef0_b4b2_588dfd29b425__teapot__:
+.L__ret_transform_target_array_init__fa28af4d_7400_489c_a6f6_2260c9c35214__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $60,(%rax)
+            movl $100,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2393,36 +2393,36 @@ array_init__teapot__:
 
             movq %rdi,(instruction_cnt)
             testq %rax,%rax
-            leaq (.__trampoline__b1e7f285_a7f8_436d_af97_c5888aabbd7e__teapot__)(%rip),%rdi
+            leaq (.__trampoline__001696f8_80c8_4f62_9bee_301421d5978b__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___164)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__b1e7f285_a7f8_436d_af97_c5888aabbd7e__teapot__)(%rip),%rdi
+            leaq (.__branch_counter__001696f8_80c8_4f62_9bee_301421d5978b__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___164:
 
             nop
             je .L_1401__teapot__
-.L__trampoline_target__c5ee0985_59ed_42ec_88d8_a835f12d9293__teapot__:
+.L__trampoline_target__c2dcdedb_dcda_439c_b4c2_d7d3aa7f0cb9__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $59,(%rax)
+            movl $99,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             leaq (array_size)(%rip),%rdi
             btcq $45,%rdi
-            xorl %edx,%edx
-            orb (%rdi),%dl
-            movb %dl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (%rdi),%sil
+            movb %sil,(dift_reg_tags+3)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___166
 
-            movb (dift_reg_queued_tag),%dl
-            movzbq (dift_reg_queued_id),%rsi
-            orb %dl,(dift_reg_tags)(%rsi)
+            movb (dift_reg_queued_tag),%sil
+            movzbq (dift_reg_queued_id),%rdx
+            orb %sil,(dift_reg_tags)(%rdx)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___166:
@@ -2459,11 +2459,11 @@ array_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq memset__dift_wrapper__@PLT
-.L__ret_transform_target_array_init__dae808b1_0f7c_4049_84b6_5ed80bf58c9f__teapot__:
+.L__ret_transform_target_array_init__fddc7a08_641a_4520_a556_ca2a10fef480__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $62,(%rax)
+            movl $103,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2474,14 +2474,14 @@ array_init__teapot__:
 
             nop
             movq %rbx,%rdx
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+4)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+4)
 .L__dift_done__teapot___173:
 
             nop
             leaq (.L_2042)(%rip),%rsi
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___174:
 
             nop
@@ -2508,12 +2508,12 @@ array_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_array_init__6dca55f1_2847_40e1_b9a6_0714e25ea99a__teapot__:
 .L_13fc__teapot__:
+.L__ret_transform_target_array_init__6c94379d_7706_46f5_a1ca_b0560cda7a49__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $63,(%rax)
+            movl $104,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2595,12 +2595,12 @@ array_init__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $58,(%rax)
+            movl $105,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___185:
 
             nop
@@ -2619,11 +2619,11 @@ array_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq perror@PLT
-.L__ret_transform_target_array_init__c8179f01_8f1a_4d15_8f77_f082fa0d2ee1__teapot__:
+.L__ret_transform_target_array_init__73b53f4b_ff86_42ce_93ea_e27f54d753db__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $57,(%rax)
+            movl $101,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2655,7 +2655,7 @@ otherArray_init__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $81,(%rax)
+            movl $97,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2835,11 +2835,11 @@ otherArray_init__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq malloc@PLT
-.L__ret_transform_target_otherArray_init__d8ccb866_3a17_41e9_8f34_3ec4c2c9ab16__teapot__:
+.L__ret_transform_target_otherArray_init__643980ef_5071_4300_a67b_3238470ceaf1__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $78,(%rax)
+            movl $93,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -2880,138 +2880,138 @@ otherArray_init__teapot__:
 
             movq %rdi,(instruction_cnt)
             testq %rax,%rax
-            leaq (.__trampoline__52363970_9b97_4e01_ac2e_d434946027e3__teapot__)(%rip),%rdi
+            leaq (.__trampoline__f3d0f919_f7e0_480f_9dfd_b16b351dfcd9__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___210)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__52363970_9b97_4e01_ac2e_d434946027e3__teapot__)(%rip),%rdi
+            leaq (.__branch_counter__f3d0f919_f7e0_480f_9dfd_b16b351dfcd9__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___210:
 
             nop
             je .L_1472__teapot__
-.L__trampoline_target__978d4b03_8b49_4ec6_9fcd_d3239487e4de__teapot__:
+.L__trampoline_target__945a069b_47d2_45be_9a5e_55a7294f34ef__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $76,(%rax)
+            movl $96,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags+12),%sil
-            movb %sil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            orb (dift_reg_tags+12),%dl
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___212:
 
             nop
             movq %r12,%rdx
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+4)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+4)
 .L__dift_done__teapot___213:
 
             nop
             movl $45,%esi
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            movb %r12b,(dift_reg_tags+5)
+            xorl %edi,%edi
+            orb (dift_reg_tags),%dil
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___214:
 
             nop
             movq %rax,%rdi
             movq %rbx,(scratchpad+524288)
-            leaq -8(%rsp),%rax
+            leaq -8(%rsp),%r12
             movq (memory_history_top),%rbx
-            movq (%rax),%r12
-            movq %rax,(%rbx)
-            movq %r12,8(%rbx)
+            movq (%r12),%rax
+            movq %r12,(%rbx)
+            movq %rax,8(%rbx)
             leaq 16(%rbx),%rbx
             movq %rbx,(memory_history_top)
             movq (scratchpad+524288),%rbx
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq memset__dift_wrapper__@PLT
-.L__ret_transform_target_otherArray_init__950dc09b_2748_4317_9dfa_236cc09bd6f3__teapot__:
+.L__ret_transform_target_otherArray_init__1fc018ef_6d86_4e98_a273_c7541f5de497__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $80,(%rax)
+            movl $95,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             movl %ebp,%ebp
-            xorl %eax,%eax
-            orb (dift_reg_tags+13),%al
-            orb (dift_reg_tags+7),%al
-            orb (dift_reg_tags+1),%al
-            leaq (%rbx,%rbp),%r12
-            btcq $45,%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
-            movb %al,(%r12)
-            addq $8,%r12
+            xorl %edi,%edi
+            orb (dift_reg_tags+7),%dil
+            orb (dift_reg_tags+13),%dil
+            orb (dift_reg_tags+1),%dil
+            leaq (%rbx,%rbp),%rsi
+            btcq $45,%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%rdx
+            movq %rsi,(%r12)
+            movq %rdx,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movb %dil,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___218:
 
             nop
-            leaq (%rbx,%rbp),%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            leaq (%rbx,%rbp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%rdx
+            movq %rsi,(%r12)
+            movq %rdx,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movb %r13b,(%rbx,%rbp)
-            xorl %edi,%edi
-            orb (dift_reg_tags+1),%dil
-            movb %dil,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___220:
 
             nop
             movq %rbx,%rdx
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___221:
 
             nop
             leaq (.L_203c)(%rip),%rsi
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+5)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+5)
 .L__dift_done__teapot___222:
 
             nop
             movl $1,%edi
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___223:
 
             nop
             movl $0,%eax
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rax
-            movq (%r12),%r13
-            movq %r12,(%rax)
-            movq %r13,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_otherArray_init__a6eafa07_baf5_45a2_8d15_bb710d8a0270__teapot__:
 .L_1464__teapot__:
+.L__ret_transform_target_otherArray_init__cefd4c2d_ebe6_4bb3_a111_64de12342510__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $77,(%rax)
+            movl $94,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+1),%r12b
-            movb %r12b,(dift_reg_tags)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+1),%r13b
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___227:
 
             nop
@@ -3019,15 +3019,15 @@ otherArray_init__teapot__:
             addq $8,%rsp
             leaq (%rsp),%r12
             btcq $45,%r12
-            xorl %ebx,%ebx
-            orb (%r12),%bl
-            movb %bl,(dift_reg_tags+1)
+            xorl %ebp,%ebp
+            orb (%r12),%bpl
+            movb %bpl,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___228
 
-            movb (dift_reg_queued_tag),%bl
+            movb (dift_reg_queued_tag),%bpl
             movzbq (dift_reg_queued_id),%r13
-            orb %bl,(dift_reg_tags)(%r13)
+            orb %bpl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___228:
@@ -3139,44 +3139,44 @@ otherArray_init__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $79,(%rax)
+            movl $98,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+5)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+5)
 .L__dift_done__teapot___236:
 
             nop
             leaq (.L_2015)(%rip),%rdi
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rax
-            movq (%r12),%r13
-            movq %r12,(%rax)
-            movq %r13,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq perror@PLT
-.L__ret_transform_target_otherArray_init__5a4ad75c_f146_427e_91e3_83a84bead813__teapot__:
+.L__ret_transform_target_otherArray_init__0d85d26e_8f72_49cf_9e08_7eb0dc2322cc__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $75,(%rax)
+            movl $92,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            movq (instruction_cnt),%rax
-            addq $1,%rax
-            cmpq $250,%rax
+            movq (instruction_cnt),%r12
+            addq $1,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rax,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             jmp .L_1464__teapot__
 .size otherArray_init__teapot__, . - otherArray_init__teapot__
-.L__indbr_transform_target_random_char__e74ca4e6_a96d_4559_863a_ce2f201788f5__teapot__:
 random_char__teapot__:
+.L__indbr_transform_target_random_char__2257313e_2203_45cc_8bda_37d09ce90e24__teapot__:
 
             movq %rbx,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
@@ -3194,7 +3194,7 @@ random_char__teapot__:
             movq (scratchpad+524288),%rbx
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $98,(%rax)
+            movl $80,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3252,8 +3252,8 @@ random_char__teapot__:
             movq (scratchpad+524288),%rax
             retq 
 .size random_char__teapot__, . - random_char__teapot__
-.L__indbr_transform_target_csel__a7c53e75_c0e5_4595_b147_90f3c026d89a__teapot__:
 csel__teapot__:
+.L__indbr_transform_target_csel__910821e3_3a21_4274_94f8_869f25df71ab__teapot__:
 
             movq %rbx,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
@@ -3271,7 +3271,7 @@ csel__teapot__:
             movq (scratchpad+524288),%rbx
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $50,(%rax)
+            movl $81,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3299,8 +3299,8 @@ csel__teapot__:
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
             xorl %ebx,%ebx
-            orb (dift_reg_tags+5),%bl
             orb (dift_reg_tags),%bl
+            orb (dift_reg_tags+5),%bl
             movb %bl,(dift_reg_tags+5)
 .L__dift_done__teapot___251:
 
@@ -3311,8 +3311,8 @@ csel__teapot__:
             subq $1,%rdx
             movq %rbx,(scratchpad+524288)
             xorl %eax,%eax
-            orb (dift_reg_tags+4),%al
             orb (dift_reg_tags+3),%al
+            orb (dift_reg_tags+4),%al
             movb %al,(dift_reg_tags+3)
 .L__dift_done__teapot___252:
 
@@ -3405,7 +3405,7 @@ flush_lines__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $67,(%rax)
+            movl $10,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3445,11 +3445,11 @@ flush_lines__teapot__:
             movq (scratchpad+524288),%rax
             testq %rdx,%rdx
             movq %rax,(scratchpad)
-            leaq (.__trampoline__be2a2e06_8e20_4833_8473_7a76673547ac__teapot__)(%rip),%rax
+            leaq (.__trampoline__2e1eb74e_d668_4c69_8752_a770c9707337__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___262)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__be2a2e06_8e20_4833_8473_7a76673547ac__teapot__)(%rip),%rax
+            leaq (.__branch_counter__2e1eb74e_d668_4c69_8752_a770c9707337__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -3457,11 +3457,11 @@ flush_lines__teapot__:
 
             nop
             je .L_14c8__teapot__
-.L__trampoline_target__433d72da_6423_4670_bae6_e568a08fa410__teapot__:
+.L__trampoline_target__7bf83f7d_95bc_42bc_b352_29737188d410__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $64,(%rax)
+            movl $11,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3483,7 +3483,7 @@ flush_lines__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $65,(%rax)
+            movl $12,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3536,11 +3536,11 @@ flush_lines__teapot__:
             movq (scratchpad+524288),%rax
             cmpq %rax,%rdx
             movq %rax,(scratchpad)
-            leaq (.__trampoline__d6d1a998_ec62_4579_ad82_405ceff9b656__teapot__)(%rip),%rax
+            leaq (.__trampoline__345bb64b_5d5d_4273_b3ab_6de102c2ffed__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___270)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__d6d1a998_ec62_4579_ad82_405ceff9b656__teapot__)(%rip),%rax
+            leaq (.__branch_counter__345bb64b_5d5d_4273_b3ab_6de102c2ffed__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -3548,8 +3548,8 @@ flush_lines__teapot__:
 
             nop
             jne .L_14b9__teapot__
-.L__trampoline_target__7052fc43_6b90_4215_9d81_6acb75e2bf5d__teapot__:
 .L_14c8__teapot__:
+.L__trampoline_target__a998571d_2e05_43e3_8417_265288cd7085__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
@@ -3569,7 +3569,7 @@ flush_lines__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $66,(%rax)
+            movl $13,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3622,7 +3622,7 @@ decode_flush_reload_state__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $94,(%rax)
+            movl $0,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3703,19 +3703,19 @@ decode_flush_reload_state__teapot__:
             pushq %r13
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
-            xorl %r13d,%r13d
-            orb (dift_reg_tags+12),%r13b
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+12),%r14b
             leaq -8(%rsp),%rbx
             btcq $45,%rbx
-            movabsq $72340172838076673,%r14
-            imulq %r14,%r13
+            movabsq $72340172838076673,%r13
+            imulq %r13,%r14
             movq (memory_history_top),%rax
-            movq (%rbx),%r14
+            movq (%rbx),%r13
             movq %rbx,(%rax)
-            movq %r14,8(%rax)
+            movq %r13,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
-            movq %r13,(%rbx)
+            movq %r14,(%rbx)
             addq $8,%rbx
 .L__dift_done__teapot___281:
 
@@ -3723,70 +3723,70 @@ decode_flush_reload_state__teapot__:
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
-            leaq -8(%rsp),%r14
+            leaq -8(%rsp),%r13
             movq (memory_history_top),%rax
-            movq (%r14),%r13
-            movq %r14,(%rax)
-            movq %r13,8(%rax)
+            movq (%r13),%r14
+            movq %r13,(%rax)
+            movq %r14,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
             movq (scratchpad+524288),%rax
             pushq %r12
             movq %rax,(scratchpad+524288)
-            xorl %r13d,%r13d
-            orb (dift_reg_tags+7),%r13b
-            leaq -8(%rsp),%r14
-            btcq $45,%r14
-            movabsq $72340172838076673,%r12
-            imulq %r12,%r13
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+7),%r14b
+            leaq -8(%rsp),%r12
+            btcq $45,%r12
+            movabsq $72340172838076673,%r13
+            imulq %r13,%r14
             movq (memory_history_top),%rax
-            movq (%r14),%r12
-            movq %r14,(%rax)
-            movq %r12,8(%rax)
+            movq (%r12),%r13
+            movq %r12,(%rax)
+            movq %r13,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
-            movq %r13,(%r14)
-            addq $8,%r14
+            movq %r14,(%r12)
+            addq $8,%r12
 .L__dift_done__teapot___283:
 
             nop
             movq (scratchpad+524288),%rax
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%r14
-            movq (%r12),%r13
-            movq %r12,(%r14)
-            movq %r13,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%r14
+            movq %r13,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             pushq %rbp
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+1),%bpl
-            leaq -8(%rsp),%r12
-            btcq $45,%r12
-            movabsq $72340172838076673,%r13
-            imulq %r13,%rbp
-            movq (memory_history_top),%r14
-            movq (%r12),%r13
-            movq %r12,(%r14)
-            movq %r13,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %rbp,(%r12)
-            addq $8,%r12
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+1),%r14b
+            leaq -8(%rsp),%r13
+            btcq $45,%r13
+            movabsq $72340172838076673,%rbp
+            imulq %rbp,%r14
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r14,(%r13)
+            addq $8,%r13
 .L__dift_done__teapot___285:
 
             nop
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%r14
-            movq (%r12),%r13
-            movq %r12,(%r14)
-            movq %r13,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             pushq %rbx
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+5),%bpl
-            movb %bpl,(dift_reg_tags+14)
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+5),%r14b
+            movb %r14b,(dift_reg_tags+14)
 .L__dift_done__teapot___287:
 
             nop
@@ -3820,45 +3820,45 @@ decode_flush_reload_state__teapot__:
 
             movq %r12,(instruction_cnt)
             cmpq $1,%rdx
-            leaq (.__trampoline__a0c77b16_9eb5_4428_a951_dff1a4509600__teapot__)(%rip),%r12
+            leaq (.__trampoline__eb026ad7_5c62_47cd_bd9e_40636ce4cc33__teapot__)(%rip),%r12
             movq %r12,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___290)(%rip),%r12
             movq %r12,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__a0c77b16_9eb5_4428_a951_dff1a4509600__teapot__)(%rip),%r12
+            leaq (.__branch_counter__eb026ad7_5c62_47cd_bd9e_40636ce4cc33__teapot__)(%rip),%r12
             movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___290:
 
             nop
             jbe .L_1522__teapot__
-.L__trampoline_target__576306fd_80ae_4c4b_af2b_903702e6aac2__teapot__:
+.L__trampoline_target__04354667_8e45_4662_aa56_d51939b5c969__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $90,(%rax)
+            movl $8,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___292:
 
             nop
             movl $1,%eax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+12)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+12)
 .L__dift_done__teapot___293:
 
             nop
             movl $0,%r12d
-            xorl %r13d,%r13d
-            movb %r13b,(dift_reg_tags+7)
+            xorl %ebp,%ebp
+            movb %bpl,(dift_reg_tags+7)
 .L__dift_done__teapot___294:
 
             nop
             movl $0,%ebp
-            xorl %r13d,%r13d
-            movb %r13b,(dift_reg_tags+13)
+            xorl %ecx,%ecx
+            movb %cl,(dift_reg_tags+13)
 .L__dift_done__teapot___295:
 
             nop
@@ -3880,7 +3880,7 @@ decode_flush_reload_state__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $96,(%rax)
+            movl $7,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3920,11 +3920,11 @@ decode_flush_reload_state__teapot__:
             movq (scratchpad+524288),%rax
             cmpq %rax,%rdx
             movq %rax,(scratchpad)
-            leaq (.__trampoline__f542cbcb_73a3_47bb_a15c_c7f57c03d15c__teapot__)(%rip),%rax
+            leaq (.__trampoline__29240a47_21b8_4aff_ab54_968a7ab4cd25__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___301)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__f542cbcb_73a3_47bb_a15c_c7f57c03d15c__teapot__)(%rip),%rax
+            leaq (.__branch_counter__29240a47_21b8_4aff_ab54_968a7ab4cd25__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -3932,11 +3932,11 @@ decode_flush_reload_state__teapot__:
 
             nop
             jbe .L_1538__teapot__
-.L__trampoline_target__08119b96_c39d_4f05_b5d9_1119e4d70971__teapot__:
+.L__trampoline_target__138b325c_5fe9_4a1a_b86e_20f81eb2c3da__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $92,(%rax)
+            movl $6,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -3974,11 +3974,11 @@ decode_flush_reload_state__teapot__:
             movq (scratchpad+524288),%rax
             cmpq $255,%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__8e873746_e9d6_44c1_80ae_f8ab75dafe29__teapot__)(%rip),%rax
+            leaq (.__trampoline__d9a78565_f49e_4370_ab42_4fcc3f4c2076__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___305)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__8e873746_e9d6_44c1_80ae_f8ab75dafe29__teapot__)(%rip),%rax
+            leaq (.__branch_counter__d9a78565_f49e_4370_ab42_4fcc3f4c2076__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -3986,12 +3986,12 @@ decode_flush_reload_state__teapot__:
 
             nop
             ja .L_1538__teapot__
+.L__trampoline_target__ae20bfba_6a9b_4b3c_9285_d5eeec099e7e__teapot__:
 .L_150c__teapot__:
-.L__trampoline_target__c2968379_c685_42b6_bdae_5fca2eecbb95__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $88,(%rax)
+            movl $3,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -4136,11 +4136,11 @@ decode_flush_reload_state__teapot__:
             movq (scratchpad+524288),%rax
             cmpq %rbx,%rcx
             movq %rax,(scratchpad)
-            leaq (.__trampoline__cff96331_ded0_4295_aa61_b7129b61bd64__teapot__)(%rip),%rax
+            leaq (.__trampoline__d4b3ab72_cc21_4c54_a149_64390f6b9b56__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___311)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__cff96331_ded0_4295_aa61_b7129b61bd64__teapot__)(%rip),%rax
+            leaq (.__branch_counter__d4b3ab72_cc21_4c54_a149_64390f6b9b56__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -4148,11 +4148,11 @@ decode_flush_reload_state__teapot__:
 
             nop
             jbe .L_14fb__teapot__
-.L__trampoline_target__091fc3ad_cba1_4ea0_a45d_98246218f41d__teapot__:
+.L__trampoline_target__408d6aab_a42b_4c3b_b93f_7b82a0db8f58__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $93,(%rax)
+            movl $9,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -4201,7 +4201,7 @@ decode_flush_reload_state__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $89,(%rax)
+            movl $5,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -4211,8 +4211,8 @@ decode_flush_reload_state__teapot__:
 
             nop
             movl $0,%r12d
-            xorl %ebx,%ebx
-            movb %bl,(dift_reg_tags+7)
+            xorl %ebp,%ebp
+            movb %bpl,(dift_reg_tags+7)
 .L__dift_done__teapot___320:
 
             nop
@@ -4241,7 +4241,7 @@ decode_flush_reload_state__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $95,(%rax)
+            movl $2,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -4261,25 +4261,25 @@ decode_flush_reload_state__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __ctype_b_loc@PLT
-.L__ret_transform_target_decode_flush_reload_state__696574e0_edae_490d_ad6f_245bd733cce0__teapot__:
+.L__ret_transform_target_decode_flush_reload_state__a9c7d194_ecf9_48f8_984c_fcdf38c0c0f4__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $91,(%rax)
+            movl $1,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+7),%cl
-            movb %cl,(dift_reg_tags+2)
+            xorl %edx,%edx
+            orb (dift_reg_tags+7),%dl
+            movb %dl,(dift_reg_tags+2)
 .L__dift_done__teapot___328:
 
             nop
             movzbl %bpl,%ecx
-            leaq (%rax),%rdi
-            xorq %r9,%r9
-            orb (dift_reg_tags),%r9b
-            testb $48,%r9b
+            leaq (%rax),%rdx
+            xorq %rsi,%rsi
+            orb (dift_reg_tags),%sil
+            testb $48,%sil
             je .L__attacker_tags_check__teapot___329
 
             movq %rsp,(old_rsp)
@@ -4287,8 +4287,8 @@ decode_flush_reload_state__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -4298,7 +4298,7 @@ decode_flush_reload_state__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___329:
 
-            testb $2,%r9b
+            testb $2,%sil
             je .L__asan_check__teapot___329
 
             movq %rsp,(old_rsp)
@@ -4306,8 +4306,8 @@ decode_flush_reload_state__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -4319,14 +4319,14 @@ decode_flush_reload_state__teapot__:
             movb $3,(dift_reg_queued_id)
 .L__asan_check__teapot___329:
 
-            movq %rdi,%r8
+            movq %rdx,%r8
             shrq $3,%r8
             movb 2147450880(%r8),%r8b
             testb %r8b,%r8b
             je .L__mem_operand_policy_done__teapot___329
 .L__asan_check_fail__teapot___329:
 
-            testb $1,%r9b
+            testb $1,%sil
             je .L__asan_check_fail_non_attacker__teapot___329
 .L__asan_check_fail_attacker__teapot___329:
 
@@ -4335,8 +4335,8 @@ decode_flush_reload_state__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -4354,18 +4354,18 @@ decode_flush_reload_state__teapot__:
 .L__mem_operand_policy_done__teapot___329:
 
             nop
-            leaq (%rax),%r9
-            btcq $45,%r9
+            leaq (%rax),%rsi
+            btcq $45,%rsi
             xorl %r8d,%r8d
             orb (dift_reg_tags),%r8b
-            orb (%r9),%r8b
+            orb (%rsi),%r8b
             movb %r8b,(dift_reg_tags+3)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___330
 
             movb (dift_reg_queued_tag),%r8b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r8b,(dift_reg_tags)(%rdi)
+            movzbq (dift_reg_queued_id),%rdx
+            orb %r8b,(dift_reg_tags)(%rdx)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___330:
@@ -4378,8 +4378,8 @@ decode_flush_reload_state__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+3)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___331:
 
             nop
@@ -4399,9 +4399,9 @@ decode_flush_reload_state__teapot__:
             jmp .L__dift_done__teapot___332
 .L__dift_doit__teapot___332:
 
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+3),%cl
-            movb %cl,(dift_reg_tags+7)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+3),%r8b
+            movb %r8b,(dift_reg_tags+7)
 .L__dift_done__teapot___332:
 
             nop
@@ -4411,29 +4411,29 @@ decode_flush_reload_state__teapot__:
             sahf 
             movq (scratchpad+524296),%rax
             cmovel %edx,%ebp
-            xorl %r8d,%r8d
-            orb (dift_reg_tags+14),%r8b
-            orb (dift_reg_tags+7),%r8b
-            leaq (%r14),%rcx
-            btcq $45,%rcx
-            movq (memory_history_top),%r9
-            movq (%rcx),%rdi
-            movq %rcx,(%r9)
-            movq %rdi,8(%r9)
-            leaq 16(%r9),%r9
-            movq %r9,(memory_history_top)
-            movb %r8b,(%rcx)
-            addq $8,%rcx
+            xorl %r9d,%r9d
+            orb (dift_reg_tags+7),%r9b
+            orb (dift_reg_tags+14),%r9b
+            leaq (%r14),%rdx
+            btcq $45,%rdx
+            movq (memory_history_top),%rsi
+            movq (%rdx),%r8
+            movq %rdx,(%rsi)
+            movq %r8,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
+            movb %r9b,(%rdx)
+            addq $8,%rdx
 .L__dift_done__teapot___333:
 
             nop
-            leaq (%r14),%rcx
-            movq (memory_history_top),%r9
-            movq (%rcx),%rdi
-            movq %rcx,(%r9)
-            movq %rdi,8(%r9)
-            leaq 16(%r9),%r9
-            movq %r9,(memory_history_top)
+            leaq (%r14),%rdx
+            movq (memory_history_top),%rsi
+            movq (%rdx),%r8
+            movq %rdx,(%rsi)
+            movq %r8,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
             movb %bpl,(%r14)
             xorl %r14d,%r14d
             orb (dift_reg_tags+12),%r14b
@@ -4443,9 +4443,9 @@ decode_flush_reload_state__teapot__:
             nop
             movzbl %r12b,%edx
             leaq (%rax),%r14
-            xorq %r9,%r9
-            orb (dift_reg_tags),%r9b
-            testb $48,%r9b
+            xorq %rsi,%rsi
+            orb (dift_reg_tags),%sil
+            testb $48,%sil
             je .L__attacker_tags_check__teapot___336
 
             movq %rsp,(old_rsp)
@@ -4454,7 +4454,7 @@ decode_flush_reload_state__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq %r14,%rsi
-            movq %r9,%rdx
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -4464,7 +4464,7 @@ decode_flush_reload_state__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___336:
 
-            testb $2,%r9b
+            testb $2,%sil
             je .L__asan_check__teapot___336
 
             movq %rsp,(old_rsp)
@@ -4473,7 +4473,7 @@ decode_flush_reload_state__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq %r14,%rsi
-            movq %r9,%rdx
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -4485,14 +4485,14 @@ decode_flush_reload_state__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___336:
 
-            movq %r14,%rcx
-            shrq $3,%rcx
-            movb 2147450880(%rcx),%cl
-            testb %cl,%cl
+            movq %r14,%r8
+            shrq $3,%r8
+            movb 2147450880(%r8),%r8b
+            testb %r8b,%r8b
             je .L__mem_operand_policy_done__teapot___336
 .L__asan_check_fail__teapot___336:
 
-            testb $1,%r9b
+            testb $1,%sil
             je .L__asan_check_fail_non_attacker__teapot___336
 .L__asan_check_fail_attacker__teapot___336:
 
@@ -4502,7 +4502,7 @@ decode_flush_reload_state__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq %r14,%rsi
-            movq %r9,%rdx
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -4520,18 +4520,18 @@ decode_flush_reload_state__teapot__:
 .L__mem_operand_policy_done__teapot___336:
 
             nop
-            leaq (%rax),%r9
-            btcq $45,%r9
-            xorl %ecx,%ecx
-            orb (dift_reg_tags),%cl
-            orb (%r9),%cl
-            movb %cl,(dift_reg_tags)
+            leaq (%rax),%rsi
+            btcq $45,%rsi
+            xorl %r8d,%r8d
+            orb (dift_reg_tags),%r8b
+            orb (%rsi),%r8b
+            movb %r8b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___337
 
-            movb (dift_reg_queued_tag),%cl
+            movb (dift_reg_queued_tag),%r8b
             movzbq (dift_reg_queued_id),%r14
-            orb %cl,(dift_reg_tags)(%r14)
+            orb %r8b,(dift_reg_tags)(%r14)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___337:
@@ -4565,9 +4565,9 @@ decode_flush_reload_state__teapot__:
             jmp .L__dift_done__teapot___339
 .L__dift_doit__teapot___339:
 
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+12),%cl
-            movb %cl,(dift_reg_tags+9)
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+12),%r14b
+            movb %r14b,(dift_reg_tags+9)
 .L__dift_done__teapot___339:
 
             nop
@@ -4577,161 +4577,161 @@ decode_flush_reload_state__teapot__:
             sahf 
             movq (scratchpad+524296),%rax
             cmovnel %r12d,%r9d
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+7),%cl
-            movb %cl,(dift_reg_tags+3)
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+7),%r14b
+            movb %r14b,(dift_reg_tags+3)
 .L__dift_done__teapot___340:
 
             nop
             movsbl %bpl,%edx
-            xorl %edi,%edi
-            orb (dift_reg_tags+13),%dil
-            leaq -8(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%rcx
-            imulq %rcx,%rdi
-            movq (memory_history_top),%r14
-            movq (%rbp),%rcx
+            xorl %ebp,%ebp
+            orb (dift_reg_tags+13),%bpl
+            leaq -8(%rsp),%r14
+            btcq $45,%r14
+            movabsq $72340172838076673,%r8
+            imulq %r8,%rbp
+            movq (memory_history_top),%rsi
+            movq (%r14),%r8
+            movq %r14,(%rsi)
+            movq %r8,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
             movq %rbp,(%r14)
-            movq %rcx,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %rdi,(%rbp)
-            addq $8,%rbp
+            addq $8,%r14
 .L__dift_done__teapot___341:
 
             nop
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%rcx
-            movq %rbp,(%r14)
-            movq %rcx,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r14
+            movq (memory_history_top),%rsi
+            movq (%r14),%r8
+            movq %r14,(%rsi)
+            movq %r8,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
             pushq %r13
             movzbl %r12b,%r12d
-            xorl %edi,%edi
-            orb (dift_reg_tags+12),%dil
-            leaq -8(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%rcx
-            imulq %rcx,%rdi
-            movq (memory_history_top),%r14
-            movq (%rbp),%rcx
-            movq %rbp,(%r14)
-            movq %rcx,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %rdi,(%rbp)
-            addq $8,%rbp
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+12),%r8b
+            leaq -8(%rsp),%r14
+            btcq $45,%r14
+            movabsq $72340172838076673,%r13
+            imulq %r13,%r8
+            movq (memory_history_top),%rsi
+            movq (%r14),%r13
+            movq %r14,(%rsi)
+            movq %r13,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
+            movq %r8,(%r14)
+            addq $8,%r14
 .L__dift_done__teapot___343:
 
             nop
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%rcx
-            movq %rbp,(%r14)
-            movq %rcx,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r14
+            movq (memory_history_top),%rsi
+            movq (%r14),%r13
+            movq %r14,(%rsi)
+            movq %r13,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
             pushq %r12
             movsbl %r9b,%r9d
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+1),%bpl
-            movb %bpl,(dift_reg_tags+8)
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+8)
 .L__dift_done__teapot___345:
 
             nop
             movq %rbx,%r8
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+3),%bpl
-            movb %bpl,(dift_reg_tags+2)
+            xorl %esi,%esi
+            orb (dift_reg_tags+3),%sil
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___346:
 
             nop
             movl %edx,%ecx
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___347:
 
             nop
             leaq (.L_2090)(%rip),%rsi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r14d,%r14d
+            movb %r14b,(dift_reg_tags+5)
 .L__dift_done__teapot___348:
 
             nop
             movl $1,%edi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r14d,%r14d
+            movb %r14b,(dift_reg_tags)
 .L__dift_done__teapot___349:
 
             nop
             movl $0,%eax
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r14
+            movq (memory_history_top),%r12
+            movq (%r14),%r13
+            movq %r14,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_decode_flush_reload_state__394c2019_60db_47b5_aaee_510955d1ab03__teapot__:
+.L__ret_transform_target_decode_flush_reload_state__e44c6f8e_8353_470d_989c_137d422c6558__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $97,(%rax)
+            movl $4,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             addq $16,%rsp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+1)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___353
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%r14
+            orb %r13b,(dift_reg_tags)(%r14)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___353:
 
             nop
             popq %rbx
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+7)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %ebp,%ebp
+            orb (%r12),%bpl
+            movb %bpl,(dift_reg_tags+7)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___354
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r13b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%bpl
+            movzbq (dift_reg_queued_id),%r13
+            orb %bpl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___354:
 
             nop
             popq %rbp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+12)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+12)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___355
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r13b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r13
+            orb %r14b,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___355:
@@ -4741,15 +4741,15 @@ decode_flush_reload_state__teapot__:
             movq %rax,(scratchpad+524288)
             leaq (%rsp),%rax
             btcq $45,%rax
-            xorl %r13d,%r13d
-            orb (%rax),%r13b
-            movb %r13b,(dift_reg_tags+13)
+            xorl %r14d,%r14d
+            orb (%rax),%r14b
+            movb %r14b,(dift_reg_tags+13)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___356
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r14
-            orb %r13b,(dift_reg_tags)(%r14)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r13
+            orb %r14b,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___356:
@@ -4841,7 +4841,7 @@ calibrate_latency__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $112,(%rax)
+            movl $74,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -4883,19 +4883,19 @@ calibrate_latency__teapot__:
             pushq %rbp
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+1),%bpl
+            xorl %edi,%edi
+            orb (dift_reg_tags+1),%dil
             leaq -8(%rsp),%rbx
             btcq $45,%rbx
-            movabsq $72340172838076673,%rdi
-            imulq %rdi,%rbp
+            movabsq $72340172838076673,%rbp
+            imulq %rbp,%rdi
             movq (memory_history_top),%rax
-            movq (%rbx),%rdi
+            movq (%rbx),%rbp
             movq %rbx,(%rax)
-            movq %rdi,8(%rax)
+            movq %rbp,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
-            movq %rbp,(%rbx)
+            movq %rdi,(%rbx)
             addq $8,%rbx
 .L__dift_done__teapot___365:
 
@@ -4903,46 +4903,46 @@ calibrate_latency__teapot__:
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
-            leaq -8(%rsp),%rdi
+            leaq -8(%rsp),%rbp
             movq (memory_history_top),%rax
-            movq (%rdi),%rbp
-            movq %rdi,(%rax)
-            movq %rbp,8(%rax)
+            movq (%rbp),%rdi
+            movq %rbp,(%rax)
+            movq %rdi,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
             movq (scratchpad+524288),%rax
             pushq %rbx
             subq $8,%rsp
-            xorl %ebx,%ebx
-            movb %bl,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___367:
 
             nop
             movl $8,%edi
             movq %rax,(scratchpad+524288)
-            leaq -8(%rsp),%rbx
+            leaq -8(%rsp),%rbp
             movq (memory_history_top),%rax
-            movq (%rbx),%rbp
-            movq %rbx,(%rax)
-            movq %rbp,8(%rax)
+            movq (%rbp),%rbx
+            movq %rbp,(%rax)
+            movq %rbx,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
             movq (scratchpad+524288),%rax
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq malloc@PLT
-.L__ret_transform_target_calibrate_latency__5d1edaaf_8962_4b0e_b171_a1b88b4bc70e__teapot__:
+.L__ret_transform_target_calibrate_latency__b6db33d9_25b0_444c_b7e4_fcaaf5fd8af1__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $110,(%rax)
+            movl $76,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r9d,%r9d
-            orb (dift_reg_tags),%r9b
-            orb (dift_reg_tags),%r9b
-            testb $48,%r9b
+            xorl %esi,%esi
+            orb (dift_reg_tags),%sil
+            orb (dift_reg_tags),%sil
+            testb $48,%sil
             je .L__check_ok__teapot___371
 
             movq %rsp,(old_rsp)
@@ -4951,7 +4951,7 @@ calibrate_latency__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %r9,%rdx
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -4962,43 +4962,43 @@ calibrate_latency__teapot__:
 .L__check_ok__teapot___371:
 
             nop
-            movq (instruction_cnt),%r9
-            addq $2,%r9
-            cmpq $250,%r9
+            movq (instruction_cnt),%rsi
+            addq $2,%rsi
+            cmpq $250,%rsi
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r9,(instruction_cnt)
+            movq %rsi,(instruction_cnt)
             testq %rax,%rax
-            leaq (.__trampoline__f3a283a7_776c_4369_a001_1a2fe7eb5bc5__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___373)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__f3a283a7_776c_4369_a001_1a2fe7eb5bc5__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__66ed920a_c1ea_40bd_9954_18d11801e056__teapot__)(%rip),%rsi
+            movq %rsi,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___373)(%rip),%rsi
+            movq %rsi,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__66ed920a_c1ea_40bd_9954_18d11801e056__teapot__)(%rip),%rsi
+            movq %rsi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___373:
 
             nop
             je .L_16b7__teapot__
-.L__trampoline_target__9b570d6f_feb2_488e_aa11_c146c3b09420__teapot__:
+.L__trampoline_target__3b32d92d_788c_43bb_91b0_38668d75dda3__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $108,(%rax)
+            movl $73,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+1)
+            xorl %edx,%edx
+            orb (dift_reg_tags),%dl
+            movb %dl,(dift_reg_tags+1)
 .L__dift_done__teapot___375:
 
             nop
             movq %rax,%rbx
-            leaq (%rbx),%rbp
-            xorq %r9,%r9
-            orb (dift_reg_tags+1),%r9b
-            testb $48,%r9b
+            leaq (%rbx),%rdx
+            xorq %rsi,%rsi
+            orb (dift_reg_tags+1),%sil
+            testb $48,%sil
             je .L__attacker_tags_check__teapot___376
 
             movq %rsp,(old_rsp)
@@ -5006,8 +5006,8 @@ calibrate_latency__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -5017,7 +5017,7 @@ calibrate_latency__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___376:
 
-            testb $2,%r9b
+            testb $2,%sil
             je .L__asan_check__teapot___376
 
             movq %rsp,(old_rsp)
@@ -5025,8 +5025,8 @@ calibrate_latency__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -5038,19 +5038,19 @@ calibrate_latency__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___376:
 
-            movq %rbp,%rcx
-            shrq $3,%rcx
-            movb 2147450880(%rcx),%cl
-            testb %cl,%cl
+            movq %rdx,%r8
+            shrq $3,%r8
+            movb 2147450880(%r8),%r8b
+            testb %r8b,%r8b
             je .L__mem_operand_policy_done__teapot___376
 
-            movb %bpl,%dil
-            andb $7,%dil
-            cmpb %cl,%dil
+            movb %dl,%bpl
+            andb $7,%bpl
+            cmpb %r8b,%bpl
             jl .L__mem_operand_policy_done__teapot___376
 .L__asan_check_fail__teapot___376:
 
-            testb $1,%r9b
+            testb $1,%sil
             je .L__asan_check_fail_non_attacker__teapot___376
 .L__asan_check_fail_attacker__teapot___376:
 
@@ -5059,8 +5059,8 @@ calibrate_latency__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -5078,47 +5078,47 @@ calibrate_latency__teapot__:
 .L__mem_operand_policy_done__teapot___376:
 
             nop
-            leaq (%rbx),%r9
-            btcq $45,%r9
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+1),%cl
-            orb (%r9),%cl
-            movb %cl,(dift_reg_tags)
+            leaq (%rbx),%rsi
+            btcq $45,%rsi
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+1),%r8b
+            orb (%rsi),%r8b
+            movb %r8b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___377
 
-            movb (dift_reg_queued_tag),%cl
-            movzbq (dift_reg_queued_id),%rbp
-            orb %cl,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r8b
+            movzbq (dift_reg_queued_id),%rdx
+            orb %r8b,(dift_reg_tags)(%rdx)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___377:
 
             nop
             movb (%rbx),%al
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+4)
 .L__dift_done__teapot___378:
 
             nop
             movl $1000,%esi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r8d,%r8d
+            movb %r8b,(dift_reg_tags+5)
 .L__dift_done__teapot___379:
 
             nop
-            movq (instruction_cnt),%r9
-            addq $4,%r9
-            cmpq $250,%r9
+            movq (instruction_cnt),%rdx
+            addq $4,%rdx
+            cmpq $250,%rdx
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r9,(instruction_cnt)
+            movq %rdx,(instruction_cnt)
             movl $0,%edi
 .L_15ce__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $111,(%rax)
+            movl $77,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -5126,34 +5126,34 @@ calibrate_latency__teapot__:
 
             mfence 
             lfence 
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
-            movb %bpl,(dift_reg_tags+3)
+            xorl %r8d,%r8d
+            movb %r8b,(dift_reg_tags)
+            movb %r8b,(dift_reg_tags+3)
 .L__dift_done__teapot___383:
 
             nop
             rdtsc 
             shlq $32,%rdx
-            xorl %r8d,%r8d
-            orb (dift_reg_tags),%r8b
-            orb (dift_reg_tags+3),%r8b
-            movb %r8b,(dift_reg_tags)
+            xorl %r9d,%r9d
+            orb (dift_reg_tags),%r9b
+            orb (dift_reg_tags+3),%r9b
+            movb %r9b,(dift_reg_tags)
 .L__dift_done__teapot___384:
 
             nop
             orq %rdx,%rax
             lfence 
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+8)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags),%r8b
+            movb %r8b,(dift_reg_tags+8)
 .L__dift_done__teapot___385:
 
             nop
             movq %rax,%r8
             leaq (%rbx),%rbp
-            xorq %r9,%r9
-            orb (dift_reg_tags+1),%r9b
-            testb $48,%r9b
+            xorq %rdx,%rdx
+            orb (dift_reg_tags+1),%dl
+            testb $48,%dl
             je .L__attacker_tags_check__teapot___386
 
             movq %rsp,(old_rsp)
@@ -5162,7 +5162,7 @@ calibrate_latency__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq %rbp,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -5172,7 +5172,7 @@ calibrate_latency__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___386:
 
-            testb $2,%r9b
+            testb $2,%dl
             je .L__asan_check__teapot___386
 
             movq %rsp,(old_rsp)
@@ -5181,7 +5181,7 @@ calibrate_latency__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq %rbp,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -5193,19 +5193,19 @@ calibrate_latency__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___386:
 
-            movq %rbp,%rcx
-            shrq $3,%rcx
-            movb 2147450880(%rcx),%cl
-            testb %cl,%cl
+            movq %rbp,%r9
+            shrq $3,%r9
+            movb 2147450880(%r9),%r9b
+            testb %r9b,%r9b
             je .L__mem_operand_policy_done__teapot___386
 
-            movb %bpl,%dl
-            andb $7,%dl
-            cmpb %cl,%dl
+            movb %bpl,%al
+            andb $7,%al
+            cmpb %r9b,%al
             jl .L__mem_operand_policy_done__teapot___386
 .L__asan_check_fail__teapot___386:
 
-            testb $1,%r9b
+            testb $1,%dl
             je .L__asan_check_fail_non_attacker__teapot___386
 .L__asan_check_fail_attacker__teapot___386:
 
@@ -5215,7 +5215,7 @@ calibrate_latency__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq %rbp,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -5233,18 +5233,18 @@ calibrate_latency__teapot__:
 .L__mem_operand_policy_done__teapot___386:
 
             nop
-            leaq (%rbx),%r9
-            btcq $45,%r9
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+1),%cl
-            orb (%r9),%cl
-            movb %cl,(dift_reg_tags)
+            leaq (%rbx),%rdx
+            btcq $45,%rdx
+            xorl %r9d,%r9d
+            orb (dift_reg_tags+1),%r9b
+            orb (%rdx),%r9b
+            movb %r9b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___387
 
-            movb (dift_reg_queued_tag),%cl
+            movb (dift_reg_queued_tag),%r9b
             movzbq (dift_reg_queued_id),%rbp
-            orb %cl,(dift_reg_tags)(%rbp)
+            orb %r9b,(dift_reg_tags)(%rbp)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___387:
@@ -5252,42 +5252,42 @@ calibrate_latency__teapot__:
             nop
             movb (%rbx),%al
             xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+2)
             movb %bpl,(dift_reg_tags)
             movb %bpl,(dift_reg_tags+3)
+            movb %bpl,(dift_reg_tags+2)
 .L__dift_done__teapot___388:
 
             nop
             rdtscp 
             shlq $32,%rdx
-            xorl %ecx,%ecx
-            orb (dift_reg_tags),%cl
-            orb (dift_reg_tags+3),%cl
-            movb %cl,(dift_reg_tags)
+            xorl %r9d,%r9d
+            orb (dift_reg_tags),%r9b
+            orb (dift_reg_tags+3),%r9b
+            movb %r9b,(dift_reg_tags)
 .L__dift_done__teapot___389:
 
             nop
             orq %rdx,%rax
             lfence 
-            xorl %edx,%edx
-            orb (dift_reg_tags),%dl
-            orb (dift_reg_tags+8),%dl
-            movb %dl,(dift_reg_tags)
+            xorl %ecx,%ecx
+            orb (dift_reg_tags+8),%cl
+            orb (dift_reg_tags),%cl
+            movb %cl,(dift_reg_tags)
 .L__dift_done__teapot___390:
 
             nop
             subq %r8,%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+5),%bpl
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags),%r8b
+            orb (dift_reg_tags+5),%r8b
+            movb %r8b,(dift_reg_tags+5)
 .L__dift_done__teapot___391:
 
             nop
             addq %rax,%rdi
-            xorl %r9d,%r9d
-            orb (dift_reg_tags+4),%r9b
-            testb $48,%r9b
+            xorl %edx,%edx
+            orb (dift_reg_tags+4),%dl
+            testb $48,%dl
             je .L__check_ok__teapot___392
 
             movq %rsp,(old_rsp)
@@ -5296,7 +5296,7 @@ calibrate_latency__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %r9,%rdx
+            movq %rdx,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -5308,71 +5308,71 @@ calibrate_latency__teapot__:
 
             nop
             subl $1,%esi
-            leaq (.__trampoline__ebbbbfa1_4208_4a69_aced_b9e374f22135__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___393)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__ebbbbfa1_4208_4a69_aced_b9e374f22135__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__d49eeba5_904a_4187_b78a_e46d8c7310ac__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___393)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__d49eeba5_904a_4187_b78a_e46d8c7310ac__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___393:
 
             nop
             jne .L_15ce__teapot__
-.L__trampoline_target__67df1e52_abd7_432f_96dd_363ec36a8843__teapot__:
+.L__trampoline_target__3355bc12_2f56_40e8_86e7_a47839b48bb9__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $109,(%rax)
+            movl $70,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             shrq $3,%rdi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+3)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___395:
 
             nop
             movabsq $2361183241434822607,%rdx
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+5),%bpl
-            movb %bpl,(dift_reg_tags)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+5),%r8b
+            movb %r8b,(dift_reg_tags)
 .L__dift_done__teapot___396:
 
             nop
             movq %rdi,%rax
             mulq %rdx
             shrq $4,%rdx
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+3),%bpl
-            movb %bpl,(dift_reg_tags+9)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+3),%r8b
+            movb %r8b,(dift_reg_tags+9)
 .L__dift_done__teapot___397:
 
             nop
             movq %rdx,%r9
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+4)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+4)
 .L__dift_done__teapot___398:
 
             nop
             movl $1000,%esi
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+5)
+            xorl %r8d,%r8d
+            movb %r8b,(dift_reg_tags+5)
 .L__dift_done__teapot___399:
 
             nop
-            movq (instruction_cnt),%rbp
-            addq $8,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%rdx
+            addq $8,%rdx
+            cmpq $250,%rdx
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %rdx,(instruction_cnt)
             movl $0,%edi
 .L_1622__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $107,(%rax)
+            movl $78,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -5381,34 +5381,34 @@ calibrate_latency__teapot__:
 
             mfence 
             lfence 
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags)
-            movb %cl,(dift_reg_tags+3)
+            xorl %r8d,%r8d
+            movb %r8b,(dift_reg_tags)
+            movb %r8b,(dift_reg_tags+3)
 .L__dift_done__teapot___403:
 
             nop
             rdtsc 
             shlq $32,%rdx
-            xorl %r8d,%r8d
-            orb (dift_reg_tags),%r8b
-            orb (dift_reg_tags+3),%r8b
-            movb %r8b,(dift_reg_tags)
+            xorl %ebp,%ebp
+            orb (dift_reg_tags),%bpl
+            orb (dift_reg_tags+3),%bpl
+            movb %bpl,(dift_reg_tags)
 .L__dift_done__teapot___404:
 
             nop
             orq %rdx,%rax
             lfence 
-            xorl %r8d,%r8d
-            orb (dift_reg_tags),%r8b
-            movb %r8b,(dift_reg_tags+8)
+            xorl %ecx,%ecx
+            orb (dift_reg_tags),%cl
+            movb %cl,(dift_reg_tags+8)
 .L__dift_done__teapot___405:
 
             nop
             movq %rax,%r8
-            leaq (%rbx),%rax
-            xorq %rcx,%rcx
-            orb (dift_reg_tags+1),%cl
-            testb $48,%cl
+            leaq (%rbx),%rcx
+            xorq %rbp,%rbp
+            orb (dift_reg_tags+1),%bpl
+            testb $48,%bpl
             je .L__attacker_tags_check__teapot___406
 
             movq %rsp,(old_rsp)
@@ -5416,8 +5416,8 @@ calibrate_latency__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rax,%rsi
-            movq %rcx,%rdx
+            movq %rcx,%rsi
+            movq %rbp,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -5427,7 +5427,7 @@ calibrate_latency__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___406:
 
-            testb $2,%cl
+            testb $2,%bpl
             je .L__asan_check__teapot___406
 
             movq %rsp,(old_rsp)
@@ -5435,8 +5435,8 @@ calibrate_latency__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rax,%rsi
-            movq %rcx,%rdx
+            movq %rcx,%rsi
+            movq %rbp,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -5448,19 +5448,19 @@ calibrate_latency__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___406:
 
-            movq %rax,%rdx
-            shrq $3,%rdx
-            movb 2147450880(%rdx),%dl
-            testb %dl,%dl
+            movq %rcx,%rax
+            shrq $3,%rax
+            movb 2147450880(%rax),%al
+            testb %al,%al
             je .L__mem_operand_policy_done__teapot___406
 
-            movb %al,%bpl
-            andb $7,%bpl
-            cmpb %dl,%bpl
+            movb %cl,%dl
+            andb $7,%dl
+            cmpb %al,%dl
             jl .L__mem_operand_policy_done__teapot___406
 .L__asan_check_fail__teapot___406:
 
-            testb $1,%cl
+            testb $1,%bpl
             je .L__asan_check_fail_non_attacker__teapot___406
 .L__asan_check_fail_attacker__teapot___406:
 
@@ -5469,8 +5469,8 @@ calibrate_latency__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rax,%rsi
-            movq %rcx,%rdx
+            movq %rcx,%rsi
+            movq %rbp,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -5488,61 +5488,61 @@ calibrate_latency__teapot__:
 .L__mem_operand_policy_done__teapot___406:
 
             nop
-            leaq (%rbx),%rcx
-            btcq $45,%rcx
-            xorl %edx,%edx
-            orb (dift_reg_tags+1),%dl
-            orb (%rcx),%dl
-            movb %dl,(dift_reg_tags)
+            leaq (%rbx),%rbp
+            btcq $45,%rbp
+            xorl %eax,%eax
+            orb (dift_reg_tags+1),%al
+            orb (%rbp),%al
+            movb %al,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___407
 
-            movb (dift_reg_queued_tag),%dl
-            movzbq (dift_reg_queued_id),%rax
-            orb %dl,(dift_reg_tags)(%rax)
+            movb (dift_reg_queued_tag),%al
+            movzbq (dift_reg_queued_id),%rcx
+            orb %al,(dift_reg_tags)(%rcx)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___407:
 
             nop
             movb (%rbx),%al
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+2)
-            movb %al,(dift_reg_tags)
-            movb %al,(dift_reg_tags+3)
+            xorl %ecx,%ecx
+            movb %cl,(dift_reg_tags)
+            movb %cl,(dift_reg_tags+3)
+            movb %cl,(dift_reg_tags+2)
 .L__dift_done__teapot___408:
 
             nop
             rdtscp 
             shlq $32,%rdx
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            orb (dift_reg_tags+3),%bpl
-            movb %bpl,(dift_reg_tags)
+            xorl %ecx,%ecx
+            orb (dift_reg_tags),%cl
+            orb (dift_reg_tags+3),%cl
+            movb %cl,(dift_reg_tags)
 .L__dift_done__teapot___409:
 
             nop
             orq %rdx,%rax
             lfence 
-            xorl %edx,%edx
-            orb (dift_reg_tags),%dl
-            orb (dift_reg_tags+8),%dl
-            movb %dl,(dift_reg_tags)
+            xorl %ecx,%ecx
+            orb (dift_reg_tags+8),%cl
+            orb (dift_reg_tags),%cl
+            movb %cl,(dift_reg_tags)
 .L__dift_done__teapot___410:
 
             nop
             subq %r8,%rax
-            xorl %r8d,%r8d
-            orb (dift_reg_tags+5),%r8b
-            orb (dift_reg_tags),%r8b
-            movb %r8b,(dift_reg_tags+5)
+            xorl %ecx,%ecx
+            orb (dift_reg_tags),%cl
+            orb (dift_reg_tags+5),%cl
+            movb %cl,(dift_reg_tags+5)
 .L__dift_done__teapot___411:
 
             nop
             addq %rax,%rdi
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+4),%bpl
-            testb $48,%bpl
+            xorl %edx,%edx
+            orb (dift_reg_tags+4),%dl
+            testb $48,%dl
             je .L__check_ok__teapot___412
 
             movq %rsp,(old_rsp)
@@ -5551,7 +5551,7 @@ calibrate_latency__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rbp,%rdx
+            movq %rdx,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -5563,66 +5563,66 @@ calibrate_latency__teapot__:
 
             nop
             subl $1,%esi
-            leaq (.__trampoline__db001040_0995_4d63_ace6_32d4b7cd41cc__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___413)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__db001040_0995_4d63_ace6_32d4b7cd41cc__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__70a0842c_7442_4079_80d5_8a6e361514d1__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___413)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__70a0842c_7442_4079_80d5_8a6e361514d1__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___413:
 
             nop
             jne .L_1622__teapot__
-.L__trampoline_target__d7cbccc9_a3e5_4589_b752_a721190776a2__teapot__:
+.L__trampoline_target__feba9be2_389a_47d5_a1fb_b0570cc80cc9__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $106,(%rax)
+            movl $72,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             shrq $3,%rdi
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+2)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+2)
 .L__dift_done__teapot___415:
 
             nop
             movabsq $2361183241434822607,%rcx
-            xorl %r8d,%r8d
-            orb (dift_reg_tags+5),%r8b
-            movb %r8b,(dift_reg_tags)
+            xorl %edx,%edx
+            orb (dift_reg_tags+5),%dl
+            movb %dl,(dift_reg_tags)
 .L__dift_done__teapot___416:
 
             nop
             movq %rdi,%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+2),%dil
-            orb (dift_reg_tags),%dil
-            movb %dil,(dift_reg_tags)
-            movb %dil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            orb (dift_reg_tags),%dl
+            orb (dift_reg_tags+2),%dl
+            movb %dl,(dift_reg_tags)
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___417:
 
             nop
             mulq %rcx
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+3),%cl
-            movb %cl,(dift_reg_tags+2)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+3),%r8b
+            movb %r8b,(dift_reg_tags+2)
 .L__dift_done__teapot___418:
 
             nop
             movq %rdx,%rcx
             shrq $4,%rcx
-            xorl %edi,%edi
-            orb (dift_reg_tags+9),%dil
-            orb (dift_reg_tags+2),%dil
-            movb %dil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            orb (dift_reg_tags+9),%dl
+            orb (dift_reg_tags+2),%dl
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___419:
 
             nop
             leaq (%r9,%rcx,2),%rdx
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+7)
+            xorl %r8d,%r8d
+            movb %r8b,(dift_reg_tags+7)
 .L__dift_done__teapot___420:
 
             nop
@@ -5634,19 +5634,19 @@ calibrate_latency__teapot__:
 
             nop
             movq %rdx,%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags),%dil
-            orb (dift_reg_tags+7),%dil
-            movb %dil,(dift_reg_tags)
-            movb %dil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            orb (dift_reg_tags+7),%dl
+            orb (dift_reg_tags),%dl
+            movb %dl,(dift_reg_tags)
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___422:
 
             nop
             mulq %rbp
             shrq $1,%rdx
-            xorl %edi,%edi
-            orb (dift_reg_tags+3),%dil
-            movb %dil,(dift_reg_tags+7)
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+3),%r8b
+            movb %r8b,(dift_reg_tags+7)
 .L__dift_done__teapot___423:
 
             nop
@@ -5665,14 +5665,14 @@ calibrate_latency__teapot__:
 
             nop
             movq %r9,%rdx
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+4)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+4)
 .L__dift_done__teapot___426:
 
             nop
             leaq (.L_20f0)(%rip),%rsi
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___427:
 
             nop
@@ -5699,17 +5699,17 @@ calibrate_latency__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_calibrate_latency__fc53bdd7_f3a1_4b1e_9a39_bf207940c991__teapot__:
+.L__ret_transform_target_calibrate_latency__f2c78883_cafe_4189_9142_3e2e7a7f80f8__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $104,(%rax)
+            movl $79,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %eax,%eax
-            orb (dift_reg_tags+1),%al
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            orb (dift_reg_tags+1),%dil
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___432:
 
             nop
@@ -5726,11 +5726,11 @@ calibrate_latency__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq free@PLT
-.L__ret_transform_target_calibrate_latency__4371d92f_cd07_4f41_9f3c_2805751b9140__teapot__:
+.L__ret_transform_target_calibrate_latency__48ba0df4_5a09_4457_9486_7852d5684508__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $105,(%rax)
+            movl $75,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -5745,15 +5745,15 @@ calibrate_latency__teapot__:
             movq %rax,(scratchpad+524288)
             leaq (%rsp),%rax
             btcq $45,%rax
-            xorl %ebp,%ebp
-            orb (%rax),%bpl
-            movb %bpl,(dift_reg_tags+1)
+            xorl %ebx,%ebx
+            orb (%rax),%bl
+            movb %bl,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___437
 
-            movb (dift_reg_queued_tag),%bpl
-            movzbq (dift_reg_queued_id),%rbx
-            orb %bpl,(dift_reg_tags)(%rbx)
+            movb (dift_reg_queued_tag),%bl
+            movzbq (dift_reg_queued_id),%rbp
+            orb %bl,(dift_reg_tags)(%rbp)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___437:
@@ -5830,41 +5830,41 @@ calibrate_latency__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $103,(%rax)
+            movl $71,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r11d,%r11d
-            movb %r11b,(dift_reg_tags+2)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___443:
 
             nop
             leaq (__PRETTY_FUNCTION__.33725)(%rip),%rcx
-            xorl %r11d,%r11d
-            movb %r11b,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___444:
 
             nop
             movl $134,%edx
-            xorl %r11d,%r11d
-            movb %r11b,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___445:
 
             nop
             leaq (.L_2052)(%rip),%rsi
-            xorl %r11d,%r11d
-            movb %r11b,(dift_reg_tags+5)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+5)
 .L__dift_done__teapot___446:
 
             nop
             leaq (.L_205c)(%rip),%rdi
-            leaq -8(%rsp),%r11
-            movq (memory_history_top),%r9
-            movq (%r11),%r14
-            movq %r11,(%r9)
-            movq %r14,8(%r9)
-            leaq 16(%r9),%r9
-            movq %r9,(memory_history_top)
+            leaq -8(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r11
+            movq %rsi,(%r12)
+            movq %r11,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __assert_fail@PLT
@@ -5887,7 +5887,7 @@ victim_function__teapot__:
             movq (scratchpad+524288),%rbx
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $56,(%rax)
+            movl $88,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -5959,139 +5959,139 @@ victim_function__teapot__:
             movq (scratchpad+524288),%rbx
             pushq %r14
             movq %rbx,(scratchpad+524288)
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+13),%r15b
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+13),%r14b
             leaq -8(%rsp),%rax
             btcq $45,%rax
-            movabsq $72340172838076673,%r14
-            imulq %r14,%r15
+            movabsq $72340172838076673,%r15
+            imulq %r15,%r14
             movq (memory_history_top),%rbx
-            movq (%rax),%r14
+            movq (%rax),%r15
             movq %rax,(%rbx)
-            movq %r14,8(%rbx)
+            movq %r15,8(%rbx)
             leaq 16(%rbx),%rbx
             movq %rbx,(memory_history_top)
-            movq %r15,(%rax)
+            movq %r14,(%rax)
             addq $8,%rax
 .L__dift_done__teapot___455:
 
             nop
             movq (scratchpad+524288),%rbx
-            leaq -8(%rsp),%r14
+            leaq -8(%rsp),%r15
             movq (memory_history_top),%rax
-            movq (%r14),%r15
-            movq %r14,(%rax)
-            movq %r15,8(%rax)
+            movq (%r15),%r14
+            movq %r15,(%rax)
+            movq %r14,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
             pushq %r13
-            xorl %r13d,%r13d
-            orb (dift_reg_tags+12),%r13b
-            leaq -8(%rsp),%r14
-            btcq $45,%r14
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+12),%r14b
+            leaq -8(%rsp),%rax
+            btcq $45,%rax
             movabsq $72340172838076673,%r15
-            imulq %r15,%r13
-            movq (memory_history_top),%rax
-            movq (%r14),%r15
+            imulq %r15,%r14
+            movq (memory_history_top),%r13
+            movq (%rax),%r15
+            movq %rax,(%r13)
+            movq %r15,8(%r13)
+            leaq 16(%r13),%r13
+            movq %r13,(memory_history_top)
             movq %r14,(%rax)
-            movq %r15,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
-            movq %r13,(%r14)
-            addq $8,%r14
+            addq $8,%rax
 .L__dift_done__teapot___457:
 
             nop
-            leaq -8(%rsp),%r14
-            movq (memory_history_top),%rax
-            movq (%r14),%r15
-            movq %r14,(%rax)
-            movq %r15,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
+            leaq -8(%rsp),%rax
+            movq (memory_history_top),%r13
+            movq (%rax),%r15
+            movq %rax,(%r13)
+            movq %r15,8(%r13)
+            leaq 16(%r13),%r13
+            movq %r13,(memory_history_top)
             pushq %r12
-            xorl %eax,%eax
-            orb (dift_reg_tags+7),%al
-            leaq -8(%rsp),%r12
-            btcq $45,%r12
-            movabsq $72340172838076673,%r15
-            imulq %r15,%rax
-            movq (memory_history_top),%r14
-            movq (%r12),%r15
-            movq %r12,(%r14)
-            movq %r15,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %rax,(%r12)
-            addq $8,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+7),%r13b
+            leaq -8(%rsp),%r15
+            btcq $45,%r15
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r13,(%r15)
+            addq $8,%r15
 .L__dift_done__teapot___459:
 
             nop
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%r14
-            movq (%r12),%r15
-            movq %r12,(%r14)
-            movq %r15,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             pushq %rbp
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+1),%r15b
-            leaq -8(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%r12
-            imulq %r12,%r15
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %r15,(%rbp)
-            addq $8,%rbp
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+1),%r13b
+            leaq -8(%rsp),%r15
+            btcq $45,%r15
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r13,(%r15)
+            addq $8,%r15
 .L__dift_done__teapot___461:
 
             nop
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             pushq %rbx
             subq $8,%rsp
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+5),%bpl
-            movb %bpl,(dift_reg_tags+13)
+            xorl %r15d,%r15d
+            orb (dift_reg_tags+5),%r15b
+            movb %r15b,(dift_reg_tags+13)
 .L__dift_done__teapot___463:
 
             nop
             movq %rdi,%r13
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+4),%bpl
-            movb %bpl,(dift_reg_tags+7)
+            xorl %r15d,%r15d
+            orb (dift_reg_tags+4),%r15b
+            movb %r15b,(dift_reg_tags+7)
 .L__dift_done__teapot___464:
 
             nop
             movq %rsi,%rbp
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+3),%r12b
-            movb %r12b,(dift_reg_tags+12)
+            xorl %r15d,%r15d
+            orb (dift_reg_tags+3),%r15b
+            movb %r15b,(dift_reg_tags+12)
 .L__dift_done__teapot___465:
 
             nop
             movl %edx,%r12d
-            xorl %r14d,%r14d
-            orb (dift_reg_tags+2),%r14b
-            movb %r14b,(dift_reg_tags+14)
+            xorl %r15d,%r15d
+            orb (dift_reg_tags+2),%r15b
+            movb %r15b,(dift_reg_tags+14)
 .L__dift_done__teapot___466:
 
             nop
             movl %ecx,%r14d
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+8),%r15b
-            movb %r15b,(dift_reg_tags+1)
+            xorl %eax,%eax
+            orb (dift_reg_tags+8),%al
+            movb %al,(dift_reg_tags+1)
 .L__dift_done__teapot___467:
 
             nop
@@ -6146,22 +6146,22 @@ victim_function__teapot__:
 
             movq %r15,(instruction_cnt)
             cmpl %r8d,%eax
-            leaq (.__trampoline__5efddf78_4c98_490c_b578_b723671923bb__teapot__)(%rip),%r15
+            leaq (.__trampoline__56a60200_76a9_4348_afec_f9d08a4fb692__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___471)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__5efddf78_4c98_490c_b578_b723671923bb__teapot__)(%rip),%r15
+            leaq (.__branch_counter__56a60200_76a9_4348_afec_f9d08a4fb692__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___471:
 
             nop
             ja .L_170f__teapot__
-.L__trampoline_target__da0fcc89_4728_468a_9276_7ba0e5ea4ed5__teapot__:
+.L__trampoline_target__0c647829_3f6e_424c_8bc4_eec8c4caa290__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $55,(%rax)
+            movl $90,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -6214,23 +6214,23 @@ victim_function__teapot__:
 
             movq %r15,(instruction_cnt)
             cmpl %r8d,%eax
-            leaq (.__trampoline__133c87ac_2a09_47a4_b9d9_d3c5225f2834__teapot__)(%rip),%r15
+            leaq (.__trampoline__73454647_e019_4b26_ac47_096045cba6c2__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___476)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__133c87ac_2a09_47a4_b9d9_d3c5225f2834__teapot__)(%rip),%r15
+            leaq (.__branch_counter__73454647_e019_4b26_ac47_096045cba6c2__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___476:
 
             nop
             jae .L_1734__teapot__
-.L__trampoline_target__2dfd9140_4b36_4ee3_af66_de8d52d582af__teapot__:
 .L_170f__teapot__:
+.L__trampoline_target__d17a78f8_0b4a_470d_ba38_5bd43afed7ce__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $53,(%rax)
+            movl $91,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -6362,37 +6362,37 @@ victim_function__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq realloc@PLT
-.L__ret_transform_target_victim_function__b263e65e_7a18_4c16_a8c2_f952cd183195__teapot__:
+.L__ret_transform_target_victim_function__cb1729f6_691e_4b83_ad86_0c6f9a6d3b45__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $54,(%rax)
+            movl $87,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags),%sil
-            movb %sil,(dift_reg_tags+5)
+            xorl %edx,%edx
+            orb (dift_reg_tags),%dl
+            movb %dl,(dift_reg_tags+5)
 .L__dift_done__teapot___485:
 
             nop
             movq %rax,%rdi
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
-            xorl %edx,%edx
-            orb (dift_reg_tags),%dl
-            orb (dift_reg_tags+13),%dl
+            xorl %esi,%esi
+            orb (dift_reg_tags+13),%sil
+            orb (dift_reg_tags),%sil
             leaq (%r13),%rbx
             btcq $45,%rbx
-            movabsq $72340172838076673,%rsi
-            imulq %rsi,%rdx
+            movabsq $72340172838076673,%rdx
+            imulq %rdx,%rsi
             movq (memory_history_top),%rax
-            movq (%rbx),%rsi
+            movq (%rbx),%rdx
             movq %rbx,(%rax)
-            movq %rsi,8(%rax)
+            movq %rdx,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
-            movq %rdx,(%rbx)
+            movq %rsi,(%rbx)
             addq $8,%rbx
 .L__dift_done__teapot___486:
 
@@ -6400,26 +6400,26 @@ victim_function__teapot__:
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
-            leaq (%r13),%rsi
+            leaq (%r13),%rdx
             movq (memory_history_top),%rax
-            movq (%rsi),%rdx
-            movq %rsi,(%rax)
-            movq %rdx,8(%rax)
+            movq (%rdx),%rsi
+            movq %rdx,(%rax)
+            movq %rsi,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
             movq (scratchpad+524288),%rax
             movq %rax,(%r13)
             leaq (array_size)(%rip),%rax
             btcq $45,%rax
-            xorl %edx,%edx
-            orb (%rax),%dl
-            movb %dl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (%rax),%sil
+            movb %sil,(dift_reg_tags+3)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___488
 
-            movb (dift_reg_queued_tag),%dl
-            movzbq (dift_reg_queued_id),%rsi
-            orb %dl,(dift_reg_tags)(%rsi)
+            movb (dift_reg_queued_tag),%sil
+            movzbq (dift_reg_queued_id),%rdx
+            orb %sil,(dift_reg_tags)(%rdx)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___488:
@@ -6446,12 +6446,12 @@ victim_function__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq memcpy__dift_wrapper__@PLT
-.L__ret_transform_target_victim_function__5132ced8_b73c_43e1_8092_6c981be6a2bc__teapot__:
+.L__ret_transform_target_victim_function__083f6fe9_11da_4735_995b_57df6ce2b8d7__teapot__:
 .L_1734__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $52,(%rax)
+            movl $89,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -6465,18 +6465,18 @@ victim_function__teapot__:
             movl %r12d,%edx
             cmpq %rbx,%rdx
             sbbq %rdx,%rdx
-            xorl %eax,%eax
-            orb (dift_reg_tags+12),%al
-            orb (dift_reg_tags+3),%al
-            movb %al,(dift_reg_tags+3)
+            xorl %ebx,%ebx
+            orb (dift_reg_tags+12),%bl
+            orb (dift_reg_tags+3),%bl
+            movb %bl,(dift_reg_tags+3)
 .L__dift_done__teapot___494:
 
             nop
             andl %r12d,%edx
-            leaq (%r13),%r12
-            xorq %rcx,%rcx
-            orb (dift_reg_tags+13),%cl
-            testb $48,%cl
+            leaq (%r13),%r15
+            xorq %r12,%r12
+            orb (dift_reg_tags+13),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___495
 
             movq %rsp,(old_rsp)
@@ -6484,8 +6484,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rcx,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -6495,7 +6495,7 @@ victim_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___495:
 
-            testb $2,%cl
+            testb $2,%r12b
             je .L__asan_check__teapot___495
 
             movq %rsp,(old_rsp)
@@ -6503,8 +6503,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rcx,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -6516,14 +6516,14 @@ victim_function__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___495:
 
-            movq %r12,%r15
-            shrq $3,%r15
-            movb 2147450880(%r15),%r15b
-            testb %r15b,%r15b
+            movq %r15,%rbx
+            shrq $3,%rbx
+            movb 2147450880(%rbx),%bl
+            testb %bl,%bl
             je .L__mem_operand_policy_done__teapot___495
 .L__asan_check_fail__teapot___495:
 
-            testb $1,%cl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___495
 .L__asan_check_fail_attacker__teapot___495:
 
@@ -6532,8 +6532,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rcx,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -6551,29 +6551,29 @@ victim_function__teapot__:
 .L__mem_operand_policy_done__teapot___495:
 
             nop
-            leaq (%r13),%rcx
-            btcq $45,%rcx
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+13),%r15b
-            orb (%rcx),%r15b
-            movb %r15b,(dift_reg_tags)
+            leaq (%r13),%r12
+            btcq $45,%r12
+            xorl %ebx,%ebx
+            orb (dift_reg_tags+13),%bl
+            orb (%r12),%bl
+            movb %bl,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___496
 
-            movb (dift_reg_queued_tag),%r15b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r15b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%bl
+            movzbq (dift_reg_queued_id),%r15
+            orb %bl,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___496:
 
             nop
             movq (%r13),%rax
-            leaq (%rax,%rdx),%r12
-            xorq %rcx,%rcx
-            orb (dift_reg_tags),%cl
-            orb (dift_reg_tags+3),%cl
-            testb $48,%cl
+            leaq (%rax,%rdx),%r15
+            xorq %r12,%r12
+            orb (dift_reg_tags),%r12b
+            orb (dift_reg_tags+3),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___497
 
             movq %rsp,(old_rsp)
@@ -6581,8 +6581,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rcx,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -6592,7 +6592,7 @@ victim_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___497:
 
-            testb $2,%cl
+            testb $2,%r12b
             je .L__asan_check__teapot___497
 
             movq %rsp,(old_rsp)
@@ -6600,8 +6600,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rcx,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -6613,19 +6613,19 @@ victim_function__teapot__:
             movb $2,(dift_reg_queued_id)
 .L__asan_check__teapot___497:
 
-            movq %r12,%r15
-            shrq $3,%r15
-            movb 2147450880(%r15),%r15b
-            testb %r15b,%r15b
+            movq %r15,%r13
+            shrq $3,%r13
+            movb 2147450880(%r13),%r13b
+            testb %r13b,%r13b
             je .L__mem_operand_policy_done__teapot___497
 
-            movb %r12b,%r13b
-            andb $7,%r13b
-            cmpb %r15b,%r13b
+            movb %r15b,%bl
+            andb $7,%bl
+            cmpb %r13b,%bl
             jl .L__mem_operand_policy_done__teapot___497
 .L__asan_check_fail__teapot___497:
 
-            testb $1,%cl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___497
 .L__asan_check_fail_attacker__teapot___497:
 
@@ -6634,8 +6634,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rcx,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -6653,19 +6653,19 @@ victim_function__teapot__:
 .L__mem_operand_policy_done__teapot___497:
 
             nop
-            leaq (%rax,%rdx),%rcx
-            btcq $45,%rcx
-            xorl %r15d,%r15d
-            orb (dift_reg_tags),%r15b
-            orb (dift_reg_tags+3),%r15b
-            orb (%rcx),%r15b
-            movb %r15b,(dift_reg_tags+2)
+            leaq (%rax,%rdx),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags),%r13b
+            orb (dift_reg_tags+3),%r13b
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+2)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___498
 
-            movb (dift_reg_queued_tag),%r15b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r15b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r13b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___498:
@@ -6681,17 +6681,17 @@ victim_function__teapot__:
             nop
             imull %ecx,%r14d
             xorl %r15d,%r15d
-            orb (dift_reg_tags+14),%r15b
             orb (dift_reg_tags+7),%r15b
+            orb (dift_reg_tags+14),%r15b
             movb %r15b,(dift_reg_tags+7)
 .L__dift_done__teapot___500:
 
             nop
             addq %r14,%rbp
-            leaq (%rbp),%r12
-            xorq %r14,%r14
-            orb (dift_reg_tags+7),%r14b
-            testb $48,%r14b
+            leaq (%rbp),%r15
+            xorq %r12,%r12
+            orb (dift_reg_tags+7),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___501
 
             movq %rsp,(old_rsp)
@@ -6699,8 +6699,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -6710,7 +6710,7 @@ victim_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___501:
 
-            testb $2,%r14b
+            testb $2,%r12b
             je .L__asan_check__teapot___501
 
             movq %rsp,(old_rsp)
@@ -6718,8 +6718,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -6731,19 +6731,19 @@ victim_function__teapot__:
             movb $7,(dift_reg_queued_id)
 .L__asan_check__teapot___501:
 
-            movq %r12,%r15
-            shrq $3,%r15
-            movb 2147450880(%r15),%r15b
-            testb %r15b,%r15b
+            movq %r15,%r14
+            shrq $3,%r14
+            movb 2147450880(%r14),%r14b
+            testb %r14b,%r14b
             je .L__mem_operand_policy_done__teapot___501
 
-            movb %r12b,%al
-            andb $7,%al
-            cmpb %r15b,%al
+            movb %r15b,%r13b
+            andb $7,%r13b
+            cmpb %r14b,%r13b
             jl .L__mem_operand_policy_done__teapot___501
 .L__asan_check_fail__teapot___501:
 
-            testb $1,%r14b
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___501
 .L__asan_check_fail_attacker__teapot___501:
 
@@ -6752,8 +6752,8 @@ victim_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -6771,93 +6771,93 @@ victim_function__teapot__:
 .L__mem_operand_policy_done__teapot___501:
 
             nop
-            leaq (%rbp),%r14
-            btcq $45,%r14
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+7),%r15b
-            orb (%r14),%r15b
-            movb %r15b,(dift_reg_tags+7)
+            leaq (%rbp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+7),%r14b
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+7)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___502
 
-            movb (dift_reg_queued_tag),%r15b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r15b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___502:
 
             nop
             movb (%rbp),%bpl
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags)
 .L__dift_done__teapot___503:
 
             nop
             movl $0,%eax
             addq $8,%rsp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+1)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___504
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___504:
 
             nop
             popq %rbx
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+7)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+7)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___505
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___505:
 
             nop
             popq %rbp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+12)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r15d,%r15d
+            orb (%r12),%r15b
+            movb %r15b,(dift_reg_tags+12)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___506
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r13b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r15b
+            movzbq (dift_reg_queued_id),%r13
+            orb %r15b,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___506:
 
             nop
             popq %r12
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+13)
+            leaq (%rsp),%r13
+            btcq $45,%r13
+            xorl %r14d,%r14d
+            orb (%r13),%r14b
+            movb %r14b,(dift_reg_tags+13)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___507
 
-            movb (dift_reg_queued_tag),%r13b
+            movb (dift_reg_queued_tag),%r14b
             movzbq (dift_reg_queued_id),%r15
-            orb %r13b,(dift_reg_tags)(%r15)
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___507:
@@ -6867,15 +6867,15 @@ victim_function__teapot__:
             movq %rax,(scratchpad+524288)
             leaq (%rsp),%rax
             btcq $45,%rax
-            xorl %r15d,%r15d
-            orb (%rax),%r15b
-            movb %r15b,(dift_reg_tags+14)
+            xorl %r14d,%r14d
+            orb (%rax),%r14b
+            movb %r14b,(dift_reg_tags+14)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___508
 
-            movb (dift_reg_queued_tag),%r15b
-            movzbq (dift_reg_queued_id),%r14
-            orb %r15b,(dift_reg_tags)(%r14)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___508:
@@ -6967,7 +6967,7 @@ attacker_function__teapot__:
             movq (scratchpad+524288),%rbx
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $9,(%rax)
+            movl $62,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -7039,270 +7039,270 @@ attacker_function__teapot__:
             movq (scratchpad+524288),%rbx
             pushq %r14
             movq %rbx,(scratchpad+524288)
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+13),%r15b
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+13),%r14b
             leaq -8(%rsp),%rax
             btcq $45,%rax
-            movabsq $72340172838076673,%r14
-            imulq %r14,%r15
+            movabsq $72340172838076673,%r15
+            imulq %r15,%r14
             movq (memory_history_top),%rbx
-            movq (%rax),%r14
+            movq (%rax),%r15
             movq %rax,(%rbx)
-            movq %r14,8(%rbx)
+            movq %r15,8(%rbx)
             leaq 16(%rbx),%rbx
             movq %rbx,(memory_history_top)
-            movq %r15,(%rax)
+            movq %r14,(%rax)
             addq $8,%rax
 .L__dift_done__teapot___519:
 
             nop
             movq (scratchpad+524288),%rbx
-            leaq -8(%rsp),%r14
+            leaq -8(%rsp),%r15
             movq (memory_history_top),%rax
-            movq (%r14),%r15
-            movq %r14,(%rax)
-            movq %r15,8(%rax)
+            movq (%r15),%r14
+            movq %r15,(%rax)
+            movq %r14,8(%rax)
             leaq 16(%rax),%rax
             movq %rax,(memory_history_top)
             pushq %r13
-            xorl %r13d,%r13d
-            orb (dift_reg_tags+12),%r13b
-            leaq -8(%rsp),%r14
-            btcq $45,%r14
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+12),%r14b
+            leaq -8(%rsp),%rax
+            btcq $45,%rax
             movabsq $72340172838076673,%r15
-            imulq %r15,%r13
-            movq (memory_history_top),%rax
-            movq (%r14),%r15
+            imulq %r15,%r14
+            movq (memory_history_top),%r13
+            movq (%rax),%r15
+            movq %rax,(%r13)
+            movq %r15,8(%r13)
+            leaq 16(%r13),%r13
+            movq %r13,(memory_history_top)
             movq %r14,(%rax)
-            movq %r15,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
-            movq %r13,(%r14)
-            addq $8,%r14
+            addq $8,%rax
 .L__dift_done__teapot___521:
 
             nop
-            leaq -8(%rsp),%r14
-            movq (memory_history_top),%rax
-            movq (%r14),%r15
-            movq %r14,(%rax)
-            movq %r15,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
+            leaq -8(%rsp),%rax
+            movq (memory_history_top),%r13
+            movq (%rax),%r15
+            movq %rax,(%r13)
+            movq %r15,8(%r13)
+            leaq 16(%r13),%r13
+            movq %r13,(memory_history_top)
             pushq %r12
-            xorl %eax,%eax
-            orb (dift_reg_tags+7),%al
-            leaq -8(%rsp),%r12
-            btcq $45,%r12
-            movabsq $72340172838076673,%r15
-            imulq %r15,%rax
-            movq (memory_history_top),%r14
-            movq (%r12),%r15
-            movq %r12,(%r14)
-            movq %r15,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %rax,(%r12)
-            addq $8,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+7),%r13b
+            leaq -8(%rsp),%r15
+            btcq $45,%r15
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r13,(%r15)
+            addq $8,%r15
 .L__dift_done__teapot___523:
 
             nop
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%r14
-            movq (%r12),%r15
-            movq %r12,(%r14)
-            movq %r15,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             pushq %rbp
-            xorl %r15d,%r15d
-            orb (dift_reg_tags+1),%r15b
-            leaq -8(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%r12
-            imulq %r12,%r15
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %r15,(%rbp)
-            addq $8,%rbp
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+1),%r13b
+            leaq -8(%rsp),%r15
+            btcq $45,%r15
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r13,(%r15)
+            addq $8,%r15
 .L__dift_done__teapot___525:
 
             nop
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             pushq %rbx
             subq $2168,%rsp
-            leaq %fs:40,%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags)
+            leaq %fs:40,%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___527
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___527:
 
             nop
             movq %fs:40,%rax
-            xorl %r15d,%r15d
-            orb (dift_reg_tags),%r15b
-            orb (dift_reg_tags+6),%r15b
-            leaq 2152(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%r12
-            imulq %r12,%r15
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %r15,(%rbp)
-            addq $8,%rbp
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (dift_reg_tags),%r13b
+            leaq 2152(%rsp),%r15
+            btcq $45,%r15
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r13,(%r15)
+            addq $8,%r15
 .L__dift_done__teapot___528:
 
             nop
-            leaq 2152(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq 2152(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,2152(%rsp)
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags)
 .L__dift_done__teapot___530:
 
             nop
             xorl %eax,%eax
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq (instruction_cnt),%r14
-            addq $12,%r14
-            cmpq $250,%r14
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq (instruction_cnt),%r12
+            addq $12,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r14,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             callq array_init__teapot__
-.L__ret_transform_target_attacker_function__64c25cc8_965c_46e6_83d0_6f4edab78a68__teapot__:
+.L__ret_transform_target_attacker_function__8a273969_4093_499e_9dc6_a0f66c7471d8__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $19,(%rax)
+            movl $17,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r15d,%r15d
-            orb (dift_reg_tags),%r15b
-            orb (dift_reg_tags+6),%r15b
-            leaq 88(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%r12
-            imulq %r12,%r15
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %r15,(%rbp)
-            addq $8,%rbp
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (dift_reg_tags),%r13b
+            leaq 88(%rsp),%r15
+            btcq $45,%r15
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r13,(%r15)
+            addq $8,%r15
 .L__dift_done__teapot___534:
 
             nop
-            leaq 88(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq 88(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,88(%rsp)
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags)
 .L__dift_done__teapot___536:
 
             nop
             movl $0,%eax
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq (instruction_cnt),%r14
-            addq $3,%r14
-            cmpq $250,%r14
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r14,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             callq secret_init__teapot__
-.L__ret_transform_target_attacker_function__c7bcfee9_4f50_499c_aa9d_67dadc4acae5__teapot__:
+.L__ret_transform_target_attacker_function__5ffacf72_e75f_4787_b4e6_ad84eef21fef__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $30,(%rax)
+            movl $24,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            orb (dift_reg_tags+6),%r12b
-            leaq 72(%rsp),%rbp
-            btcq $45,%rbp
-            movabsq $72340172838076673,%rdi
-            imulq %rdi,%r12
-            movq (memory_history_top),%r14
-            movq (%rbp),%rdi
-            movq %rbp,(%r14)
-            movq %rdi,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            movq %r12,(%rbp)
-            addq $8,%rbp
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+6),%r14b
+            orb (dift_reg_tags),%r14b
+            leaq 72(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r15
+            imulq %r15,%r14
+            movq (memory_history_top),%r12
+            movq (%rsi),%r15
+            movq %rsi,(%r12)
+            movq %r15,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %r14,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___540:
 
             nop
-            leaq 72(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%rdi
-            movq %rbp,(%r14)
-            movq %rdi,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq 72(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r15
+            movq %rsi,(%r12)
+            movq %r15,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,72(%rsp)
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (dift_reg_tags),%sil
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___542:
 
             nop
             movq %rax,%rdx
-            leaq 88(%rsp),%rbp
-            xorq %r14,%r14
-            orb (dift_reg_tags+6),%r14b
-            testb $48,%r14b
+            leaq 88(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___543
 
             movq %rsp,(old_rsp)
@@ -7310,8 +7310,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -7321,7 +7321,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___543:
 
-            testb $2,%r14b
+            testb $2,%r12b
             je .L__asan_check__teapot___543
 
             movq %rsp,(old_rsp)
@@ -7329,8 +7329,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -7342,14 +7342,14 @@ attacker_function__teapot__:
             movb $3,(dift_reg_queued_id)
 .L__asan_check__teapot___543:
 
-            movq %rbp,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %rsi,%r15
+            shrq $3,%r15
+            movb 2147450880(%r15),%r15b
+            testb %r15b,%r15b
             je .L__mem_operand_policy_done__teapot___543
 .L__asan_check_fail__teapot___543:
 
-            testb $1,%r14b
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___543
 .L__asan_check_fail_attacker__teapot___543:
 
@@ -7358,8 +7358,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -7377,118 +7377,118 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___543:
 
             nop
-            leaq 88(%rsp),%r14
-            btcq $45,%r14
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (dift_reg_tags+3),%dil
-            orb (%r14),%dil
-            movb %dil,(dift_reg_tags+3)
+            leaq 88(%rsp),%r12
+            btcq $45,%r12
+            xorl %r15d,%r15d
+            orb (dift_reg_tags+6),%r15b
+            orb (dift_reg_tags+3),%r15b
+            orb (%r12),%r15b
+            movb %r15b,(dift_reg_tags+3)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___544
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rbp
-            orb %dil,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r15b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r15b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___544:
 
             nop
             subq 88(%rsp),%rdx
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___545:
 
             nop
             leaq (.L_2061)(%rip),%rsi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags+5)
 .L__dift_done__teapot___546:
 
             nop
             movl $1,%edi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags)
 .L__dift_done__teapot___547:
 
             nop
             movl $0,%eax
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_attacker_function__3a1bf459_dbb1_4708_a201_5a43b1ec0055__teapot__:
+.L__ret_transform_target_attacker_function__979cd9b7_9ec6_4338_b2e3_f365c2ab1f9f__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $40,(%rax)
+            movl $32,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r14d,%r14d
-            movb %r14b,(dift_reg_tags+9)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+9)
 .L__dift_done__teapot___551:
 
             nop
             movl $0,%r9d
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+8)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+8)
 .L__dift_done__teapot___552:
 
             nop
             movl $4294967295,%r8d
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+2)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___553:
 
             nop
             movl $34,%ecx
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___554:
 
             nop
             movl $3,%edx
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___555:
 
             nop
             movl $1048576,%esi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags+5)
 .L__dift_done__teapot___556:
 
             nop
             movl $0,%edi
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq mmap@PLT
-.L__ret_transform_target_attacker_function__853ba40b_7ec0_493f_bcd9_804f5ba9be01__teapot__:
+.L__ret_transform_target_attacker_function__4657c448_5658_48f1_aed9_4ee4ad5a94b3__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $49,(%rax)
+            movl $41,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r14d,%r14d
-            orb (dift_reg_tags),%r14b
-            testb $48,%r14b
+            xorl %r12d,%r12d
+            orb (dift_reg_tags),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___560
 
             movq %rsp,(old_rsp)
@@ -7497,7 +7497,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %r14,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -7508,29 +7508,29 @@ attacker_function__teapot__:
 .L__check_ok__teapot___560:
 
             nop
-            movq (instruction_cnt),%r14
-            addq $2,%r14
-            cmpq $250,%r14
+            movq (instruction_cnt),%r12
+            addq $2,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r14,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             cmpq $-1,%rax
-            leaq (.__trampoline__085c0535_89c0_4e36_b02f_7e8d9eb54dc1__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___562)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__085c0535_89c0_4e36_b02f_7e8d9eb54dc1__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__b88d08a0_3a05_4252_8951_2ed6bfab4973__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___562)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__b88d08a0_3a05_4252_8951_2ed6bfab4973__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___562:
 
             nop
             je .L_191e__teapot__
-.L__trampoline_target__8646099a_4477_4da8_adb9_694ea4119c0f__teapot__:
+.L__trampoline_target__9fd54977_5f65_4ad2_b922_898b3ccaeb6f__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $10,(%rax)
+            movl $46,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -7539,9 +7539,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+15)
+            xorl %esi,%esi
+            orb (dift_reg_tags),%sil
+            movb %sil,(dift_reg_tags+15)
 .L__dift_done__teapot___564:
 
             nop
@@ -7556,8 +7556,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___565:
 
             nop
@@ -7572,8 +7572,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___566:
 
             nop
@@ -7588,9 +7588,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r14d,%r14d
+            orb (dift_reg_tags),%r14b
+            movb %r14b,(dift_reg_tags+5)
 .L__dift_done__teapot___567:
 
             nop
@@ -7600,21 +7600,21 @@ attacker_function__teapot__:
             sahf 
             movq (scratchpad+524296),%rax
             movq %rax,%rdi
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r14
+            movq (memory_history_top),%r12
+            movq (%r14),%r13
+            movq %r14,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq memset__dift_wrapper__@PLT
-.L__ret_transform_target_attacker_function__f4e382ad_a539_4608_b492_4f168a2ef6d8__teapot__:
+.L__ret_transform_target_attacker_function__97097815_8786_468c_bb16_b0f19021c1db__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $25,(%rax)
+            movl $55,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -7623,8 +7623,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r14d,%r14d
+            movb %r14b,(dift_reg_tags)
 .L__dift_done__teapot___571:
 
             nop
@@ -7634,35 +7634,35 @@ attacker_function__teapot__:
             sahf 
             movq (scratchpad+524296),%rax
             movl $0,%eax
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r14
+            movq (memory_history_top),%r12
+            movq (%r14),%r13
+            movq %r14,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%r14
-            addq $2,%r14
-            cmpq $250,%r14
+            movq (instruction_cnt),%r12
+            addq $2,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r14,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
             callq calibrate_latency__teapot__
-.L__ret_transform_target_attacker_function__cf6b7941_4066_4a49_bc82_073157f137f4__teapot__:
+.L__ret_transform_target_attacker_function__e07ba195_f6ea_44a3_aaeb_75ef67146022__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $35,(%rax)
+            movl $14,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -7671,9 +7671,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            movb %bpl,(dift_reg_tags+14)
+            xorl %r14d,%r14d
+            orb (dift_reg_tags),%r14b
+            movb %r14b,(dift_reg_tags+14)
 .L__dift_done__teapot___575:
 
             nop
@@ -7688,8 +7688,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+5)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+5)
 .L__dift_done__teapot___576:
 
             nop
@@ -7699,21 +7699,21 @@ attacker_function__teapot__:
             sahf 
             movq (scratchpad+524296),%rax
             leaq (.L_2130)(%rip),%rdi
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rbp
-            movq (%r12),%rax
-            movq %r12,(%rbp)
-            movq %rax,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq puts@PLT
-.L__ret_transform_target_attacker_function__71ccd55d_f12c_4ae4_b3c0_013e5403934e__teapot__:
+.L__ret_transform_target_attacker_function__fc56e38b_81e5_44ac_835e_d465fc6a59b5__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $42,(%rax)
+            movl $23,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -7722,9 +7722,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+6),%cl
-            movb %cl,(dift_reg_tags+5)
+            xorl %esi,%esi
+            orb (dift_reg_tags+6),%sil
+            movb %sil,(dift_reg_tags+5)
 .L__dift_done__teapot___580:
 
             nop
@@ -7739,8 +7739,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+2)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___581:
 
             nop
@@ -7755,8 +7755,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___582:
 
             nop
@@ -7770,12 +7770,12 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -7785,54 +7785,54 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $1,(%rax)
+            movl $30,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq (%rdi),%r12
-            movq (memory_history_top),%rbp
-            movq (%r12),%rdx
-            movq %r12,(%rbp)
-            movq %rdx,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq (%rdi),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             rep stosq (%rdi)
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $12,(%rax)
+            movl $39,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            leaq 2151(%rsp),%rcx
-            btcq $45,%rcx
-            movq (memory_history_top),%rbp
-            movq (%rcx),%rdi
-            movq %rcx,(%rbp)
-            movq %rdi,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movb %r12b,(%rcx)
-            addq $8,%rcx
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            leaq 2151(%rsp),%rsi
+            btcq $45,%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movb %dl,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___588:
 
             nop
-            leaq 2151(%rsp),%rcx
-            movq (memory_history_top),%rbp
-            movq (%rcx),%rdi
-            movq %rcx,(%rbp)
-            movq %rdi,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq 2151(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movb $0,2151(%rsp)
-            leaq 88(%rsp),%rcx
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 88(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___590
 
             movq %rsp,(old_rsp)
@@ -7840,8 +7840,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -7851,7 +7851,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___590:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___590
 
             movq %rsp,(old_rsp)
@@ -7859,8 +7859,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -7872,14 +7872,14 @@ attacker_function__teapot__:
             movb $1,(dift_reg_queued_id)
 .L__asan_check__teapot___590:
 
-            movq %rcx,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %rsi,%r13
+            shrq $3,%r13
+            movb 2147450880(%r13),%r13b
+            testb %r13b,%r13b
             je .L__mem_operand_policy_done__teapot___590
 .L__asan_check_fail__teapot___590:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___590
 .L__asan_check_fail_attacker__teapot___590:
 
@@ -7888,8 +7888,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -7907,28 +7907,28 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___590:
 
             nop
-            leaq 88(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (%rbp),%dil
-            movb %dil,(dift_reg_tags+1)
+            leaq 88(%rsp),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___591
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rcx
-            orb %dil,(dift_reg_tags)(%rcx)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___591:
 
             nop
             movq 88(%rsp),%rbx
-            leaq 72(%rsp),%rcx
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 72(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___592
 
             movq %rsp,(old_rsp)
@@ -7936,8 +7936,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -7947,7 +7947,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___592:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___592
 
             movq %rsp,(old_rsp)
@@ -7955,8 +7955,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -7968,14 +7968,14 @@ attacker_function__teapot__:
             movb $13,(dift_reg_queued_id)
 .L__asan_check__teapot___592:
 
-            movq %rcx,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %rsi,%r13
+            shrq $3,%r13
+            movb 2147450880(%r13),%r13b
+            testb %r13b,%r13b
             je .L__mem_operand_policy_done__teapot___592
 .L__asan_check_fail__teapot___592:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___592
 .L__asan_check_fail_attacker__teapot___592:
 
@@ -7984,8 +7984,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -8003,185 +8003,104 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___592:
 
             nop
-            leaq 72(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (%rbp),%dil
-            movb %dil,(dift_reg_tags+13)
+            leaq 72(%rsp),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+13)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___593
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rcx
-            orb %dil,(dift_reg_tags)(%rcx)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___593:
 
             nop
             movq 72(%rsp),%r13
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+13),%cl
-            movb %cl,(dift_reg_tags+7)
+            xorl %esi,%esi
+            orb (dift_reg_tags+13),%sil
+            movb %sil,(dift_reg_tags+7)
 .L__dift_done__teapot___594:
 
             nop
             movq %r13,%rbp
-            xorl %edi,%edi
-            orb (dift_reg_tags+1),%dil
-            orb (dift_reg_tags+7),%dil
-            movb %dil,(dift_reg_tags+7)
+            xorl %esi,%esi
+            orb (dift_reg_tags+7),%sil
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+7)
 .L__dift_done__teapot___595:
 
             nop
             subq %rbx,%rbp
-            xorl %edx,%edx
-            orb (dift_reg_tags+6),%dl
-            orb (dift_reg_tags+7),%dl
-            leaq 16(%rsp),%rdi
-            btcq $45,%rdi
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rdx
-            movq (memory_history_top),%rcx
-            movq (%rdi),%r12
-            movq %rdi,(%rcx)
-            movq %r12,8(%rcx)
-            leaq 16(%rcx),%rcx
-            movq %rcx,(memory_history_top)
-            movq %rdx,(%rdi)
-            addq $8,%rdi
+            xorl %edi,%edi
+            orb (dift_reg_tags+7),%dil
+            orb (dift_reg_tags+6),%dil
+            leaq 16(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%rdx
+            imulq %rdx,%rdi
+            movq (memory_history_top),%r12
+            movq (%rsi),%rdx
+            movq %rsi,(%r12)
+            movq %rdx,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdi,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___596:
 
             nop
-            leaq 16(%rsp),%rdi
-            movq (memory_history_top),%rcx
-            movq (%rdi),%r12
-            movq %rdi,(%rcx)
-            movq %r12,8(%rcx)
-            leaq 16(%rcx),%rcx
-            movq %rcx,(memory_history_top)
+            leaq 16(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%rdx
+            movq %rsi,(%r12)
+            movq %rdx,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rbp,16(%rsp)
-            xorl %edi,%edi
-            orb (dift_reg_tags+1),%dil
-            movb %dil,(dift_reg_tags+2)
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___598:
 
             nop
             movq %rbx,%rcx
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+13),%r12b
-            movb %r12b,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (dift_reg_tags+13),%sil
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___599:
 
             nop
             movq %r13,%rdx
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+4)
+            xorl %eax,%eax
+            movb %al,(dift_reg_tags+4)
 .L__dift_done__teapot___600:
 
             nop
             leaq (.L_2160)(%rip),%rsi
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags+5)
+            xorl %eax,%eax
+            movb %al,(dift_reg_tags+5)
 .L__dift_done__teapot___601:
 
             nop
             movl $1,%edi
             movq %rbx,(scratchpad+524288)
-            leaq -8(%rsp),%rax
+            leaq -8(%rsp),%r12
             movq (memory_history_top),%rbx
-            movq (%rax),%r12
-            movq %rax,(%rbx)
-            movq %r12,8(%rbx)
+            movq (%r12),%rax
+            movq %r12,(%rbx)
+            movq %rax,8(%rbx)
             leaq 16(%rbx),%rbx
             movq %rbx,(memory_history_top)
             movq (scratchpad+524288),%rbx
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_attacker_function__ac4c9ae4_e02b_4dc7_ae55_36b690ebbbec__teapot__:
-
-            movq %rax,(scratchpad+524288)
-            movq (guard_list_top),%rax
-            movl $22,(%rax)
-            leaq 4(%rax),%rax
-            movq %rax,(guard_list_top)
-            movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+7),%dil
-            movb %dil,(dift_reg_tags+8)
-.L__dift_done__teapot___605:
-
-            nop
-            movq %rbp,%r8
-            xorl %edi,%edi
-            orb (dift_reg_tags+1),%dil
-            movb %dil,(dift_reg_tags+2)
-.L__dift_done__teapot___606:
-
-            nop
-            movq %rbx,%rcx
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+13),%r12b
-            movb %r12b,(dift_reg_tags+3)
-.L__dift_done__teapot___607:
-
-            nop
-            movq %r13,%rdx
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags+4)
-.L__dift_done__teapot___608:
-
-            nop
-            leaq (.L_2188)(%rip),%rsi
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags+5)
-.L__dift_done__teapot___609:
-
-            nop
-            movl $1,%edi
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags)
-.L__dift_done__teapot___610:
-
-            nop
-            movl $0,%eax
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rax
-            movq (%r12),%r13
-            movq %r12,(%rax)
-            movq %r13,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
-            jmp restore_checkpoint_EXT_LIB@PLT
-
-            callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_attacker_function__5b4e800e_cb8b_404a_bf98_f2d202ce7ba4__teapot__:
-
-            movq %rax,(scratchpad+524288)
-            movq (guard_list_top),%rax
-            movl $33,(%rax)
-            leaq 4(%rax),%rax
-            movq %rax,(guard_list_top)
-            movq (scratchpad+524288),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags+5)
-.L__dift_done__teapot___614:
-
-            nop
-            leaq (.L_2130)(%rip),%rdi
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rax
-            movq (%r12),%r13
-            movq %r12,(%rax)
-            movq %r13,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
-            jmp restore_checkpoint_EXT_LIB@PLT
-
-            callq puts@PLT
-.L__ret_transform_target_attacker_function__c3d8f094_9ab9_4aec_9586_f7338a2d4f6a__teapot__:
+.L__ret_transform_target_attacker_function__3543858f_250f_4b04_949b_486380d30134__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
@@ -8189,79 +8108,160 @@ attacker_function__teapot__:
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq (array_size)(%rip),%rdi
-            btcq $45,%rdi
-            xorl %edx,%edx
-            orb (%rdi),%dl
-            movb %dl,(dift_reg_tags)
+            xorl %esi,%esi
+            orb (dift_reg_tags+7),%sil
+            movb %sil,(dift_reg_tags+8)
+.L__dift_done__teapot___605:
+
+            nop
+            movq %rbp,%r8
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+2)
+.L__dift_done__teapot___606:
+
+            nop
+            movq %rbx,%rcx
+            xorl %esi,%esi
+            orb (dift_reg_tags+13),%sil
+            movb %sil,(dift_reg_tags+3)
+.L__dift_done__teapot___607:
+
+            nop
+            movq %r13,%rdx
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
+.L__dift_done__teapot___608:
+
+            nop
+            leaq (.L_2188)(%rip),%rsi
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+5)
+.L__dift_done__teapot___609:
+
+            nop
+            movl $1,%edi
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags)
+.L__dift_done__teapot___610:
+
+            nop
+            movl $0,%eax
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rax
+            movq %r13,(%r12)
+            movq %rax,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            jmp restore_checkpoint_EXT_LIB@PLT
+
+            callq __printf_chk__dift_wrapper__@PLT
+.L__ret_transform_target_attacker_function__d1b90268_6450_4902_b730_b1f93ab1ed91__teapot__:
+
+            movq %rax,(scratchpad+524288)
+            movq (guard_list_top),%rax
+            movl $51,(%rax)
+            leaq 4(%rax),%rax
+            movq %rax,(guard_list_top)
+            movq (scratchpad+524288),%rax
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+5)
+.L__dift_done__teapot___614:
+
+            nop
+            leaq (.L_2130)(%rip),%rdi
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rax
+            movq %r13,(%r12)
+            movq %rax,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            jmp restore_checkpoint_EXT_LIB@PLT
+
+            callq puts@PLT
+.L__ret_transform_target_attacker_function__9c5af263_c596_4a94_837d_62fb05aa069a__teapot__:
+
+            movq %rax,(scratchpad+524288)
+            movq (guard_list_top),%rax
+            movl $61,(%rax)
+            leaq 4(%rax),%rax
+            movq %rax,(guard_list_top)
+            movq (scratchpad+524288),%rax
+            leaq (array_size)(%rip),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___618
 
-            movb (dift_reg_queued_tag),%dl
-            movzbq (dift_reg_queued_id),%r12
-            orb %dl,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___618:
 
             nop
             movl (array_size)(%rip),%eax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            movb %r12b,(dift_reg_tags+1)
+            xorl %esi,%esi
+            orb (dift_reg_tags),%sil
+            movb %sil,(dift_reg_tags+1)
 .L__dift_done__teapot___619:
 
             nop
             leal -1(%rax),%ebx
-            xorl %eax,%eax
-            orb (dift_reg_tags+6),%al
-            orb (dift_reg_tags+1),%al
-            leaq 24(%rsp),%r12
-            btcq $45,%r12
-            movabsq $72340172838076673,%rdx
-            imulq %rdx,%rax
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
-            movq %rax,(%r12)
-            addq $8,%r12
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            orb (dift_reg_tags+1),%dl
+            leaq 24(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___620:
 
             nop
-            leaq 24(%rsp),%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            leaq 24(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rbx,24(%rsp)
-            leaq (array_size)(%rip),%rdi
-            btcq $45,%rdi
-            xorl %edx,%edx
-            orb (%rdi),%dl
-            movb %dl,(dift_reg_tags)
+            leaq (array_size)(%rip),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___622
 
-            movb (dift_reg_queued_tag),%dl
-            movzbq (dift_reg_queued_id),%r12
-            orb %dl,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___622:
 
             nop
             movl (array_size)(%rip),%eax
-            movq (instruction_cnt),%rdi
-            addq $15,%rdi
-            cmpq $250,%rdi
+            movq (instruction_cnt),%r12
+            addq $15,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rdi,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             shrl $1,%eax
             movl %eax,%eax
             movq %rax,(scratchpad+524296)
@@ -8269,21 +8269,21 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags),%sil
-            orb (dift_reg_tags+6),%sil
-            leaq 8(%rsp),%r12
-            btcq $45,%r12
-            movabsq $72340172838076673,%rdx
-            imulq %rdx,%rsi
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            orb (dift_reg_tags),%dl
+            leaq 8(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
             movq %rsi,(%r12)
-            addq $8,%r12
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___624:
 
             nop
@@ -8292,22 +8292,22 @@ attacker_function__teapot__:
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq 8(%rsp),%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            leaq 8(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,8(%rsp)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+7),%r12b
-            movb %r12b,(dift_reg_tags)
+            xorl %esi,%esi
+            orb (dift_reg_tags+7),%sil
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___626:
 
             nop
@@ -8322,21 +8322,21 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags),%sil
-            orb (dift_reg_tags+6),%sil
-            leaq 32(%rsp),%r12
-            btcq $45,%r12
-            movabsq $72340172838076673,%rdx
-            imulq %rdx,%rsi
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            orb (dift_reg_tags),%dl
+            leaq 32(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
             movq %rsi,(%r12)
-            addq $8,%r12
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___627:
 
             nop
@@ -8345,34 +8345,34 @@ attacker_function__teapot__:
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq 32(%rsp),%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            leaq 32(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,32(%rsp)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags+6),%sil
-            orb (dift_reg_tags+7),%sil
-            leaq 48(%rsp),%r12
-            btcq $45,%r12
-            movq $16843009,%rdx
-            imulq %rdx,%rsi
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
-            movl %esi,(%r12)
-            addq $8,%r12
+            xorl %edx,%edx
+            orb (dift_reg_tags+7),%dl
+            orb (dift_reg_tags+6),%dl
+            leaq 48(%rsp),%rsi
+            btcq $45,%rsi
+            movq $16843009,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movl %edx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___629:
 
             nop
@@ -8381,34 +8381,34 @@ attacker_function__teapot__:
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq 48(%rsp),%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            leaq 48(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movl %ebp,48(%rsp)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags),%sil
-            orb (dift_reg_tags+6),%sil
-            leaq 52(%rsp),%r12
-            btcq $45,%r12
-            movq $16843009,%rdx
-            imulq %rdx,%rsi
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
-            movl %esi,(%r12)
-            addq $8,%r12
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            orb (dift_reg_tags),%dl
+            leaq 52(%rsp),%rsi
+            btcq $45,%rsi
+            movq $16843009,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movl %edx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___631:
 
             nop
@@ -8417,21 +8417,21 @@ attacker_function__teapot__:
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq 52(%rsp),%r12
-            movq (memory_history_top),%rdi
-            movq (%r12),%rdx
-            movq %r12,(%rdi)
-            movq %rdx,8(%rdi)
-            leaq 16(%rdi),%rdi
-            movq %rdi,(memory_history_top)
+            leaq 52(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movl %eax,52(%rsp)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___633:
 
             nop
@@ -8446,9 +8446,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %esi,%esi
-            orb (dift_reg_tags+7),%sil
-            movb %sil,(dift_reg_tags+4)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+7),%r13b
+            movb %r13b,(dift_reg_tags+4)
 .L__dift_done__teapot___634:
 
             nop
@@ -8463,9 +8463,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            movb %r12b,(dift_reg_tags+5)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags),%r13b
+            movb %r13b,(dift_reg_tags+5)
 .L__dift_done__teapot___635:
 
             nop
@@ -8483,11 +8483,11 @@ attacker_function__teapot__:
             leaq 16(%r12),%r12
             movq %r12,(memory_history_top)
             callq otherArray_init__teapot__
-.L__ret_transform_target_attacker_function__5cc7f1ec_0ef1_41b4_b857_d6a761c1dc4a__teapot__:
+.L__ret_transform_target_attacker_function__890c0f0d_6768_4b90_aebd_2c5982c3de2f__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $6,(%rax)
+            movl $16,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -8496,21 +8496,21 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            orb (dift_reg_tags+6),%r12b
-            leaq 40(%rsp),%rcx
-            btcq $45,%rcx
-            movabsq $72340172838076673,%rdi
-            imulq %rdi,%r12
-            movq (memory_history_top),%rbp
-            movq (%rcx),%rdi
-            movq %rcx,(%rbp)
-            movq %rdi,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq %r12,(%rcx)
-            addq $8,%rcx
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            orb (dift_reg_tags),%dl
+            leaq 40(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___638:
 
             nop
@@ -8519,21 +8519,21 @@ attacker_function__teapot__:
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq 40(%rsp),%rcx
-            movq (memory_history_top),%rbp
-            movq (%rcx),%rdi
-            movq %rcx,(%rbp)
-            movq %rdi,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq 40(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,40(%rsp)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___640:
 
             nop
@@ -8548,21 +8548,21 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (dift_reg_tags+1),%r12b
-            leaq 64(%rsp),%rcx
-            btcq $45,%rcx
-            movabsq $72340172838076673,%rdi
-            imulq %rdi,%r12
-            movq (memory_history_top),%rbp
-            movq (%rcx),%rdi
-            movq %rcx,(%rbp)
-            movq %rdi,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq %r12,(%rcx)
-            addq $8,%rcx
+            xorl %ebp,%ebp
+            orb (dift_reg_tags+6),%bpl
+            orb (dift_reg_tags+1),%bpl
+            leaq 64(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rbp
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rbp,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___641:
 
             nop
@@ -8571,24 +8571,24 @@ attacker_function__teapot__:
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq 64(%rsp),%rcx
-            movq (memory_history_top),%rbp
-            movq (%rcx),%rdi
-            movq %rcx,(%rbp)
-            movq %rdi,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq 64(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -8599,7 +8599,7 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $17,(%rax)
+            movl $29,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -8608,8 +8608,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+2)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___645:
 
             nop
@@ -8624,10 +8624,10 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            leaq 72(%rsp),%rdi
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 72(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___646
 
             movq %rsp,(old_rsp)
@@ -8635,8 +8635,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -8646,7 +8646,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___646:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___646
 
             movq %rsp,(old_rsp)
@@ -8654,8 +8654,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -8667,14 +8667,14 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___646:
 
-            movq %rdi,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %rsi,%r13
+            shrq $3,%r13
+            movb 2147450880(%r13),%r13b
+            testb %r13b,%r13b
             je .L__mem_operand_policy_done__teapot___646
 .L__asan_check_fail__teapot___646:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___646
 .L__asan_check_fail_attacker__teapot___646:
 
@@ -8683,8 +8683,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -8712,18 +8712,18 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            leaq 72(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (%rbp),%r12b
-            movb %r12b,(dift_reg_tags+5)
+            leaq 72(%rsp),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___647
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r12b,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___647:
@@ -8740,8 +8740,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___648:
 
             nop
@@ -8755,12 +8755,12 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -8770,7 +8770,7 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $24,(%rax)
+            movl $25,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -8780,23 +8780,23 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $34,(%rax)
+            movl $33,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+2),%dil
-            movb %dil,(dift_reg_tags)
+            xorl %esi,%esi
+            orb (dift_reg_tags+2),%sil
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___653:
 
             nop
             movq %rcx,%rax
             notq %rax
             subq $1,%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags),%bpl
-            orb (dift_reg_tags+3),%bpl
-            testb $48,%bpl
+            xorl %r12d,%r12d
+            orb (dift_reg_tags),%r12b
+            orb (dift_reg_tags+3),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___654
 
             movq %rsp,(old_rsp)
@@ -8805,7 +8805,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rbp,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -8816,36 +8816,36 @@ attacker_function__teapot__:
 .L__check_ok__teapot___654:
 
             nop
-            movq (instruction_cnt),%rbp
-            addq $5,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $5,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             cmpq %rdx,%rax
-            leaq (.__trampoline__135eb19f_24ed_4364_aeef_bc0f72cc8f4f__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___656)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__135eb19f_24ed_4364_aeef_bc0f72cc8f4f__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__732d7cd7_aa82_4282_ae2d_2df653e22ee0__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___656)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__732d7cd7_aa82_4282_ae2d_2df653e22ee0__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___656:
 
             nop
             jbe .L_1acf__teapot__
-.L__trampoline_target__fb4490f8_bc32_4ec9_9647_e19201b577dd__teapot__:
+.L__trampoline_target__479025d9_6ebc_4cf3_a8d3_04093a6b7dc9__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $46,(%rax)
+            movl $40,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+3),%bpl
-            orb (dift_reg_tags+3),%bpl
-            testb $48,%bpl
+            xorl %r12d,%r12d
+            orb (dift_reg_tags+3),%r12b
+            orb (dift_reg_tags+3),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___658
 
             movq %rsp,(old_rsp)
@@ -8854,7 +8854,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rbp,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -8865,129 +8865,129 @@ attacker_function__teapot__:
 .L__check_ok__teapot___658:
 
             nop
-            movq (instruction_cnt),%rbp
-            addq $2,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $2,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             testq %rdx,%rdx
-            leaq (.__trampoline__0b6006c7_a177_45cf_8bcb_4e0810f87912__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___660)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__0b6006c7_a177_45cf_8bcb_4e0810f87912__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__a84f83ad_1e7c_4966_8724_0854a0275058__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___660)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__a84f83ad_1e7c_4966_8724_0854a0275058__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___660:
 
             nop
             jne .L_1acf__teapot__
-.L__trampoline_target__dcb3883d_e6c8_4bf0_b672_3c717fb8f25e__teapot__:
+.L__trampoline_target__bc628f63_d6f9_40e8_b280_350f4b94be03__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $8,(%rax)
+            movl $47,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             xorl %edx,%edx
             orb (dift_reg_tags+6),%dl
-            leaq 56(%rsp),%rdi
-            btcq $45,%rdi
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rdx
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq %rdx,(%rdi)
-            addq $8,%rdi
+            leaq 56(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___662:
 
             nop
-            leaq 56(%rsp),%rdi
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq 56(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq $100,56(%rsp)
-            movq (instruction_cnt),%rbp
-            addq $2,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $2,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             jmp .L_19cd__teapot__
 .L_191e__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $18,(%rax)
+            movl $53,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r15d,%r15d
+            movb %r15b,(dift_reg_tags+5)
 .L__dift_done__teapot___666:
 
             nop
             leaq (.L_206f)(%rip),%rdi
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq perror@PLT
-.L__ret_transform_target_attacker_function__a1eaf219_3ce0_46fe_8c81_8dc26136ee60__teapot__:
+.L__ret_transform_target_attacker_function__badd2d8b_82e0_47b4_bbbf_7d20a8f1e6b3__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $32,(%rax)
+            movl $60,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            movq (instruction_cnt),%r14
-            addq $1,%r14
-            cmpq $250,%r14
+            movq (instruction_cnt),%r12
+            addq $1,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r14,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             jmp .L_1b0e__teapot__
 .L_192f__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $44,(%rax)
+            movl $19,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___672:
 
             nop
             movl $13,%esi
-            movq (instruction_cnt),%rbp
-            addq $2,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $2,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             jmp .L_1985__teapot__
 .L_1936__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $4,(%rax)
+            movl $27,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -8995,50 +8995,50 @@ attacker_function__teapot__:
 
             mfence 
             lfence 
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags)
-            movb %cl,(dift_reg_tags+3)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags)
+            movb %r13b,(dift_reg_tags+3)
 .L__dift_done__teapot___676:
 
             nop
             rdtsc 
             shlq $32,%rdx
-            xorl %ecx,%ecx
-            orb (dift_reg_tags),%cl
-            orb (dift_reg_tags+3),%cl
-            movb %cl,(dift_reg_tags)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags),%r13b
+            orb (dift_reg_tags+3),%r13b
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___677:
 
             nop
             orq %rdx,%rax
             lfence 
-            xorl %ecx,%ecx
-            orb (dift_reg_tags),%cl
-            movb %cl,(dift_reg_tags+8)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags),%r13b
+            movb %r13b,(dift_reg_tags+8)
 .L__dift_done__teapot___678:
 
             nop
             movq %rax,%r8
-            xorl %ecx,%ecx
-            orb (dift_reg_tags+5),%cl
-            movb %cl,(dift_reg_tags)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+5),%r13b
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___679:
 
             nop
             movq %rdi,%rax
             shlq $12,%rax
-            xorl %ecx,%ecx
-            orb (dift_reg_tags),%cl
-            orb (dift_reg_tags+15),%cl
-            movb %cl,(dift_reg_tags)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags),%r13b
+            orb (dift_reg_tags+15),%r13b
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___680:
 
             nop
             addq %r15,%rax
-            leaq (%rax),%rcx
-            xorq %rbp,%rbp
-            orb (dift_reg_tags),%bpl
-            testb $48,%bpl
+            leaq (%rax),%r13
+            xorq %r12,%r12
+            orb (dift_reg_tags),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___681
 
             movq %rsp,(old_rsp)
@@ -9046,8 +9046,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -9057,7 +9057,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___681:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___681
 
             movq %rsp,(old_rsp)
@@ -9065,8 +9065,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9078,19 +9078,19 @@ attacker_function__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___681:
 
-            movq %rcx,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %r13,%rdx
+            shrq $3,%rdx
+            movb 2147450880(%rdx),%dl
+            testb %dl,%dl
             je .L__mem_operand_policy_done__teapot___681
 
-            movb %cl,%dl
-            andb $7,%dl
-            cmpb %r12b,%dl
+            movb %r13b,%bpl
+            andb $7,%bpl
+            cmpb %dl,%bpl
             jl .L__mem_operand_policy_done__teapot___681
 .L__asan_check_fail__teapot___681:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___681
 .L__asan_check_fail_attacker__teapot___681:
 
@@ -9099,8 +9099,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9118,28 +9118,28 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___681:
 
             nop
-            leaq (%rax),%rbp
-            btcq $45,%rbp
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            orb (%rbp),%r12b
-            movb %r12b,(dift_reg_tags)
+            leaq (%rax),%r12
+            btcq $45,%r12
+            xorl %edx,%edx
+            orb (dift_reg_tags),%dl
+            orb (%r12),%dl
+            movb %dl,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___682
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rcx
-            orb %r12b,(dift_reg_tags)(%rcx)
+            movb (dift_reg_queued_tag),%dl
+            movzbq (dift_reg_queued_id),%r13
+            orb %dl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___682:
 
             nop
             movb (%rax),%al
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+2)
-            movb %cl,(dift_reg_tags)
-            movb %cl,(dift_reg_tags+3)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags)
+            movb %r13b,(dift_reg_tags+3)
+            movb %r13b,(dift_reg_tags+2)
 .L__dift_done__teapot___683:
 
             nop
@@ -9155,8 +9155,8 @@ attacker_function__teapot__:
             orq %rdx,%rax
             lfence 
             xorl %r13d,%r13d
-            orb (dift_reg_tags),%r13b
             orb (dift_reg_tags+8),%r13b
+            orb (dift_reg_tags),%r13b
             movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___685:
 
@@ -9182,27 +9182,27 @@ attacker_function__teapot__:
             movzbl %al,%eax
             leaq 96(%rsp,%rdi,8),%r13
             btcq $45,%r13
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+5),%bpl
-            orb (dift_reg_tags+6),%bpl
-            orb (dift_reg_tags),%bpl
-            orb (%r13),%bpl
-            movabsq $72340172838076673,%rbx
-            imulq %rbx,%rbp
+            xorl %ebx,%ebx
+            orb (dift_reg_tags),%bl
+            orb (dift_reg_tags+6),%bl
+            orb (dift_reg_tags+5),%bl
+            orb (%r13),%bl
+            movabsq $72340172838076673,%rbp
+            imulq %rbp,%rbx
             movq (memory_history_top),%r12
-            movq (%r13),%rbx
+            movq (%r13),%rbp
             movq %r13,(%r12)
-            movq %rbx,8(%r12)
+            movq %rbp,8(%r12)
             leaq 16(%r12),%r12
             movq %r12,(memory_history_top)
-            movq %rbp,(%r13)
+            movq %rbx,(%r13)
             addq $8,%r13
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___687
 
-            movb (dift_reg_queued_tag),%bpl
-            movzbq (dift_reg_queued_id),%rbx
-            orb %bpl,(dift_reg_tags)(%rbx)
+            movb (dift_reg_queued_tag),%bl
+            movzbq (dift_reg_queued_id),%rbp
+            orb %bl,(dift_reg_tags)(%rbp)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___687:
@@ -9210,9 +9210,9 @@ attacker_function__teapot__:
             nop
             leaq 96(%rsp,%rdi,8),%r13
             movq (memory_history_top),%r12
-            movq (%r13),%rbx
+            movq (%r13),%rbp
             movq %r13,(%r12)
-            movq %rbx,8(%r12)
+            movq %rbp,8(%r12)
             leaq 16(%r12),%r12
             movq %r12,(memory_history_top)
             addq %rax,96(%rsp,%rdi,8)
@@ -9220,14 +9220,14 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $15,(%rax)
+            movl $36,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             addq $167,%rsi
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+4),%bpl
-            testb $48,%bpl
+            xorl %r12d,%r12d
+            orb (dift_reg_tags+4),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___690
 
             movq %rsp,(old_rsp)
@@ -9236,7 +9236,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rbp,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -9247,43 +9247,43 @@ attacker_function__teapot__:
 .L__check_ok__teapot___690:
 
             nop
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             cmpq $42765,%rsi
-            leaq (.__trampoline__f09ce298_2bd3_4fff_b467_2ca312ad87e4__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___692)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__f09ce298_2bd3_4fff_b467_2ca312ad87e4__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__a0b2349d_d497_44ab_adc1_f79988d7df99__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___692)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__a0b2349d_d497_44ab_adc1_f79988d7df99__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___692:
 
             nop
             je .L_1991__teapot__
-.L__trampoline_target__f6f7865d_8891_460a_9a2a_90d16ada9601__teapot__:
 .L_1985__teapot__:
+.L__trampoline_target__3a392698_d00d_43c5_a4bb_0b58dafc3b41__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $27,(%rax)
+            movl $43,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+4),%dil
-            movb %dil,(dift_reg_tags+5)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+4),%r13b
+            movb %r13b,(dift_reg_tags+5)
 .L__dift_done__teapot___694:
 
             nop
             movzbl %sil,%edi
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+4),%bpl
-            testb $48,%bpl
+            xorl %r12d,%r12d
+            orb (dift_reg_tags+4),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___695
 
             movq %rsp,(old_rsp)
@@ -9292,7 +9292,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rbp,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -9303,51 +9303,51 @@ attacker_function__teapot__:
 .L__check_ok__teapot___695:
 
             nop
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             cmpb $90,%sil
-            leaq (.__trampoline__879171fc_c261_43f7_a1e5_ba8dedc7fc02__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___697)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__879171fc_c261_43f7_a1e5_ba8dedc7fc02__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__19a633a3_58ec_450c_a1a7_e5cecca00a47__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___697)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__19a633a3_58ec_450c_a1a7_e5cecca00a47__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___697:
 
             nop
             jne .L_1936__teapot__
-.L__trampoline_target__fd128c22_edd8_418a_a8a5_77268896c82d__teapot__:
+.L__trampoline_target__3ee3f720_b829_4976_b024_2b3d32a69ba9__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $41,(%rax)
+            movl $52,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            movq (instruction_cnt),%rbp
-            addq $1,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $1,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             jmp .L_1975__teapot__
 .L_1991__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $2,(%rax)
+            movl $56,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq 88(%rsp),%rdi
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 88(%rsp),%r13
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___701
 
             movq %rsp,(old_rsp)
@@ -9355,8 +9355,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -9366,7 +9366,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___701:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___701
 
             movq %rsp,(old_rsp)
@@ -9374,8 +9374,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9387,14 +9387,14 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___701:
 
-            movq %rdi,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %r13,%rbp
+            shrq $3,%rbp
+            movb 2147450880(%rbp),%bpl
+            testb %bpl,%bpl
             je .L__mem_operand_policy_done__teapot___701
 .L__asan_check_fail__teapot___701:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___701
 .L__asan_check_fail_attacker__teapot___701:
 
@@ -9403,8 +9403,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9422,53 +9422,53 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___701:
 
             nop
-            leaq 88(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (%rbp),%r12b
-            movb %r12b,(dift_reg_tags+5)
+            leaq 88(%rsp),%r12
+            btcq $45,%r12
+            xorl %ebp,%ebp
+            orb (dift_reg_tags+6),%bpl
+            orb (%r12),%bpl
+            movb %bpl,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___702
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r12b,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%bpl
+            movzbq (dift_reg_queued_id),%r13
+            orb %bpl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___702:
 
             nop
             movq 88(%rsp),%rdi
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rbp
-            movq (%r12),%rax
-            movq %r12,(%rbp)
-            movq %rax,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq free@PLT
-.L__ret_transform_target_attacker_function__5d4ecae0_5119_4582_acba_65513b66b02b__teapot__:
+.L__ret_transform_target_attacker_function__b2ead161_26db_4715_aabe_0cdf4bc90288__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $13,(%rax)
+            movl $15,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___706:
 
             nop
             movl $0,%eax
             leaq -8(%rsp),%r13
             movq (memory_history_top),%r12
-            movq (%r13),%rbx
+            movq (%r13),%rbp
             movq %r13,(%r12)
-            movq %rbx,8(%r12)
+            movq %rbp,8(%r12)
             leaq 16(%r12),%r12
             movq %r12,(memory_history_top)
             movq (instruction_cnt),%r12
@@ -9478,7 +9478,7 @@ attacker_function__teapot__:
 
             movq %r12,(instruction_cnt)
             callq array_init__teapot__
-.L__ret_transform_target_attacker_function__f2c21ec7_ee5f_4836_8207_430fd352ca45__teapot__:
+.L__ret_transform_target_attacker_function__deb7c6f2_21d5_4961_84b4_5f92cf40e671__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
@@ -9487,41 +9487,41 @@ attacker_function__teapot__:
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             xorl %edx,%edx
-            orb (dift_reg_tags),%dl
             orb (dift_reg_tags+6),%dl
-            leaq 88(%rsp),%rdi
-            btcq $45,%rdi
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rdx
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq %rdx,(%rdi)
-            addq $8,%rdi
+            orb (dift_reg_tags),%dl
+            leaq 88(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___710:
 
             nop
-            leaq 88(%rsp),%rdi
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq 88(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,88(%rsp)
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___712:
 
             nop
             movl $90,%edx
-            leaq 48(%rsp),%rdi
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 48(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___713
 
             movq %rsp,(old_rsp)
@@ -9529,8 +9529,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -9540,7 +9540,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___713:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___713
 
             movq %rsp,(old_rsp)
@@ -9548,8 +9548,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9561,20 +9561,20 @@ attacker_function__teapot__:
             movb $4,(dift_reg_queued_id)
 .L__asan_check__teapot___713:
 
-            movq %rdi,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %rsi,%r13
+            shrq $3,%r13
+            movb 2147450880(%r13),%r13b
+            testb %r13b,%r13b
             je .L__mem_operand_policy_done__teapot___713
 
-            movb %dil,%sil
-            andb $7,%sil
-            addb $3,%sil
-            cmpb %r12b,%sil
+            movb %sil,%bpl
+            andb $7,%bpl
+            addb $3,%bpl
+            cmpb %r13b,%bpl
             jl .L__mem_operand_policy_done__teapot___713
 .L__asan_check_fail__teapot___713:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___713
 .L__asan_check_fail_attacker__teapot___713:
 
@@ -9583,8 +9583,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9602,28 +9602,28 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___713:
 
             nop
-            leaq 48(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (%rbp),%r12b
-            movb %r12b,(dift_reg_tags+4)
+            leaq 48(%rsp),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+4)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___714
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r12b,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___714:
 
             nop
             movl 48(%rsp),%esi
-            leaq 52(%rsp),%rdi
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 52(%rsp),%r13
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___715
 
             movq %rsp,(old_rsp)
@@ -9631,8 +9631,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -9642,7 +9642,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___715:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___715
 
             movq %rsp,(old_rsp)
@@ -9650,8 +9650,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9663,20 +9663,20 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___715:
 
-            movq %rdi,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %r13,%rbp
+            shrq $3,%rbp
+            movb 2147450880(%rbp),%bpl
+            testb %bpl,%bpl
             je .L__mem_operand_policy_done__teapot___715
 
-            movb %dil,%r13b
-            andb $7,%r13b
-            addb $3,%r13b
-            cmpb %r12b,%r13b
+            movb %r13b,%dil
+            andb $7,%dil
+            addb $3,%dil
+            cmpb %bpl,%dil
             jl .L__mem_operand_policy_done__teapot___715
 .L__asan_check_fail__teapot___715:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___715
 .L__asan_check_fail_attacker__teapot___715:
 
@@ -9685,8 +9685,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9704,18 +9704,18 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___715:
 
             nop
-            leaq 52(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (%rbp),%r12b
-            movb %r12b,(dift_reg_tags+5)
+            leaq 52(%rsp),%r12
+            btcq $45,%r12
+            xorl %ebp,%ebp
+            orb (dift_reg_tags+6),%bpl
+            orb (%r12),%bpl
+            movb %bpl,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___716
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r12b,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%bpl
+            movzbq (dift_reg_queued_id),%r13
+            orb %bpl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___716:
@@ -9724,9 +9724,9 @@ attacker_function__teapot__:
             movl 52(%rsp),%edi
             leaq -8(%rsp),%r13
             movq (memory_history_top),%r12
-            movq (%r13),%rbx
+            movq (%r13),%rbp
             movq %r13,(%r12)
-            movq %rbx,8(%r12)
+            movq %rbp,8(%r12)
             leaq 16(%r12),%r12
             movq %r12,(memory_history_top)
             movq (instruction_cnt),%r12
@@ -9736,45 +9736,45 @@ attacker_function__teapot__:
 
             movq %r12,(instruction_cnt)
             callq otherArray_init__teapot__
-.L__ret_transform_target_attacker_function__1f04b63c_98f8_45d2_82e0_beaabb550c3d__teapot__:
+.L__ret_transform_target_attacker_function__31500b1f_dd7d_45c8_8bf8_60e62467f1b2__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $31,(%rax)
+            movl $28,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             xorl %edx,%edx
-            orb (dift_reg_tags),%dl
             orb (dift_reg_tags+6),%dl
-            leaq 40(%rsp),%rdi
-            btcq $45,%rdi
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rdx
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq %rdx,(%rdi)
-            addq $8,%rdi
+            orb (dift_reg_tags),%dl
+            leaq 40(%rsp),%rsi
+            btcq $45,%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
 .L__dift_done__teapot___720:
 
             nop
-            leaq 40(%rsp),%rdi
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq 40(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,40(%rsp)
-            xorl %ebp,%ebp
-            leaq 56(%rsp),%rdi
-            btcq $45,%rdi
-            orb (%rdi),%bpl
-            testb $48,%bpl
+            xorl %r12d,%r12d
+            leaq 56(%rsp),%rsi
+            btcq $45,%rsi
+            orb (%rsi),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___722
 
             movq %rsp,(old_rsp)
@@ -9783,7 +9783,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rbp,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -9794,112 +9794,112 @@ attacker_function__teapot__:
 .L__check_ok__teapot___722:
 
             nop
-            leaq 56(%rsp),%rdi
-            btcq $45,%rdi
+            leaq 56(%rsp),%rsi
+            btcq $45,%rsi
             xorl %edx,%edx
             orb (dift_reg_tags+6),%dl
-            orb (%rdi),%dl
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rdx
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq %rdx,(%rdi)
-            addq $8,%rdi
+            orb (%rsi),%dl
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdx
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq %rdx,(%rsi)
+            addq $8,%rsi
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___723
 
             movb (dift_reg_queued_tag),%dl
-            movzbq (dift_reg_queued_id),%r12
-            orb %dl,(dift_reg_tags)(%r12)
+            movzbq (dift_reg_queued_id),%r13
+            orb %dl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___723:
 
             nop
-            leaq 56(%rsp),%rdi
-            movq (memory_history_top),%rbp
-            movq (%rdi),%r12
-            movq %rdi,(%rbp)
-            movq %r12,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            leaq 56(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             subq $1,56(%rsp)
-            leaq (.__trampoline__8861aade_eb1b_495f_b351_ece101d6a33e__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___726)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__8861aade_eb1b_495f_b351_ece101d6a33e__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__ef3bf9f5_b46a_4d7a_9b10_8b9b47f68315__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___726)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__ef3bf9f5_b46a_4d7a_9b10_8b9b47f68315__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___726:
 
             nop
             je .L_1a9b__teapot__
-.L__trampoline_target__6f2ea62c_3a97_495b_bd87_14601d63be82__teapot__:
+.L__trampoline_target__7f91e847_4eef_40c6_b80c_0925e8a4b959__teapot__:
 .L_19cd__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $43,(%rax)
+            movl $37,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___728:
 
             nop
             movl $256,%edx
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___729:
 
             nop
             movl $4096,%esi
-            xorl %edi,%edi
-            orb (dift_reg_tags+15),%dil
-            movb %dil,(dift_reg_tags+5)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+15),%r13b
+            movb %r13b,(dift_reg_tags+5)
 .L__dift_done__teapot___730:
 
             nop
             movq %r15,%rdi
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rbp
-            movq (%r12),%rax
-            movq %r12,(%rbp)
-            movq %rax,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
-            movq (instruction_cnt),%rbp
-            addq $4,%rbp
-            cmpq $250,%rbp
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            movq (instruction_cnt),%r12
+            addq $4,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             callq flush_lines__teapot__
-.L__ret_transform_target_attacker_function__f9f116f6_1e1b_442e_947e_ea407d7f1313__teapot__:
+.L__ret_transform_target_attacker_function__b19b3c19_e5c0_4fd6_8f50_eef720d5cc77__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $3,(%rax)
+            movl $44,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             clflush (array_size)(%rip)
-            leaq 64(%rsp),%rcx
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 64(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___734
 
             movq %rsp,(old_rsp)
@@ -9907,8 +9907,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -9918,7 +9918,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___734:
 
-            testb $2,%bpl
+            testb $2,%r12b
             je .L__asan_check__teapot___734
 
             movq %rsp,(old_rsp)
@@ -9926,8 +9926,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9939,14 +9939,14 @@ attacker_function__teapot__:
             movb $12,(dift_reg_queued_id)
 .L__asan_check__teapot___734:
 
-            movq %rcx,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %rsi,%r13
+            shrq $3,%r13
+            movb 2147450880(%r13),%r13b
+            testb %r13b,%r13b
             je .L__mem_operand_policy_done__teapot___734
 .L__asan_check_fail__teapot___734:
 
-            testb $1,%bpl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___734
 .L__asan_check_fail_attacker__teapot___734:
 
@@ -9955,8 +9955,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -9974,28 +9974,28 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___734:
 
             nop
-            leaq 64(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (%rbp),%dil
-            movb %dil,(dift_reg_tags+12)
+            leaq 64(%rsp),%r12
+            btcq $45,%r12
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            orb (%r12),%r13b
+            movb %r13b,(dift_reg_tags+12)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___735
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rcx
-            orb %dil,(dift_reg_tags)(%rcx)
+            movb (dift_reg_queued_tag),%r13b
+            movzbq (dift_reg_queued_id),%rsi
+            orb %r13b,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___735:
 
             nop
             movq 64(%rsp),%r12
-            leaq 8(%rsp),%rcx
-            xorq %rbp,%rbp
-            orb (dift_reg_tags+6),%bpl
-            testb $48,%bpl
+            leaq 8(%rsp),%r13
+            xorq %rsi,%rsi
+            orb (dift_reg_tags+6),%sil
+            testb $48,%sil
             je .L__attacker_tags_check__teapot___736
 
             movq %rsp,(old_rsp)
@@ -10003,8 +10003,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -10014,7 +10014,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___736:
 
-            testb $2,%bpl
+            testb $2,%sil
             je .L__asan_check__teapot___736
 
             movq %rsp,(old_rsp)
@@ -10022,8 +10022,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -10035,14 +10035,14 @@ attacker_function__teapot__:
             movb $1,(dift_reg_queued_id)
 .L__asan_check__teapot___736:
 
-            movq %rcx,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %r13,%rdx
+            shrq $3,%rdx
+            movb 2147450880(%rdx),%dl
+            testb %dl,%dl
             je .L__mem_operand_policy_done__teapot___736
 .L__asan_check_fail__teapot___736:
 
-            testb $1,%bpl
+            testb $1,%sil
             je .L__asan_check_fail_non_attacker__teapot___736
 .L__asan_check_fail_attacker__teapot___736:
 
@@ -10051,8 +10051,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rcx,%rsi
-            movq %rbp,%rdx
+            movq %r13,%rsi
+            movq (scratchpad),%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -10070,74 +10070,74 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___736:
 
             nop
-            leaq 8(%rsp),%rbp
-            btcq $45,%rbp
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (%rbp),%dil
-            movb %dil,(dift_reg_tags+1)
+            leaq 8(%rsp),%rsi
+            btcq $45,%rsi
+            xorl %edx,%edx
+            orb (dift_reg_tags+6),%dl
+            orb (%rsi),%dl
+            movb %dl,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___737
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rcx
-            orb %dil,(dift_reg_tags)(%rcx)
+            movb (dift_reg_queued_tag),%dl
+            movzbq (dift_reg_queued_id),%r13
+            orb %dl,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___737:
 
             nop
             movq 8(%rsp),%rbx
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+7)
+            xorl %r13d,%r13d
+            movb %r13b,(dift_reg_tags+7)
 .L__dift_done__teapot___738:
 
             nop
             movl $0,%ebp
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            movb %dil,(dift_reg_tags)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+6),%r13b
+            movb %r13b,(dift_reg_tags)
 .L__dift_done__teapot___739:
 
             nop
             leaq 88(%rsp),%rax
-            xorl %edx,%edx
-            orb (dift_reg_tags),%dl
-            orb (dift_reg_tags+6),%dl
-            leaq (%rsp),%rdi
-            btcq $45,%rdi
-            movabsq $72340172838076673,%r8
-            imulq %r8,%rdx
-            movq (memory_history_top),%rcx
-            movq (%rdi),%r8
-            movq %rdi,(%rcx)
-            movq %r8,8(%rcx)
-            leaq 16(%rcx),%rcx
-            movq %rcx,(memory_history_top)
-            movq %rdx,(%rdi)
-            addq $8,%rdi
+            xorl %r8d,%r8d
+            orb (dift_reg_tags+6),%r8b
+            orb (dift_reg_tags),%r8b
+            leaq (%rsp),%r13
+            btcq $45,%r13
+            movabsq $72340172838076673,%rdx
+            imulq %rdx,%r8
+            movq (memory_history_top),%rsi
+            movq (%r13),%rdx
+            movq %r13,(%rsi)
+            movq %rdx,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
+            movq %r8,(%r13)
+            addq $8,%r13
 .L__dift_done__teapot___740:
 
             nop
-            leaq (%rsp),%rdi
-            movq (memory_history_top),%rcx
-            movq (%rdi),%r8
-            movq %rdi,(%rcx)
-            movq %r8,8(%rcx)
-            leaq 16(%rcx),%rcx
-            movq %rcx,(memory_history_top)
-            movq (instruction_cnt),%rcx
-            addq $6,%rcx
-            cmpq $250,%rcx
+            leaq (%rsp),%r13
+            movq (memory_history_top),%rsi
+            movq (%r13),%rdx
+            movq %r13,(%rsi)
+            movq %rdx,8(%rsi)
+            leaq 16(%rsi),%rsi
+            movq %rsi,(memory_history_top)
+            movq (instruction_cnt),%rsi
+            addq $6,%rsi
+            cmpq $250,%rsi
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rcx,(instruction_cnt)
+            movq %rsi,(instruction_cnt)
             movq %rax,(%rsp)
 .L_19fe__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $14,(%rax)
+            movl $50,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -10145,37 +10145,37 @@ attacker_function__teapot__:
 
             mfence 
             lfence 
-            xorl %edi,%edi
-            orb (dift_reg_tags+12),%dil
-            movb %dil,(dift_reg_tags+8)
+            xorl %r13d,%r13d
+            orb (dift_reg_tags+12),%r13b
+            movb %r13b,(dift_reg_tags+8)
 .L__dift_done__teapot___745:
 
             nop
             movl %r12d,%r8d
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags+2)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___746:
 
             nop
             movl $4096,%ecx
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+1),%r12b
-            movb %r12b,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___747:
 
             nop
             movl %ebx,%edx
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+15),%r12b
-            movb %r12b,(dift_reg_tags+4)
+            xorl %esi,%esi
+            orb (dift_reg_tags+15),%sil
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___748:
 
             nop
             movq %r15,%rsi
-            leaq (%rsp),%r12
-            xorq %rdi,%rdi
-            orb (dift_reg_tags+6),%dil
-            testb $48,%dil
+            leaq (%rsp),%r13
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___749
 
             movq %rsp,(old_rsp)
@@ -10183,8 +10183,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rdi,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -10194,7 +10194,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___749:
 
-            testb $2,%dil
+            testb $2,%r12b
             je .L__asan_check__teapot___749
 
             movq %rsp,(old_rsp)
@@ -10202,8 +10202,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rdi,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -10215,14 +10215,14 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___749:
 
-            movq %r12,%r13
-            shrq $3,%r13
-            movb 2147450880(%r13),%r13b
-            testb %r13b,%r13b
+            movq %r13,%rdi
+            shrq $3,%rdi
+            movb 2147450880(%rdi),%dil
+            testb %dil,%dil
             je .L__mem_operand_policy_done__teapot___749
 .L__asan_check_fail__teapot___749:
 
-            testb $1,%dil
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___749
 .L__asan_check_fail_attacker__teapot___749:
 
@@ -10231,8 +10231,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %r12,%rsi
-            movq %rdi,%rdx
+            movq %r13,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -10250,18 +10250,18 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___749:
 
             nop
-            leaq (%rsp),%rdi
-            btcq $45,%rdi
-            xorl %r13d,%r13d
-            orb (dift_reg_tags+6),%r13b
-            orb (%rdi),%r13b
-            movb %r13b,(dift_reg_tags+5)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %edi,%edi
+            orb (dift_reg_tags+6),%dil
+            orb (%r12),%dil
+            movb %dil,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___750
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r13b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%dil
+            movzbq (dift_reg_queued_id),%r13
+            orb %dil,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___750:
@@ -10276,24 +10276,24 @@ attacker_function__teapot__:
             leaq 16(%r12),%r12
             movq %r12,(memory_history_top)
             callq victim_function__teapot__
-.L__ret_transform_target_attacker_function__cdfd276c_8f23_42df_9797_a1bb7b3ade85__teapot__:
+.L__ret_transform_target_attacker_function__c362d663_c2e2_43fc_a017_845a8fca99b0__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $29,(%rax)
+            movl $59,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___753:
 
             nop
             xorq %rax,%rax
             addq $1,%rbp
-            xorl %edi,%edi
-            orb (dift_reg_tags+7),%dil
-            testb $48,%dil
+            xorl %r12d,%r12d
+            orb (dift_reg_tags+7),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___754
 
             movq %rsp,(old_rsp)
@@ -10302,7 +10302,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %rdi,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -10313,35 +10313,35 @@ attacker_function__teapot__:
 .L__check_ok__teapot___754:
 
             nop
-            movq (instruction_cnt),%rdi
-            addq $4,%rdi
-            cmpq $250,%rdi
+            movq (instruction_cnt),%r12
+            addq $4,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rdi,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             cmpq $32,%rbp
-            leaq (.__trampoline__56cc3ed5_95b1_485d_87db_7f46ea4f109f__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___756)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__56cc3ed5_95b1_485d_87db_7f46ea4f109f__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__b8e70c93_4c51_48a8_b0b2_7b514a43b309__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___756)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__b8e70c93_4c51_48a8_b0b2_7b514a43b309__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___756:
 
             nop
             je .L_192f__teapot__
-.L__trampoline_target__533e96db_58f0_45f7_bcb2_53503f816862__teapot__:
+.L__trampoline_target__3453da8d_f0d7_4ce6_8fb5_5a0d3afaea11__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $39,(%rax)
+            movl $18,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+7),%dil
-            movb %dil,(dift_reg_tags+13)
+            xorl %esi,%esi
+            orb (dift_reg_tags+7),%sil
+            movb %sil,(dift_reg_tags+13)
 .L__dift_done__teapot___758:
 
             nop
@@ -10353,8 +10353,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___759:
 
             nop
@@ -10365,19 +10365,19 @@ attacker_function__teapot__:
             movq (scratchpad+524296),%rax
             sete %al
             movzbl %al,%eax
-            xorl %edi,%edi
-            orb (dift_reg_tags),%dil
-            movb %dil,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (dift_reg_tags),%sil
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___760:
 
             nop
             movq %rax,%rdx
             negq %rdx
             subq $1,%rax
-            leaq 32(%rsp),%rdi
-            xorq %rcx,%rcx
-            orb (dift_reg_tags+6),%cl
-            testb $48,%cl
+            leaq 32(%rsp),%rsi
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___761
 
             movq %rsp,(old_rsp)
@@ -10385,8 +10385,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rcx,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -10396,7 +10396,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___761:
 
-            testb $2,%cl
+            testb $2,%r12b
             je .L__asan_check__teapot___761
 
             movq %rsp,(old_rsp)
@@ -10404,8 +10404,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rcx,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -10417,14 +10417,14 @@ attacker_function__teapot__:
             movb $12,(dift_reg_queued_id)
 .L__asan_check__teapot___761:
 
-            movq %rdi,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %rsi,%rdi
+            shrq $3,%rdi
+            movb 2147450880(%rdi),%dil
+            testb %dil,%dil
             je .L__mem_operand_policy_done__teapot___761
 .L__asan_check_fail__teapot___761:
 
-            testb $1,%cl
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___761
 .L__asan_check_fail_attacker__teapot___761:
 
@@ -10433,8 +10433,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
-            movq %rcx,%rdx
+            movq %rsi,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -10452,18 +10452,18 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___761:
 
             nop
-            leaq 32(%rsp),%rcx
-            btcq $45,%rcx
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (%rcx),%r12b
-            movb %r12b,(dift_reg_tags+12)
+            leaq 32(%rsp),%r12
+            btcq $45,%r12
+            xorl %edi,%edi
+            orb (dift_reg_tags+6),%dil
+            orb (%r12),%dil
+            movb %dil,(dift_reg_tags+12)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___762
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r12b,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%dil
+            movzbq (dift_reg_queued_id),%rsi
+            orb %dil,(dift_reg_tags)(%rsi)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___762:
@@ -10575,16 +10575,16 @@ attacker_function__teapot__:
             nop
             movq 24(%rsp),%rcx
             xorl %esi,%esi
-            orb (dift_reg_tags+2),%sil
             orb (dift_reg_tags),%sil
+            orb (dift_reg_tags+2),%sil
             movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___766:
 
             nop
             andq %rax,%rcx
             xorl %esi,%esi
-            orb (dift_reg_tags+2),%sil
             orb (dift_reg_tags+12),%sil
+            orb (dift_reg_tags+2),%sil
             movb %sil,(dift_reg_tags+12)
 .L__dift_done__teapot___767:
 
@@ -10791,16 +10791,16 @@ attacker_function__teapot__:
 
             nop
             movq %rdx,%rbx
-            xorl %esi,%esi
-            orb (dift_reg_tags),%sil
-            orb (dift_reg_tags+1),%sil
-            movb %sil,(dift_reg_tags+1)
+            xorl %edx,%edx
+            orb (dift_reg_tags),%dl
+            orb (dift_reg_tags+1),%dl
+            movb %dl,(dift_reg_tags+1)
 .L__dift_done__teapot___773:
 
             nop
             orq %rax,%rbx
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___774:
 
             nop
@@ -10842,11 +10842,11 @@ attacker_function__teapot__:
             movq %rax,(instruction_cnt)
             movq (scratchpad+524288),%rax
             callq flush_lines__teapot__
-.L__ret_transform_target_attacker_function__2ef6d49f_ad26_4341_9049_aaf1240f721d__teapot__:
+.L__ret_transform_target_attacker_function__a443664a_f1ad_4fd9_a559_5be26ad24f64__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $47,(%rax)
+            movl $26,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -10880,27 +10880,27 @@ attacker_function__teapot__:
 
             movq %rdi,(instruction_cnt)
             cmpq $31,%r13
-            leaq (.__trampoline__29f74a48_66a9_4470_a76e_7d8f29f226b9__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___782)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__29f74a48_66a9_4470_a76e_7d8f29f226b9__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__0fb98d1e_c46e_40b6_a492_bc4dd330d8a3__teapot__)(%rip),%r13
+            movq %r13,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___782)(%rip),%r13
+            movq %r13,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__0fb98d1e_c46e_40b6_a492_bc4dd330d8a3__teapot__)(%rip),%r13
+            movq %r13,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___782:
 
             nop
             jne .L_19fe__teapot__
-.L__trampoline_target__6dfe459c_eae3_4914_889a_66a4461949f6__teapot__:
+.L__trampoline_target__f5d48e9c_155d_40e4_b21e_ff02e865f439__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $5,(%rax)
+            movl $35,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
-            leaq 40(%rsp),%rdi
+            leaq 40(%rsp),%r13
             xorq %rax,%rax
             orb (dift_reg_tags+6),%al
             testb $48,%al
@@ -10911,7 +10911,7 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
+            movq %r13,%rsi
             movq %rax,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
@@ -10930,7 +10930,7 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
+            movq %r13,%rsi
             movq %rax,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
@@ -10943,10 +10943,10 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___784:
 
-            movq %rdi,%r13
-            shrq $3,%r13
-            movb 2147450880(%r13),%r13b
-            testb %r13b,%r13b
+            movq %r13,%rdi
+            shrq $3,%rdi
+            movb 2147450880(%rdi),%dil
+            testb %dil,%dil
             je .L__mem_operand_policy_done__teapot___784
 .L__asan_check_fail__teapot___784:
 
@@ -10959,7 +10959,7 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rdi,%rsi
+            movq %r13,%rsi
             movq %rax,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
@@ -10982,16 +10982,16 @@ attacker_function__teapot__:
             movq %rax,(scratchpad+524288)
             leaq 40(%rsp),%rax
             btcq $45,%rax
-            xorl %r13d,%r13d
-            orb (dift_reg_tags+6),%r13b
-            orb (%rax),%r13b
-            movb %r13b,(dift_reg_tags+5)
+            xorl %edi,%edi
+            orb (dift_reg_tags+6),%dil
+            orb (%rax),%dil
+            movb %dil,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___785
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%rdi
-            orb %r13b,(dift_reg_tags)(%rdi)
+            movb (dift_reg_queued_tag),%dil
+            movzbq (dift_reg_queued_id),%r13
+            orb %dil,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___785:
@@ -11013,26 +11013,26 @@ attacker_function__teapot__:
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq free@PLT
-.L__ret_transform_target_attacker_function__dba9e893_fa73_4602_ae22_bc4e7e6fa84e__teapot__:
+.L__ret_transform_target_attacker_function__2e9de1b0_585c_40d0_8ab4_6120d11623c7__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $16,(%rax)
+            movl $42,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            movq (instruction_cnt),%rcx
-            addq $1,%rcx
-            cmpq $250,%rcx
+            movq (instruction_cnt),%rsi
+            addq $1,%rsi
+            cmpq $250,%rsi
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rcx,(instruction_cnt)
+            movq %rsi,(instruction_cnt)
             jmp .L_19fe__teapot__
 .L_1a9b__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $26,(%rax)
+            movl $49,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -11041,9 +11041,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            movb %dil,(dift_reg_tags+1)
+            xorl %esi,%esi
+            orb (dift_reg_tags+6),%sil
+            movb %sil,(dift_reg_tags+1)
 .L__dift_done__teapot___791:
 
             nop
@@ -11058,9 +11058,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            movb %dil,(dift_reg_tags+5)
+            xorl %esi,%esi
+            orb (dift_reg_tags+6),%sil
+            movb %sil,(dift_reg_tags+5)
 .L__dift_done__teapot___792:
 
             nop
@@ -11075,8 +11075,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            movb %r12b,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___793:
 
             nop
@@ -11091,9 +11091,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+1),%r12b
-            movb %r12b,(dift_reg_tags+4)
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___794:
 
             nop
@@ -11103,35 +11103,35 @@ attacker_function__teapot__:
             sahf 
             movq (scratchpad+524296),%rax
             movq %rbx,%rsi
-            leaq -8(%rsp),%r12
-            movq (memory_history_top),%rax
-            movq (%r12),%r13
-            movq %r12,(%rax)
-            movq %r13,8(%rax)
-            leaq 16(%rax),%rax
-            movq %rax,(memory_history_top)
+            leaq -8(%rsp),%r13
+            movq (memory_history_top),%r12
+            movq (%r13),%rbp
+            movq %r13,(%r12)
+            movq %rbp,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%rax
-            addq $5,%rax
-            cmpq $250,%rax
+            movq (instruction_cnt),%r12
+            addq $5,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rax,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
             callq decode_flush_reload_state__teapot__
-.L__ret_transform_target_attacker_function__4f2c819e_bbb5_475f_b4ff_dbd6806045d1__teapot__:
+.L__ret_transform_target_attacker_function__17d14e56_80cb_4e8d_a489_136d21f4f9e1__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $37,(%rax)
+            movl $54,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -11140,8 +11140,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+2)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+2)
 .L__dift_done__teapot___798:
 
             nop
@@ -11156,8 +11156,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %edi,%edi
-            movb %dil,(dift_reg_tags)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags)
 .L__dift_done__teapot___799:
 
             nop
@@ -11172,9 +11172,9 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %edi,%edi
-            orb (dift_reg_tags+1),%dil
-            movb %dil,(dift_reg_tags+5)
+            xorl %esi,%esi
+            orb (dift_reg_tags+1),%sil
+            movb %sil,(dift_reg_tags+5)
 .L__dift_done__teapot___800:
 
             nop
@@ -11188,12 +11188,12 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%rbp
-            addq $3,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -11203,24 +11203,24 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $48,(%rax)
+            movl $63,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq (%rdi),%r12
-            movq (memory_history_top),%rbp
-            movq (%r12),%rdx
-            movq %r12,(%rbp)
-            movq %rdx,8(%rbp)
-            leaq 16(%rbp),%rbp
-            movq %rbp,(memory_history_top)
+            leaq (%rdi),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r13
+            movq %rsi,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             rep stosq (%rdi)
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $7,(%rax)
+            movl $21,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -11229,8 +11229,8 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            xorl %ecx,%ecx
-            movb %cl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___806:
 
             nop
@@ -11245,12 +11245,12 @@ attacker_function__teapot__:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movq (instruction_cnt),%rbp
-            addq $2,%rbp
-            cmpq $250,%rbp
+            movq (instruction_cnt),%r12
+            addq $2,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %rbp,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -11261,77 +11261,46 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $23,(%rax)
+            movl $31,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+6),%bpl
-            movb %bpl,(dift_reg_tags+3)
+            xorl %esi,%esi
+            orb (dift_reg_tags+6),%sil
+            movb %sil,(dift_reg_tags+3)
 .L__dift_done__teapot___809:
 
             nop
             leaq 2151(%rsp),%rdx
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
 .L__dift_done__teapot___810:
 
             nop
             leaq (.L_2074)(%rip),%rsi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+5)
+            xorl %r14d,%r14d
+            movb %r14b,(dift_reg_tags+5)
 .L__dift_done__teapot___811:
 
             nop
             movl $1,%edi
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags)
+            xorl %r14d,%r14d
+            movb %r14b,(dift_reg_tags)
 .L__dift_done__teapot___812:
 
             nop
             movl $0,%eax
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r14
+            movq (memory_history_top),%r12
+            movq (%r14),%r13
+            movq %r14,(%r12)
+            movq %r13,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __printf_chk__dift_wrapper__@PLT
-.L__ret_transform_target_attacker_function__5ae6ce85_4c37_44c8_80ae_bcf2b5acf231__teapot__:
-
-            movq %rax,(scratchpad+524288)
-            movq (guard_list_top),%rax
-            movl $28,(%rax)
-            leaq 4(%rax),%rax
-            movq %rax,(guard_list_top)
-            movq (scratchpad+524288),%rax
-            xorl %ebp,%ebp
-            movb %bpl,(dift_reg_tags+4)
-.L__dift_done__teapot___816:
-
-            nop
-            movl $1048576,%esi
-            xorl %ebp,%ebp
-            orb (dift_reg_tags+15),%bpl
-            movb %bpl,(dift_reg_tags+5)
-.L__dift_done__teapot___817:
-
-            nop
-            movq %r15,%rdi
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
-            jmp restore_checkpoint_EXT_LIB@PLT
-
-            callq munmap@PLT
-.L__ret_transform_target_attacker_function__4c639d60_619d_4528_87f7_92413dde0343__teapot__:
+.L__ret_transform_target_attacker_function__13b3779c_7e9b_497c_8dd8_ff2fcc636f0e__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
@@ -11339,10 +11308,41 @@ attacker_function__teapot__:
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq 88(%rsp),%rbp
-            xorq %r14,%r14
-            orb (dift_reg_tags+6),%r14b
-            testb $48,%r14b
+            xorl %esi,%esi
+            movb %sil,(dift_reg_tags+4)
+.L__dift_done__teapot___816:
+
+            nop
+            movl $1048576,%esi
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+15),%r14b
+            movb %r14b,(dift_reg_tags+5)
+.L__dift_done__teapot___817:
+
+            nop
+            movq %r15,%rdi
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
+            jmp restore_checkpoint_EXT_LIB@PLT
+
+            callq munmap@PLT
+.L__ret_transform_target_attacker_function__5ac66119_87dd_4238_aef1_89b82b8fe153__teapot__:
+
+            movq %rax,(scratchpad+524288)
+            movq (guard_list_top),%rax
+            movl $57,(%rax)
+            leaq 4(%rax),%rax
+            movq %rax,(guard_list_top)
+            movq (scratchpad+524288),%rax
+            leaq 88(%rsp),%r15
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___821
 
             movq %rsp,(old_rsp)
@@ -11350,8 +11350,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -11361,7 +11361,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___821:
 
-            testb $2,%r14b
+            testb $2,%r12b
             je .L__asan_check__teapot___821
 
             movq %rsp,(old_rsp)
@@ -11369,8 +11369,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -11382,14 +11382,14 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___821:
 
-            movq %rbp,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %r15,%r14
+            shrq $3,%r14
+            movb 2147450880(%r14),%r14b
+            testb %r14b,%r14b
             je .L__mem_operand_policy_done__teapot___821
 .L__asan_check_fail__teapot___821:
 
-            testb $1,%r14b
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___821
 .L__asan_check_fail_attacker__teapot___821:
 
@@ -11398,8 +11398,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -11417,46 +11417,46 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___821:
 
             nop
-            leaq 88(%rsp),%r14
-            btcq $45,%r14
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (%r14),%dil
-            movb %dil,(dift_reg_tags+5)
+            leaq 88(%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+6),%r14b
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___822
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rbp
-            orb %dil,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___822:
 
             nop
             movq 88(%rsp),%rdi
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq free@PLT
-.L__ret_transform_target_attacker_function__942139e7_3409_4fd9_92d4_2c4515dd4f65__teapot__:
+.L__ret_transform_target_attacker_function__83be127e_d615_4a37_9c06_e378055b2db2__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $0,(%rax)
+            movl $58,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq 72(%rsp),%rbp
-            xorq %r14,%r14
-            orb (dift_reg_tags+6),%r14b
-            testb $48,%r14b
+            leaq 72(%rsp),%r15
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___826
 
             movq %rsp,(old_rsp)
@@ -11464,8 +11464,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -11475,7 +11475,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___826:
 
-            testb $2,%r14b
+            testb $2,%r12b
             je .L__asan_check__teapot___826
 
             movq %rsp,(old_rsp)
@@ -11483,8 +11483,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -11496,14 +11496,14 @@ attacker_function__teapot__:
             movb $5,(dift_reg_queued_id)
 .L__asan_check__teapot___826:
 
-            movq %rbp,%rdi
-            shrq $3,%rdi
-            movb 2147450880(%rdi),%dil
-            testb %dil,%dil
+            movq %r15,%r14
+            shrq $3,%r14
+            movb 2147450880(%r14),%r14b
+            testb %r14b,%r14b
             je .L__mem_operand_policy_done__teapot___826
 .L__asan_check_fail__teapot___826:
 
-            testb $1,%r14b
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___826
 .L__asan_check_fail_attacker__teapot___826:
 
@@ -11512,8 +11512,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -11531,47 +11531,47 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___826:
 
             nop
-            leaq 72(%rsp),%r14
-            btcq $45,%r14
-            xorl %edi,%edi
-            orb (dift_reg_tags+6),%dil
-            orb (%r14),%dil
-            movb %dil,(dift_reg_tags+5)
+            leaq 72(%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+6),%r14b
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+5)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___827
 
-            movb (dift_reg_queued_tag),%dil
-            movzbq (dift_reg_queued_id),%rbp
-            orb %dil,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___827:
 
             nop
             movq 72(%rsp),%rdi
-            leaq -8(%rsp),%rbp
-            movq (memory_history_top),%r14
-            movq (%rbp),%r12
-            movq %rbp,(%r14)
-            movq %r12,8(%r14)
-            leaq 16(%r14),%r14
-            movq %r14,(memory_history_top)
+            leaq -8(%rsp),%r15
+            movq (memory_history_top),%r12
+            movq (%r15),%r14
+            movq %r15,(%r12)
+            movq %r14,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq free@PLT
-.L__ret_transform_target_attacker_function__1fb013f5_b055_457c_bd18_4f8d22f8eaba__teapot__:
+.L__ret_transform_target_attacker_function__0123dae6_c74c_479f_8df9_d4585205bbe3__teapot__:
 .L_1b0e__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $11,(%rax)
+            movl $22,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq 2152(%rsp),%rbp
-            xorq %r14,%r14
-            orb (dift_reg_tags+6),%r14b
-            testb $48,%r14b
+            leaq 2152(%rsp),%r15
+            xorq %r12,%r12
+            orb (dift_reg_tags+6),%r12b
+            testb $48,%r12b
             je .L__attacker_tags_check__teapot___831
 
             movq %rsp,(old_rsp)
@@ -11579,8 +11579,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_CACHE@PLT
 
@@ -11590,7 +11590,7 @@ attacker_function__teapot__:
             movq (old_rsp),%rsp
 .L__attacker_tags_check__teapot___831:
 
-            testb $2,%r14b
+            testb $2,%r12b
             je .L__asan_check__teapot___831
 
             movq %rsp,(old_rsp)
@@ -11598,8 +11598,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -11611,14 +11611,14 @@ attacker_function__teapot__:
             movb $0,(dift_reg_queued_id)
 .L__asan_check__teapot___831:
 
-            movq %rbp,%r12
-            shrq $3,%r12
-            movb 2147450880(%r12),%r12b
-            testb %r12b,%r12b
+            movq %r15,%r14
+            shrq $3,%r14
+            movb 2147450880(%r14),%r14b
+            testb %r14b,%r14b
             je .L__mem_operand_policy_done__teapot___831
 .L__asan_check_fail__teapot___831:
 
-            testb $1,%r14b
+            testb $1,%r12b
             je .L__asan_check_fail_non_attacker__teapot___831
 .L__asan_check_fail_attacker__teapot___831:
 
@@ -11627,8 +11627,8 @@ attacker_function__teapot__:
             movq %rsi,(scratchpad)
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
-            movq %rbp,%rsi
-            movq %r14,%rdx
+            movq %r15,%rsi
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_MDS@PLT
 
@@ -11646,30 +11646,30 @@ attacker_function__teapot__:
 .L__mem_operand_policy_done__teapot___831:
 
             nop
-            leaq 2152(%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (dift_reg_tags+6),%r12b
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags)
+            leaq 2152(%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (dift_reg_tags+6),%r14b
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___832
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___832:
 
             nop
             movq 2152(%rsp),%rax
-            xorl %r14d,%r14d
-            orb (dift_reg_tags),%r14b
-            leaq %fs:40,%rbp
-            btcq $45,%rbp
-            orb (%rbp),%r14b
-            testb $48,%r14b
+            xorl %r12d,%r12d
+            orb (dift_reg_tags),%r12b
+            leaq %fs:40,%r15
+            btcq $45,%r15
+            orb (%r15),%r12b
+            testb $48,%r12b
             je .L__check_ok__teapot___833
 
             movq %rsp,(old_rsp)
@@ -11678,7 +11678,7 @@ attacker_function__teapot__:
             movq %rdi,(scratchpad+8)
             movq %rdx,(scratchpad+16)
             movq $0,%rsi
-            movq %r14,%rdx
+            movq %r12,%rdx
             leaq (%rip),%rdi
             callq report_gadget_KASPER_PORT@PLT
 
@@ -11689,112 +11689,112 @@ attacker_function__teapot__:
 .L__check_ok__teapot___833:
 
             nop
-            leaq %fs:40,%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (dift_reg_tags),%r12b
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags)
+            leaq %fs:40,%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (dift_reg_tags),%r14b
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___834
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___834:
 
             nop
-            movq (instruction_cnt),%r14
-            addq $3,%r14
-            cmpq $250,%r14
+            movq (instruction_cnt),%r12
+            addq $3,%r12
+            cmpq $250,%r12
             jge restore_checkpoint_ROB_LEN@PLT
 
-            movq %r14,(instruction_cnt)
+            movq %r12,(instruction_cnt)
             xorq %fs:40,%rax
-            leaq (.__trampoline__633e0687_2091_4128_92ba_f60fd46353ff__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___836)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__633e0687_2091_4128_92ba_f60fd46353ff__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__3637f681_0bfd_4eb1_9855_07b1a9aa101f__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___836)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__3637f681_0bfd_4eb1_9855_07b1a9aa101f__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___836:
 
             nop
             jne .L_1b33__teapot__
-.L__trampoline_target__0835b868_1c55_4e79_b9bc_741399087591__teapot__:
+.L__trampoline_target__ef617115_83d6_4203_b3b5_1d386043a2a7__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $21,(%rax)
+            movl $34,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             addq $2168,%rsp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+1)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___838
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___838:
 
             nop
             popq %rbx
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+7)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+7)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___839
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___839:
 
             nop
             popq %rbp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+12)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r15d,%r15d
+            orb (%r12),%r15b
+            movb %r15b,(dift_reg_tags+12)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___840
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r13b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r15b
+            movzbq (dift_reg_queued_id),%r13
+            orb %r15b,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___840:
 
             nop
             popq %r12
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+13)
+            leaq (%rsp),%r13
+            btcq $45,%r13
+            xorl %r14d,%r14d
+            orb (%r13),%r14b
+            movb %r14b,(dift_reg_tags+13)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___841
 
-            movb (dift_reg_queued_tag),%r13b
+            movb (dift_reg_queued_tag),%r14b
             movzbq (dift_reg_queued_id),%r15
-            orb %r13b,(dift_reg_tags)(%r15)
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___841:
@@ -11804,15 +11804,15 @@ attacker_function__teapot__:
             movq %rax,(scratchpad+524288)
             leaq (%rsp),%rax
             btcq $45,%rax
-            xorl %r15d,%r15d
-            orb (%rax),%r15b
-            movb %r15b,(dift_reg_tags+14)
+            xorl %r14d,%r14d
+            orb (%rax),%r14b
+            movb %r14b,(dift_reg_tags+14)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___842
 
-            movb (dift_reg_queued_tag),%r15b
-            movzbq (dift_reg_queued_id),%r14
-            orb %r15b,(dift_reg_tags)(%r14)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___842:
@@ -11889,46 +11889,46 @@ attacker_function__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $36,(%rax)
+            movl $48,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
-            leaq -8(%rsp),%r11
-            movq (memory_history_top),%r9
-            movq (%r11),%r14
-            movq %r11,(%r9)
-            movq %r14,8(%r9)
-            leaq 16(%r9),%r9
-            movq %r9,(memory_history_top)
+            leaq -8(%rsp),%rsi
+            movq (memory_history_top),%r12
+            movq (%rsi),%r11
+            movq %rsi,(%r12)
+            movq %r11,8(%r12)
+            leaq 16(%r12),%r12
+            movq %r12,(memory_history_top)
             jmp restore_checkpoint_EXT_LIB@PLT
 
             callq __stack_chk_fail@PLT
 .size attacker_function__teapot__, . - attacker_function__teapot__
-.L__indbr_transform_target_main__c6127cca_0978_4ace_9486_88c15c1183ef__teapot__:
+.L__indbr_transform_target_main__ec6f1844_4465_45c5_87d8_cce69d3ef136__teapot__:
 main__teapot__:
 
             movq %rbx,(scratchpad+524288)
-            movq %rsp,%rdi
-            shrq $3,%rdi
-            leaq 2147450880(%rdi),%rdi
+            movq %rsp,%rax
+            shrq $3,%rax
+            leaq 2147450880(%rax),%rax
             movq (memory_history_top),%rbx
-            movq (%rdi),%rax
-            movq %rdi,(%rbx)
-            movq %rax,8(%rbx)
+            movq (%rax),%rdi
+            movq %rax,(%rbx)
+            movq %rdi,8(%rbx)
             leaq 16(%rbx),%rbx
             movq %rbx,(memory_history_top)
-            movb $255,(%rdi)
+            movb $255,(%rax)
             movq (scratchpad+524288),%rbx
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $101,(%rax)
+            movl $84,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
             endbr64 
             subq $8,%rsp
-            xorl %eax,%eax
-            movb %al,(dift_reg_tags+5)
+            xorl %edi,%edi
+            movb %dil,(dift_reg_tags+5)
 .L__dift_done__teapot___852:
 
             nop
@@ -11951,11 +11951,11 @@ main__teapot__:
 
             movq %rax,(instruction_cnt)
             callq set_heap_limit__teapot__
-.L__ret_transform_target_main__f5e11276_dfbe_4dd4_8050_8b02e0e2f743__teapot__:
+.L__ret_transform_target_main__c505e8ff_37cd_493e_8b89_0ea5bd9ef408__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $99,(%rax)
+            movl $82,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -11985,11 +11985,11 @@ main__teapot__:
 
             movq %rax,(instruction_cnt)
             callq attacker_function__teapot__
-.L__ret_transform_target_main__7f449455_19f5_4c1a_b66c_65c07f5005c1__teapot__:
+.L__ret_transform_target_main__85d0b8a9_4353_4380_8c1f_d9bc94ac93b6__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $100,(%rax)
+            movl $83,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -12029,11 +12029,11 @@ main__teapot__:
             movq %rax,(instruction_cnt)
             movq (scratchpad+524288),%rax
             retq 
-.L__indbr_transform_target_main__65137746_70f6_4f34_a86a_fec4361c7201__teapot__:
+.L__indbr_transform_target_main__4582e74e_8836_4a6a_909d_d2703c31d825__teapot__:
 
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $102,(%rax)
+            movl $85,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -12357,8 +12357,8 @@ __libc_csu_init__teapot__:
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
             xorl %ebx,%ebx
-            orb (dift_reg_tags+15),%bl
             orb (dift_reg_tags+7),%bl
+            orb (dift_reg_tags+15),%bl
             movb %bl,(dift_reg_tags+7)
 .L__dift_done__teapot___884:
 
@@ -12418,11 +12418,11 @@ __libc_csu_init__teapot__:
             movq (scratchpad+524288),%rax
             sarq $3,%rbp
             movq %rax,(scratchpad)
-            leaq (.__trampoline__01262193_ac48_4fbe_b828_49a992f290b6__teapot__)(%rip),%rax
+            leaq (.__trampoline__9998af03_97a2_43e5_93e5_3517e89be9d2__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___889)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__01262193_ac48_4fbe_b828_49a992f290b6__teapot__)(%rip),%rax
+            leaq (.__branch_counter__9998af03_97a2_43e5_93e5_3517e89be9d2__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -12430,10 +12430,10 @@ __libc_csu_init__teapot__:
 
             nop
             je .L_1bb6__teapot__
-.L__trampoline_target__06d7660f_dc09_4d25_ae54_a40481a6101e__teapot__:
+.L__trampoline_target__e6061643_58c4_49ce_9ae8_81498d19cbad__teapot__:
 
-            xorl %esi,%esi
-            movb %sil,(dift_reg_tags+1)
+            xorl %edx,%edx
+            movb %dl,(dift_reg_tags+1)
 .L__dift_done__teapot___890:
 
             nop
@@ -12453,9 +12453,9 @@ __libc_csu_init__teapot__:
             nop
 .L_1ba0__teapot__:
 
-            xorl %esi,%esi
-            orb (dift_reg_tags+14),%sil
-            movb %sil,(dift_reg_tags+3)
+            xorl %edx,%edx
+            orb (dift_reg_tags+14),%dl
+            movb %dl,(dift_reg_tags+3)
 .L__dift_done__teapot___892:
 
             nop
@@ -12548,11 +12548,11 @@ __libc_csu_init__teapot__:
             movq (scratchpad+524288),%rax
             cmpq %rbx,%rbp
             movq %rax,(scratchpad)
-            leaq (.__trampoline__fd5641e4_e267_4951_b96a_dbc788d665c2__teapot__)(%rip),%rax
+            leaq (.__trampoline__c8d8c201_2d94_4743_acb2_9d3b329d314c__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___900)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__fd5641e4_e267_4951_b96a_dbc788d665c2__teapot__)(%rip),%rax
+            leaq (.__branch_counter__c8d8c201_2d94_4743_acb2_9d3b329d314c__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -12560,72 +12560,72 @@ __libc_csu_init__teapot__:
 
             nop
             jne .L_1ba0__teapot__
+.L__trampoline_target__d096c8da_1bab_4290_94e4_3531ce087f42__teapot__:
 .L_1bb6__teapot__:
-.L__trampoline_target__eb8cdab6_2121_4c37_9477_95183557d7c8__teapot__:
 
             addq $8,%rsp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+1)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+1)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___901
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___901:
 
             nop
             popq %rbx
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r12d,%r12d
-            orb (%r14),%r12b
-            movb %r12b,(dift_reg_tags+7)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r14d,%r14d
+            orb (%r12),%r14b
+            movb %r14b,(dift_reg_tags+7)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___902
 
-            movb (dift_reg_queued_tag),%r12b
-            movzbq (dift_reg_queued_id),%rbp
-            orb %r12b,(dift_reg_tags)(%rbp)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___902:
 
             nop
             popq %rbp
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+12)
+            leaq (%rsp),%r12
+            btcq $45,%r12
+            xorl %r15d,%r15d
+            orb (%r12),%r15b
+            movb %r15b,(dift_reg_tags+12)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___903
 
-            movb (dift_reg_queued_tag),%r13b
-            movzbq (dift_reg_queued_id),%r12
-            orb %r13b,(dift_reg_tags)(%r12)
+            movb (dift_reg_queued_tag),%r15b
+            movzbq (dift_reg_queued_id),%r13
+            orb %r15b,(dift_reg_tags)(%r13)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___903:
 
             nop
             popq %r12
-            leaq (%rsp),%r14
-            btcq $45,%r14
-            xorl %r13d,%r13d
-            orb (%r14),%r13b
-            movb %r13b,(dift_reg_tags+13)
+            leaq (%rsp),%r13
+            btcq $45,%r13
+            xorl %r14d,%r14d
+            orb (%r13),%r14b
+            movb %r14b,(dift_reg_tags+13)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___904
 
-            movb (dift_reg_queued_tag),%r13b
+            movb (dift_reg_queued_tag),%r14b
             movzbq (dift_reg_queued_id),%r15
-            orb %r13b,(dift_reg_tags)(%r15)
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___904:
@@ -12635,15 +12635,15 @@ __libc_csu_init__teapot__:
             movq %rax,(scratchpad+524288)
             leaq (%rsp),%rax
             btcq $45,%rax
-            xorl %r15d,%r15d
-            orb (%rax),%r15b
-            movb %r15b,(dift_reg_tags+14)
+            xorl %r14d,%r14d
+            orb (%rax),%r14b
+            movb %r14b,(dift_reg_tags+14)
             cmpb $0,(dift_reg_queued_tag)
             je .L__dift_done__teapot___905
 
-            movb (dift_reg_queued_tag),%r15b
-            movzbq (dift_reg_queued_id),%r14
-            orb %r15b,(dift_reg_tags)(%r14)
+            movb (dift_reg_queued_tag),%r14b
+            movzbq (dift_reg_queued_id),%r15
+            orb %r14b,(dift_reg_tags)(%r15)
             movb $0,(dift_reg_queued_tag)
             movb $0,(dift_reg_queued_id)
 .L__dift_done__teapot___905:
@@ -12747,7 +12747,7 @@ __libc_csu_init__teapot__:
             nop
             nop
 .size __libc_csu_init__teapot__, . - __libc_csu_init__teapot__
-.L__indbr_transform_target___libc_csu_fini__b407d707_3c73_4108_adab_540e476955f3__teapot__:
+.L__indbr_transform_target___libc_csu_fini__738e53dc_024d_4dc5_a63f_51c546cafebf__teapot__:
 __libc_csu_fini__teapot__:
 
             movq %rax,(scratchpad+524288)
@@ -12768,7 +12768,7 @@ __libc_csu_fini__teapot__:
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad+524288)
             movq (guard_list_top),%rax
-            movl $51,(%rax)
+            movl $86,(%rax)
             leaq 4(%rax),%rax
             movq %rax,(guard_list_top)
             movq (scratchpad+524288),%rax
@@ -12829,204 +12829,204 @@ __libc_csu_fini__teapot__:
 #===================================
 
 .align 2
-.__trampoline__9ac67204_319e_4ae2_91e9_f61eb271235a__teapot__:
-.__trampoline__e67f756f_e3a1_422e_adf9_2418c7255c1f__teapot__:
+.__trampoline__9d890186_5d58_4dc5_b875_330870304b82__teapot__:
+.__trampoline__08a9741c_8b6a_4627_a2fd_ba42f066f656__teapot__:
 
-            je .L__trampoline_target__106fc191_6cd3_428a_a5ba_b764d82cb844__teapot__
-
-            jmp .L_12b8__teapot__
-.__trampoline__b2af70a8_e632_45e0_9b18_0cfa40b8f6f7__teapot__:
-.__trampoline__106fc191_6cd3_428a_a5ba_b764d82cb844__teapot__:
-
-            je .L__trampoline_target__7358b381_530a_4179_95eb_81a0f5f8940b__teapot__
+            je .L__trampoline_target__6c1a7b2a_ea4f_4e65_be97_0007a1b2e15c__teapot__
 
             jmp .L_12b8__teapot__
-.__trampoline__b23f1e21_ade1_4ef0_b4b2_588dfd29b425__teapot__:
-.__trampoline__b1e7f285_a7f8_436d_af97_c5888aabbd7e__teapot__:
+.__trampoline__3637f681_0bfd_4eb1_9855_07b1a9aa101f__teapot__:
+.__trampoline__0123dae6_c74c_479f_8df9_d4585205bbe3__teapot__:
 
-            je .L__trampoline_target__c5ee0985_59ed_42ec_88d8_a835f12d9293__teapot__
-
-            jmp .L_1401__teapot__
-.__trampoline__f33be396_2d44_44e7_9619_c8311c70b7b1__teapot__:
-.__trampoline__e268f776_b9e2_40c2_890a_ead0feecd826__teapot__:
-
-            jne .L__trampoline_target__e75f3894_a53c_4971_9874_35810844b35d__teapot__
-
-            jmp .L_12f8__teapot__
-.__trampoline__87aeb687_4660_45ad_932c_fb2b8e96e3d1__teapot__:
-.__trampoline__e75f3894_a53c_4971_9874_35810844b35d__teapot__:
-
-            je .L__trampoline_target__2a5488ca_344b_4819_9609_a0ab54952ee5__teapot__
-
-            jmp .L_12e7__teapot__
-.__trampoline__be2a2e06_8e20_4833_8473_7a76673547ac__teapot__:
-.__trampoline__1dfb6b67_5990_4ef2_b383_45abe56cebb9__teapot__:
-
-            je .L__trampoline_target__433d72da_6423_4670_bae6_e568a08fa410__teapot__
-
-            jmp .L_14c8__teapot__
-.__trampoline__d0f657a3_0524_47d4_ab87_04c3fc9b657b__teapot__:
-.__trampoline__d6d1a998_ec62_4579_ad82_405ceff9b656__teapot__:
-
-            jne .L__trampoline_target__7052fc43_6b90_4215_9d81_6acb75e2bf5d__teapot__
-
-            jmp .L_14b9__teapot__
-.__trampoline__b4a2cb74_979f_45c2_b9bc_b1234b30f2f8__teapot__:
-.__trampoline__a0c77b16_9eb5_4428_a951_dff1a4509600__teapot__:
-
-            jbe .L__trampoline_target__576306fd_80ae_4c4b_af2b_903702e6aac2__teapot__
-
-            jmp .L_1522__teapot__
-.__trampoline__f542cbcb_73a3_47bb_a15c_c7f57c03d15c__teapot__:
-.__trampoline__95a16d59_e12c_4838_9bfe_d11dfccd92f7__teapot__:
-
-            jbe .L__trampoline_target__08119b96_c39d_4f05_b5d9_1119e4d70971__teapot__
-
-            jmp .L_1538__teapot__
-.__trampoline__8e873746_e9d6_44c1_80ae_f8ab75dafe29__teapot__:
-.__trampoline__08119b96_c39d_4f05_b5d9_1119e4d70971__teapot__:
-
-            ja .L__trampoline_target__c2968379_c685_42b6_bdae_5fca2eecbb95__teapot__
-
-            jmp .L_1538__teapot__
-.__trampoline__e44ee5f2_11a6_488a_933d_6e9fe705b80f__teapot__:
-.__trampoline__16e4af5c_3cad_4f07_aeec_3bd4fea41db9__teapot__:
-
-            jne .L__trampoline_target__4e91c35a_b4e0_479f_b2c5_4516a6c24503__teapot__
-
-            jmp .L_1350__teapot__
-.__trampoline__c2968379_c685_42b6_bdae_5fca2eecbb95__teapot__:
-.__trampoline__cff96331_ded0_4295_aa61_b7129b61bd64__teapot__:
-
-            jbe .L__trampoline_target__091fc3ad_cba1_4ea0_a45d_98246218f41d__teapot__
-
-            jmp .L_14fb__teapot__
-.__trampoline__40b7015d_4669_404d_b802_18030b8b0e66__teapot__:
-.__trampoline__4e91c35a_b4e0_479f_b2c5_4516a6c24503__teapot__:
-
-            jne .L__trampoline_target__b59215fa_97a8_4ab9_8521_16f4401fb069__teapot__
-
-            jmp .L_1366__teapot__
-.__trampoline__71efcf50_9075_484f_bbdc_fc2f8248b26e__teapot__:
-.__trampoline__59d61923_598d_4b78_b74c_a7581c516310__teapot__:
-
-            je .L__trampoline_target__f6344752_a25a_487e_be3f_06b2a67016ac__teapot__
-
-            jmp .L_13a6__teapot__
-.__trampoline__f3a283a7_776c_4369_a001_1a2fe7eb5bc5__teapot__:
-.__trampoline__5d1edaaf_8962_4b0e_b171_a1b88b4bc70e__teapot__:
-
-            je .L__trampoline_target__9b570d6f_feb2_488e_aa11_c146c3b09420__teapot__
-
-            jmp .L_16b7__teapot__
-.__trampoline__ebbbbfa1_4208_4a69_aced_b9e374f22135__teapot__:
-.__trampoline__ce579009_9a2b_400a_b2a4_83f065ff1cae__teapot__:
-
-            jne .L__trampoline_target__67df1e52_abd7_432f_96dd_363ec36a8843__teapot__
-
-            jmp .L_15ce__teapot__
-.__trampoline__135eb19f_24ed_4364_aeef_bc0f72cc8f4f__teapot__:
-.__trampoline__be33b812_40e8_4a45_a7b6_dd0a8718de6f__teapot__:
-
-            jbe .L__trampoline_target__fb4490f8_bc32_4ec9_9647_e19201b577dd__teapot__
-
-            jmp .L_1acf__teapot__
-.__trampoline__db001040_0995_4d63_ace6_32d4b7cd41cc__teapot__:
-.__trampoline__9a7fa99a_5e71_4eee_8a8b_dd26670154fc__teapot__:
-
-            jne .L__trampoline_target__d7cbccc9_a3e5_4589_b752_a721190776a2__teapot__
-
-            jmp .L_1622__teapot__
-.__trampoline__fb4490f8_bc32_4ec9_9647_e19201b577dd__teapot__:
-.__trampoline__0b6006c7_a177_45cf_8bcb_4e0810f87912__teapot__:
-
-            jne .L__trampoline_target__dcb3883d_e6c8_4bf0_b672_3c717fb8f25e__teapot__
-
-            jmp .L_1acf__teapot__
-.__trampoline__633e0687_2091_4128_92ba_f60fd46353ff__teapot__:
-.__trampoline__1fb013f5_b055_457c_bd18_4f8d22f8eaba__teapot__:
-
-            jne .L__trampoline_target__0835b868_1c55_4e79_b9bc_741399087591__teapot__
+            jne .L__trampoline_target__ef617115_83d6_4203_b3b5_1d386043a2a7__teapot__
 
             jmp .L_1b33__teapot__
-.__trampoline__5efddf78_4c98_490c_b578_b723671923bb__teapot__:
-.__trampoline__2c6708f6_86ca_4eec_a19e_9616d42671b6__teapot__:
+.__trampoline__e7bf71ac_233e_4d96_a5d9_49bd4408bafb__teapot__:
+.__trampoline__6c1a7b2a_ea4f_4e65_be97_0007a1b2e15c__teapot__:
 
-            ja .L__trampoline_target__da0fcc89_4728_468a_9276_7ba0e5ea4ed5__teapot__
+            je .L__trampoline_target__fa7464de_d735_4681_a4c1_a729a17fce2a__teapot__
 
-            jmp .L_170f__teapot__
-.__trampoline__da0fcc89_4728_468a_9276_7ba0e5ea4ed5__teapot__:
-.__trampoline__133c87ac_2a09_47a4_b9d9_d3c5225f2834__teapot__:
+            jmp .L_12b8__teapot__
+.__trampoline__001696f8_80c8_4f62_9bee_301421d5978b__teapot__:
+.__trampoline__fa28af4d_7400_489c_a6f6_2260c9c35214__teapot__:
 
-            jae .L__trampoline_target__2dfd9140_4b36_4ee3_af66_de8d52d582af__teapot__
+            je .L__trampoline_target__c2dcdedb_dcda_439c_b4c2_d7d3aa7f0cb9__teapot__
 
-            jmp .L_1734__teapot__
-.__trampoline__384cf679_7aa0_40d3_bdb6_d7a59bf99751__teapot__:
-.__trampoline__f09ce298_2bd3_4fff_b467_2ca312ad87e4__teapot__:
+            jmp .L_1401__teapot__
+.__trampoline__f6f5e5e5_e408_433c_abc2_049517e56f22__teapot__:
+.__trampoline__b9212420_fcfa_44cb_9e14_56097bdc3d1e__teapot__:
 
-            je .L__trampoline_target__f6f7865d_8891_460a_9a2a_90d16ada9601__teapot__
+            jne .L__trampoline_target__66486815_7f0e_4589_bda2_01ad7a9bed52__teapot__
 
-            jmp .L_1991__teapot__
-.__trampoline__f6f7865d_8891_460a_9a2a_90d16ada9601__teapot__:
-.__trampoline__879171fc_c261_43f7_a1e5_ba8dedc7fc02__teapot__:
+            jmp .L_12f8__teapot__
+.__trampoline__be456ae1_c16a_45bc_a4a9_14a207f75d95__teapot__:
+.__trampoline__66486815_7f0e_4589_bda2_01ad7a9bed52__teapot__:
 
-            jne .L__trampoline_target__fd128c22_edd8_418a_a8a5_77268896c82d__teapot__
+            je .L__trampoline_target__b617a250_9436_4534_8766_fd857a66a7a1__teapot__
 
-            jmp .L_1936__teapot__
-.__trampoline__2b1ab097_f86c_4bf6_aa90_c318cb206118__teapot__:
-.__trampoline__01262193_ac48_4fbe_b828_49a992f290b6__teapot__:
+            jmp .L_12e7__teapot__
+.__trampoline__a8f5131e_ffeb_4256_8f88_ea03495e84ce__teapot__:
+.__trampoline__2e1eb74e_d668_4c69_8752_a770c9707337__teapot__:
 
-            je .L__trampoline_target__06d7660f_dc09_4d25_ae54_a40481a6101e__teapot__
+            je .L__trampoline_target__7bf83f7d_95bc_42bc_b352_29737188d410__teapot__
+
+            jmp .L_14c8__teapot__
+.__trampoline__9998af03_97a2_43e5_93e5_3517e89be9d2__teapot__:
+.__trampoline__96be25db_daab_49d1_9a80_379c0c0c1674__teapot__:
+
+            je .L__trampoline_target__e6061643_58c4_49ce_9ae8_81498d19cbad__teapot__
 
             jmp .L_1bb6__teapot__
-.__trampoline__1f04b63c_98f8_45d2_82e0_beaabb550c3d__teapot__:
-.__trampoline__8861aade_eb1b_495f_b351_ece101d6a33e__teapot__:
+.__trampoline__345bb64b_5d5d_4273_b3ab_6de102c2ffed__teapot__:
+.__trampoline__969e3e57_33e8_48a3_8dab_5c922b275781__teapot__:
 
-            je .L__trampoline_target__6f2ea62c_3a97_495b_bd87_14601d63be82__teapot__
+            jne .L__trampoline_target__a998571d_2e05_43e3_8417_265288cd7085__teapot__
 
-            jmp .L_1a9b__teapot__
-.__trampoline__fd5641e4_e267_4951_b96a_dbc788d665c2__teapot__:
-.__trampoline__b38589ae_25bb_4b74_b333_932a4e49149b__teapot__:
+            jmp .L_14b9__teapot__
+.__trampoline__c8d8c201_2d94_4743_acb2_9d3b329d314c__teapot__:
+.__trampoline__520c4071_24d9_492e_b6cb_c8b84a573cbf__teapot__:
 
-            jne .L__trampoline_target__eb8cdab6_2121_4c37_9477_95183557d7c8__teapot__
+            jne .L__trampoline_target__d096c8da_1bab_4290_94e4_3531ce087f42__teapot__
 
             jmp .L_1ba0__teapot__
-.__trampoline__085c0535_89c0_4e36_b02f_7e8d9eb54dc1__teapot__:
-.__trampoline__853ba40b_7ec0_493f_bcd9_804f5ba9be01__teapot__:
+.__trampoline__eb026ad7_5c62_47cd_bd9e_40636ce4cc33__teapot__:
+.__trampoline__acbc9192_05a6_4210_b951_911c97f79d8a__teapot__:
 
-            je .L__trampoline_target__8646099a_4477_4da8_adb9_694ea4119c0f__teapot__
+            jbe .L__trampoline_target__04354667_8e45_4662_aa56_d51939b5c969__teapot__
+
+            jmp .L_1522__teapot__
+.__trampoline__3397588c_3241_4448_966e_9b44c092b5e5__teapot__:
+.__trampoline__29240a47_21b8_4aff_ab54_968a7ab4cd25__teapot__:
+
+            jbe .L__trampoline_target__138b325c_5fe9_4a1a_b86e_20f81eb2c3da__teapot__
+
+            jmp .L_1538__teapot__
+.__trampoline__d9a78565_f49e_4370_ab42_4fcc3f4c2076__teapot__:
+.__trampoline__138b325c_5fe9_4a1a_b86e_20f81eb2c3da__teapot__:
+
+            ja .L__trampoline_target__ae20bfba_6a9b_4b3c_9285_d5eeec099e7e__teapot__
+
+            jmp .L_1538__teapot__
+.__trampoline__0d648235_990a_4d62_8936_daa8a905a9db__teapot__:
+.__trampoline__f87dc753_2ee9_4bd6_9821_e676ccd8147d__teapot__:
+
+            jne .L__trampoline_target__8102deb9_fe07_4f28_9772_f41855e0b4e1__teapot__
+
+            jmp .L_1350__teapot__
+.__trampoline__ae20bfba_6a9b_4b3c_9285_d5eeec099e7e__teapot__:
+.__trampoline__d4b3ab72_cc21_4c54_a149_64390f6b9b56__teapot__:
+
+            jbe .L__trampoline_target__408d6aab_a42b_4c3b_b93f_7b82a0db8f58__teapot__
+
+            jmp .L_14fb__teapot__
+.__trampoline__8de62071_7928_4381_a7eb_0b62b6f1f7b7__teapot__:
+.__trampoline__8102deb9_fe07_4f28_9772_f41855e0b4e1__teapot__:
+
+            jne .L__trampoline_target__fa5a5ad2_a4a8_48a5_a4d4_fc4b3fb8d23e__teapot__
+
+            jmp .L_1366__teapot__
+.__trampoline__871aa948_cddd_4f5b_8eb7_1facbb9d78c1__teapot__:
+.__trampoline__9f7cd845_a005_4068_9b29_f581d8b4e79e__teapot__:
+
+            je .L__trampoline_target__0f1a0ba5_030a_4d24_82a6_5dc94d3afaf7__teapot__
+
+            jmp .L_1278__teapot__
+.__trampoline__9ed98da6_eadc_4929_9866_9d34a66fdecf__teapot__:
+.__trampoline__0f1a0ba5_030a_4d24_82a6_5dc94d3afaf7__teapot__:
+
+            je .L__trampoline_target__3af905d6_372f_42e0_925a_313b2f99eda8__teapot__
+
+            jmp .L_1278__teapot__
+.__trampoline__47750739_4dbe_4b09_814d_88018b305708__teapot__:
+.__trampoline__2349f3b9_d480_4280_a9a2_353d9ea4c4c9__teapot__:
+
+            je .L__trampoline_target__9ff78411_1d6f_4341_bf42_3857855f3c85__teapot__
+
+            jmp .L_13a6__teapot__
+.__trampoline__66ed920a_c1ea_40bd_9954_18d11801e056__teapot__:
+.__trampoline__b6db33d9_25b0_444c_b7e4_fcaaf5fd8af1__teapot__:
+
+            je .L__trampoline_target__3b32d92d_788c_43bb_91b0_38668d75dda3__teapot__
+
+            jmp .L_16b7__teapot__
+.__trampoline__f44d9fb5_9124_4190_ae6b_78059fb6eaa8__teapot__:
+.__trampoline__d49eeba5_904a_4187_b78a_e46d8c7310ac__teapot__:
+
+            jne .L__trampoline_target__3355bc12_2f56_40e8_86e7_a47839b48bb9__teapot__
+
+            jmp .L_15ce__teapot__
+.__trampoline__ee029a32_d540_450c_8c2f_ddab3cb38004__teapot__:
+.__trampoline__732d7cd7_aa82_4282_ae2d_2df653e22ee0__teapot__:
+
+            jbe .L__trampoline_target__479025d9_6ebc_4cf3_a8d3_04093a6b7dc9__teapot__
+
+            jmp .L_1acf__teapot__
+.__trampoline__70a0842c_7442_4079_80d5_8a6e361514d1__teapot__:
+.__trampoline__3f2be5c9_be44_4b3b_9ed0_cf84ebf303b7__teapot__:
+
+            jne .L__trampoline_target__feba9be2_389a_47d5_a1fb_b0570cc80cc9__teapot__
+
+            jmp .L_1622__teapot__
+.__trampoline__a84f83ad_1e7c_4966_8724_0854a0275058__teapot__:
+.__trampoline__479025d9_6ebc_4cf3_a8d3_04093a6b7dc9__teapot__:
+
+            jne .L__trampoline_target__bc628f63_d6f9_40e8_b280_350f4b94be03__teapot__
+
+            jmp .L_1acf__teapot__
+.__trampoline__56a60200_76a9_4348_afec_f9d08a4fb692__teapot__:
+.__trampoline__3cd42740_ca65_4fa1_ac56_645963515d05__teapot__:
+
+            ja .L__trampoline_target__0c647829_3f6e_424c_8bc4_eec8c4caa290__teapot__
+
+            jmp .L_170f__teapot__
+.__trampoline__0c647829_3f6e_424c_8bc4_eec8c4caa290__teapot__:
+.__trampoline__73454647_e019_4b26_ac47_096045cba6c2__teapot__:
+
+            jae .L__trampoline_target__d17a78f8_0b4a_470d_ba38_5bd43afed7ce__teapot__
+
+            jmp .L_1734__teapot__
+.__trampoline__2d8b2904_dc58_4a0a_bf26_858b40035890__teapot__:
+.__trampoline__a0b2349d_d497_44ab_adc1_f79988d7df99__teapot__:
+
+            je .L__trampoline_target__3a392698_d00d_43c5_a4bb_0b58dafc3b41__teapot__
+
+            jmp .L_1991__teapot__
+.__trampoline__19a633a3_58ec_450c_a1a7_e5cecca00a47__teapot__:
+.__trampoline__3a392698_d00d_43c5_a4bb_0b58dafc3b41__teapot__:
+
+            jne .L__trampoline_target__3ee3f720_b829_4976_b024_2b3d32a69ba9__teapot__
+
+            jmp .L_1936__teapot__
+.__trampoline__31500b1f_dd7d_45c8_8bf8_60e62467f1b2__teapot__:
+.__trampoline__ef3bf9f5_b46a_4d7a_9b10_8b9b47f68315__teapot__:
+
+            je .L__trampoline_target__7f91e847_4eef_40c6_b80c_0925e8a4b959__teapot__
+
+            jmp .L_1a9b__teapot__
+.__trampoline__b88d08a0_3a05_4252_8951_2ed6bfab4973__teapot__:
+.__trampoline__4657c448_5658_48f1_aed9_4ee4ad5a94b3__teapot__:
+
+            je .L__trampoline_target__9fd54977_5f65_4ad2_b922_898b3ccaeb6f__teapot__
 
             jmp .L_191e__teapot__
-.__trampoline__52363970_9b97_4e01_ac2e_d434946027e3__teapot__:
-.__trampoline__d8ccb866_3a17_41e9_8f34_3ec4c2c9ab16__teapot__:
+.__trampoline__643980ef_5071_4300_a67b_3238470ceaf1__teapot__:
+.__trampoline__f3d0f919_f7e0_480f_9dfd_b16b351dfcd9__teapot__:
 
-            je .L__trampoline_target__978d4b03_8b49_4ec6_9fcd_d3239487e4de__teapot__
+            je .L__trampoline_target__945a069b_47d2_45be_9a5e_55a7294f34ef__teapot__
 
             jmp .L_1472__teapot__
-.__trampoline__56cc3ed5_95b1_485d_87db_7f46ea4f109f__teapot__:
-.__trampoline__cdfd276c_8f23_42df_9797_a1bb7b3ade85__teapot__:
+.__trampoline__b8e70c93_4c51_48a8_b0b2_7b514a43b309__teapot__:
+.__trampoline__c362d663_c2e2_43fc_a017_845a8fca99b0__teapot__:
 
-            je .L__trampoline_target__533e96db_58f0_45f7_bcb2_53503f816862__teapot__
+            je .L__trampoline_target__3453da8d_f0d7_4ce6_8fb5_5a0d3afaea11__teapot__
 
             jmp .L_192f__teapot__
-.__trampoline__2ef6d49f_ad26_4341_9049_aaf1240f721d__teapot__:
-.__trampoline__29f74a48_66a9_4470_a76e_7d8f29f226b9__teapot__:
+.__trampoline__a443664a_f1ad_4fd9_a559_5be26ad24f64__teapot__:
+.__trampoline__0fb98d1e_c46e_40b6_a492_bc4dd330d8a3__teapot__:
 
-            jne .L__trampoline_target__6dfe459c_eae3_4914_889a_66a4461949f6__teapot__
+            jne .L__trampoline_target__f5d48e9c_155d_40e4_b21e_ff02e865f439__teapot__
 
             jmp .L_19fe__teapot__
-.__trampoline__5d594b8d_9c60_4744_bb93_441ddbc388a5__teapot__:
-.__trampoline__83aab3c4_d0fb_4141_9468_9c5921c07def__teapot__:
-
-            je .L__trampoline_target__ca04d35d_d303_453a_811a_57c7127756ba__teapot__
-
-            jmp .L_1278__teapot__
-.__trampoline__d3b52477_7339_4e5c_8604_1a905a450826__teapot__:
-.__trampoline__ca04d35d_d303_453a_811a_57c7127756ba__teapot__:
-
-            je .L__trampoline_target__6815feb0_69b3_43f8_ad66_f897050e3707__teapot__
-
-            jmp .L_1278__teapot__
 #===================================
 # end section .teapot_trampolines
 #===================================
@@ -13475,36 +13475,36 @@ set_heap_limit:
             movq %rdx,(scratchpad+524312)
             movq %rsi,(scratchpad+524320)
             movq %rdi,(scratchpad+524328)
-            movabsq $scratchpad,%rbx
+            movabsq $scratchpad,%rdx
             movabsq $35184372088832,%rsi
-            movq (%rbx),%rdi
-            xorq %rsi,%rdi
-            movabsq $dift_reg_tags,%rax
-            movb 6(%rax),%cl
-            orb (%rdi),%cl
-            movq 8(%rbx),%rdi
-            xorq %rsi,%rdi
-            movzbl %cl,%ecx
-            movabsq $72340172838076673,%rdx
-            imulq %rdx,%rcx
-            movq %rcx,(%rdi)
-            movb $0,(%rax)
-            movb 6(%rax),%cl
-            orb 5(%rax),%cl
-            movq 16(%rbx),%rdi
-            xorq %rsi,%rdi
-            movzbl %cl,%ecx
-            imulq %rdx,%rcx
-            movq %rcx,(%rdi)
-            movb 6(%rax),%cl
-            orb 5(%rax),%cl
-            xorq 24(%rbx),%rsi
-            movzbl %cl,%ecx
-            imulq %rdx,%rcx
-            movq %rcx,(%rsi)
-            movb 6(%rax),%sil
-            movb %sil,4(%rax)
-            movb $0,5(%rax)
+            movq (%rdx),%rax
+            xorq %rsi,%rax
+            movabsq $dift_reg_tags,%rdi
+            movb 6(%rdi),%bl
+            orb (%rax),%bl
+            movq 8(%rdx),%rax
+            xorq %rsi,%rax
+            movzbl %bl,%ebx
+            movabsq $72340172838076673,%rcx
+            imulq %rcx,%rbx
+            movq %rbx,(%rax)
+            movb $0,(%rdi)
+            movb 5(%rdi),%bl
+            orb 6(%rdi),%bl
+            movq 16(%rdx),%rax
+            xorq %rsi,%rax
+            movzbl %bl,%ebx
+            imulq %rcx,%rbx
+            movq %rbx,(%rax)
+            movb 5(%rdi),%bl
+            orb 6(%rdi),%bl
+            xorq 24(%rdx),%rsi
+            movzbl %bl,%ebx
+            imulq %rcx,%rbx
+            movq %rbx,(%rsi)
+            movb 6(%rdi),%sil
+            movb %sil,4(%rdi)
+            movb $0,5(%rdi)
             movq (scratchpad+524328),%rdi
             movq (scratchpad+524320),%rsi
             movq (scratchpad+524312),%rdx
@@ -13516,14 +13516,14 @@ set_heap_limit:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_set_heap_limit__e44ee5f2_11a6_488a_933d_6e9fe705b80f__teapot__
+            jne .L__ret_transform_target_set_heap_limit__0d648235_990a_4d62_8936_daa8a905a9db__teapot__
 
             testl %eax,%eax
-            leaq (.__trampoline__e44ee5f2_11a6_488a_933d_6e9fe705b80f__teapot__)(%rip),%rax
+            leaq (.__trampoline__0d648235_990a_4d62_8936_daa8a905a9db__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___923)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__e44ee5f2_11a6_488a_933d_6e9fe705b80f__teapot__)(%rip),%rax
+            leaq (.__branch_counter__0d648235_990a_4d62_8936_daa8a905a9db__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___923:
@@ -13548,17 +13548,17 @@ set_heap_limit:
             seto %al
             movq %rax,(scratchpad+524320)
             movq (scratchpad+524328),%rax
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%rax
-            movq (%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movabsq $dift_reg_tags,%rcx
-            orb 6(%rcx),%dl
-            movb %dl,(%rcx)
-            xorq 8(%rbx),%rax
-            orb (%rax),%dl
-            movb %dl,(%rcx)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%rcx
+            movq (%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movabsq $dift_reg_tags,%rdx
+            orb 6(%rdx),%bl
+            movb %bl,(%rdx)
+            xorq 8(%rax),%rcx
+            orb (%rcx),%bl
+            movb %bl,(%rdx)
             movq %rax,(scratchpad+524328)
             movq (scratchpad+524320),%rax
             addb $127,%al
@@ -13569,11 +13569,11 @@ set_heap_limit:
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__4e91c35a_b4e0_479f_b2c5_4516a6c24503__teapot__)(%rip),%rax
+            leaq (.__trampoline__8102deb9_fe07_4f28_9772_f41855e0b4e1__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___927)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__4e91c35a_b4e0_479f_b2c5_4516a6c24503__teapot__)(%rip),%rax
+            leaq (.__branch_counter__8102deb9_fe07_4f28_9772_f41855e0b4e1__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -13596,14 +13596,14 @@ set_heap_limit:
 
 .cfi_restore_state 
             leaq (.L_2004)(%rip),%rdi
-            movabsq $dift_reg_tags,%r9
-            movb $0,5(%r9)
+            movabsq $dift_reg_tags,%r12
+            movb $0,5(%r12)
             callq perror@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_set_heap_limit__067eda31_3f8e_41a7_b413_fb04f0e3adaa__teapot__
+            jne .L__ret_transform_target_set_heap_limit__7145636e_dc08_4f64_b62f_2ca04a333ff8__teapot__
 
             movl $1,%edi
             movq %rax,(scratchpad+524288)
@@ -13626,7 +13626,6 @@ set_heap_limit:
             callq __stack_chk_fail@PLT
 .cfi_endproc 
 .size set_heap_limit, . - set_heap_limit
-.align 4
 #-----------------------------------
 .globl secret_init
 .type secret_init, @function
@@ -13657,18 +13656,18 @@ secret_init:
             movq %rdx,(scratchpad+524304)
             movq %rsi,(scratchpad+524312)
             movq %rdi,(scratchpad+524320)
-            movabsq $dift_reg_tags,%rsi
-            movzbl 1(%rsi),%eax
-            movabsq $scratchpad,%rdx
-            movabsq $35184372088832,%rbx
-            movq (%rdx),%rcx
-            xorq %rbx,%rcx
+            movabsq $dift_reg_tags,%rdx
+            movzbl 1(%rdx),%ebx
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rax
+            movq (%rcx),%rsi
+            xorq %rax,%rsi
             movabsq $72340172838076673,%rdi
-            imulq %rax,%rdi
-            movq %rdi,(%rcx)
-            xorq 8(%rdx),%rbx
-            movb (%rbx),%dil
-            movb %dil,5(%rsi)
+            imulq %rbx,%rdi
+            movq %rdi,(%rsi)
+            xorq 8(%rcx),%rax
+            movb (%rax),%dil
+            movb %dil,5(%rdx)
             movq (scratchpad+524320),%rdi
             movq (scratchpad+524312),%rsi
             movq (scratchpad+524304),%rdx
@@ -13679,7 +13678,7 @@ secret_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_secret_init__71efcf50_9075_484f_bbdc_fc2f8248b26e__teapot__
+            jne .L__ret_transform_target_secret_init__47750739_4dbe_4b09_814d_88018b305708__teapot__
 
             movq %rax,%rbx
             testq %rax,%rax
@@ -13689,20 +13688,20 @@ secret_init:
             seto %al
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524304),%rax
-            movabsq $dift_reg_tags,%rdi
-            movb (%rdi),%al
-            movb %al,1(%rdi)
+            movabsq $dift_reg_tags,%rax
+            movb (%rax),%dil
+            movb %dil,1(%rax)
             movq %rax,(scratchpad+524304)
             movq (scratchpad+524296),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524304),%rax
             movq (scratchpad+524288),%rax
-            leaq (.__trampoline__71efcf50_9075_484f_bbdc_fc2f8248b26e__teapot__)(%rip),%rdi
+            leaq (.__trampoline__47750739_4dbe_4b09_814d_88018b305708__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___938)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__71efcf50_9075_484f_bbdc_fc2f8248b26e__teapot__)(%rip),%rdi
+            leaq (.__branch_counter__47750739_4dbe_4b09_814d_88018b305708__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___938:
@@ -13720,16 +13719,16 @@ secret_init:
             movq %rbx,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
             movq %rdx,(scratchpad+524304)
-            movabsq $dift_reg_tags,%rcx
-            movb (%rcx),%bl
-            movabsq $scratchpad,%rax
-            movabsq $35184372088832,%rdx
-            xorq (%rax),%rdx
-            movb %bl,(%rdx)
-            movb (%rcx),%bl
-            movb %bl,3(%rcx)
-            movw $0,4(%rcx)
-            movb $0,(%rcx)
+            movabsq $dift_reg_tags,%rbx
+            movb (%rbx),%dl
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rax
+            xorq (%rcx),%rax
+            movb %dl,(%rax)
+            movb (%rbx),%dl
+            movb %dl,3(%rbx)
+            movw $0,4(%rbx)
+            movb $0,(%rbx)
             movq (scratchpad+524304),%rdx
             movq (scratchpad+524296),%rcx
             movq (scratchpad+524288),%rbx
@@ -13738,7 +13737,7 @@ secret_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_secret_init__dd53baf1_7929_4b7b_8b8d_aaff38b8914f__teapot__
+            jne .L__ret_transform_target_secret_init__19814f19_28fe_401c_a0bd_cf2dca4fd3d5__teapot__
 .L_13a1:
 
             movq %rbx,%rax
@@ -13756,14 +13755,14 @@ secret_init:
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
-            movabsq $dift_reg_tags,%rbx
-            movb 1(%rbx),%al
-            movb %al,(%rbx)
-            movabsq $scratchpad,%rax
-            movabsq $35184372088832,%rcx
-            xorq (%rax),%rcx
-            movb (%rcx),%al
-            movb %al,1(%rbx)
+            movabsq $dift_reg_tags,%rax
+            movb 1(%rax),%cl
+            movb %cl,(%rax)
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rbx
+            xorq (%rcx),%rbx
+            movb (%rbx),%cl
+            movb %cl,1(%rax)
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
@@ -13779,15 +13778,11 @@ secret_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_secret_init__02fdcc5d_efd7_45ac_a283_cd029cf2c509__teapot__
+            jne .L__ret_transform_target_secret_init__7cb22c7a_d2bd_47d1_a87a_953a40ef4a41__teapot__
 
             jmp .L_13a1
 .cfi_endproc 
 .size secret_init, . - secret_init
-
-            nop
-            nop
-            nop
 .align 4
 #-----------------------------------
 .globl array_init
@@ -13819,18 +13814,18 @@ array_init:
             movq %rdx,(scratchpad+524304)
             movq %rsi,(scratchpad+524312)
             movq %rdi,(scratchpad+524320)
-            movabsq $dift_reg_tags,%rsi
-            movzbl 1(%rsi),%eax
-            movabsq $scratchpad,%rdx
-            movabsq $35184372088832,%rbx
-            movq (%rdx),%rcx
-            xorq %rbx,%rcx
+            movabsq $dift_reg_tags,%rdx
+            movzbl 1(%rdx),%ebx
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rax
+            movq (%rcx),%rsi
+            xorq %rax,%rsi
             movabsq $72340172838076673,%rdi
-            imulq %rax,%rdi
-            movq %rdi,(%rcx)
-            xorq 8(%rdx),%rbx
-            movb (%rbx),%dil
-            movb %dil,5(%rsi)
+            imulq %rbx,%rdi
+            movq %rdi,(%rsi)
+            xorq 8(%rcx),%rax
+            movb (%rax),%dil
+            movb %dil,5(%rdx)
             movq (scratchpad+524320),%rdi
             movq (scratchpad+524312),%rsi
             movq (scratchpad+524304),%rdx
@@ -13841,7 +13836,7 @@ array_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_array_init__b23f1e21_ade1_4ef0_b4b2_588dfd29b425__teapot__
+            jne .L__ret_transform_target_array_init__fa28af4d_7400_489c_a6f6_2260c9c35214__teapot__
 
             movq %rax,%rbx
             testq %rax,%rax
@@ -13851,20 +13846,20 @@ array_init:
             seto %al
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524304),%rax
-            movabsq $dift_reg_tags,%rdi
-            movb (%rdi),%al
-            movb %al,1(%rdi)
+            movabsq $dift_reg_tags,%rax
+            movb (%rax),%dil
+            movb %dil,1(%rax)
             movq %rax,(scratchpad+524304)
             movq (scratchpad+524296),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524304),%rax
             movq (scratchpad+524288),%rax
-            leaq (.__trampoline__b23f1e21_ade1_4ef0_b4b2_588dfd29b425__teapot__)(%rip),%rdi
+            leaq (.__trampoline__fa28af4d_7400_489c_a6f6_2260c9c35214__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___953)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__b23f1e21_ade1_4ef0_b4b2_588dfd29b425__teapot__)(%rip),%rdi
+            leaq (.__branch_counter__fa28af4d_7400_489c_a6f6_2260c9c35214__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___953:
@@ -13879,40 +13874,40 @@ array_init:
             movl $45,%esi
             movq %rax,%rdi
             movq %rbx,(scratchpad+524288)
-            movabsq $scratchpad,%rax
-            movabsq $35184372088832,%rbx
-            xorq (%rax),%rbx
-            movb (%rbx),%al
-            movabsq $dift_reg_tags,%rbx
-            movb %al,3(%rbx)
-            movb $0,4(%rbx)
-            movb (%rbx),%al
-            movb %al,5(%rbx)
+            movabsq $scratchpad,%rbx
+            movabsq $35184372088832,%rax
+            xorq (%rbx),%rax
+            movb (%rax),%bl
+            movabsq $dift_reg_tags,%rax
+            movb %bl,3(%rax)
+            movb $0,4(%rax)
+            movb (%rax),%bl
+            movb %bl,5(%rax)
             movq (scratchpad+524288),%rbx
             callq memset__dift_wrapper__@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_array_init__dae808b1_0f7c_4049_84b6_5ed80bf58c9f__teapot__
+            jne .L__ret_transform_target_array_init__fddc7a08_641a_4520_a556_ca2a10fef480__teapot__
 
             movq %rbx,%rdx
             leaq (.L_2042)(%rip),%rsi
             movl $1,%edi
             movl $0,%eax
             movq %rbx,(scratchpad+524288)
-            movabsq $dift_reg_tags,%rax
-            movb 1(%rax),%bl
-            movb %bl,3(%rax)
-            movw $0,4(%rax)
-            movb $0,(%rax)
+            movabsq $dift_reg_tags,%rbx
+            movb 1(%rbx),%al
+            movb %al,3(%rbx)
+            movw $0,4(%rbx)
+            movb $0,(%rbx)
             movq (scratchpad+524288),%rbx
             callq __printf_chk__dift_wrapper__@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_array_init__6dca55f1_2847_40e1_b9a6_0714e25ea99a__teapot__
+            jne .L__ret_transform_target_array_init__6c94379d_7706_46f5_a1ca_b0560cda7a49__teapot__
 .L_13fc:
 
             movq %rbx,%rax
@@ -13930,14 +13925,14 @@ array_init:
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
-            movabsq $dift_reg_tags,%rbx
-            movb 1(%rbx),%al
-            movb %al,(%rbx)
-            movabsq $scratchpad,%rax
-            movabsq $35184372088832,%rcx
-            xorq (%rax),%rcx
-            movb (%rcx),%al
-            movb %al,1(%rbx)
+            movabsq $dift_reg_tags,%rax
+            movb 1(%rax),%cl
+            movb %cl,(%rax)
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rbx
+            xorq (%rcx),%rbx
+            movb (%rbx),%cl
+            movb %cl,1(%rax)
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
@@ -13953,7 +13948,7 @@ array_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_array_init__c8179f01_8f1a_4d15_8f77_f082fa0d2ee1__teapot__
+            jne .L__ret_transform_target_array_init__73b53f4b_ff86_42ce_93ea_e27f54d753db__teapot__
 
             jmp .L_13fc
 .cfi_endproc 
@@ -14010,34 +14005,34 @@ otherArray_init:
             movq %rsi,(scratchpad+524312)
             movq %rdi,(scratchpad+524320)
             movabsq $dift_reg_tags,%rdi
-            movzbl 13(%rdi),%eax
+            movzbl 13(%rdi),%ebx
             movabsq $scratchpad,%rdx
-            movabsq $35184372088832,%rbx
-            movq (%rdx),%rcx
-            xorq %rbx,%rcx
-            movabsq $72340172838076673,%rsi
-            imulq %rsi,%rax
-            movq %rax,(%rcx)
-            movzbl 12(%rdi),%eax
-            movq 8(%rdx),%rcx
-            xorq %rbx,%rcx
-            imulq %rsi,%rax
-            movq %rax,(%rcx)
-            movzbl 7(%rdi),%eax
-            movq 16(%rdx),%rcx
-            xorq %rbx,%rcx
-            imulq %rsi,%rax
-            movq %rax,(%rcx)
-            movzbl 1(%rdi),%eax
-            xorq 24(%rdx),%rbx
-            imulq %rsi,%rax
-            movq %rax,(%rbx)
-            movb 3(%rdi),%al
-            movb 4(%rdi),%sil
-            movb %sil,7(%rdi)
-            movb %al,13(%rdi)
-            movb 5(%rdi),%al
-            movb %al,12(%rdi)
+            movabsq $35184372088832,%rax
+            movq (%rdx),%rsi
+            xorq %rax,%rsi
+            movabsq $72340172838076673,%rcx
+            imulq %rcx,%rbx
+            movq %rbx,(%rsi)
+            movzbl 12(%rdi),%ebx
+            movq 8(%rdx),%rsi
+            xorq %rax,%rsi
+            imulq %rcx,%rbx
+            movq %rbx,(%rsi)
+            movzbl 7(%rdi),%ebx
+            movq 16(%rdx),%rsi
+            xorq %rax,%rsi
+            imulq %rcx,%rbx
+            movq %rbx,(%rsi)
+            movzbl 1(%rdi),%ebx
+            xorq 24(%rdx),%rax
+            imulq %rcx,%rbx
+            movq %rbx,(%rax)
+            movb 3(%rdi),%bl
+            movb 4(%rdi),%cl
+            movb %cl,7(%rdi)
+            movb %bl,13(%rdi)
+            movb 5(%rdi),%bl
+            movb %bl,12(%rdi)
             movq (scratchpad+524320),%rdi
             movq (scratchpad+524312),%rsi
             movq (scratchpad+524304),%rdx
@@ -14048,7 +14043,7 @@ otherArray_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_otherArray_init__d8ccb866_3a17_41e9_8f34_3ec4c2c9ab16__teapot__
+            jne .L__ret_transform_target_otherArray_init__643980ef_5071_4300_a67b_3238470ceaf1__teapot__
 
             movq %rax,%rbx
             testq %rax,%rax
@@ -14058,20 +14053,20 @@ otherArray_init:
             seto %al
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524304),%rax
-            movabsq $dift_reg_tags,%rdi
-            movb (%rdi),%al
-            movb %al,1(%rdi)
+            movabsq $dift_reg_tags,%rax
+            movb (%rax),%dil
+            movb %dil,1(%rax)
             movq %rax,(scratchpad+524304)
             movq (scratchpad+524296),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524304),%rax
             movq (scratchpad+524288),%rax
-            leaq (.__trampoline__d8ccb866_3a17_41e9_8f34_3ec4c2c9ab16__teapot__)(%rip),%rdi
+            leaq (.__trampoline__643980ef_5071_4300_a67b_3238470ceaf1__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___972)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__d8ccb866_3a17_41e9_8f34_3ec4c2c9ab16__teapot__)(%rip),%rdi
+            leaq (.__branch_counter__643980ef_5071_4300_a67b_3238470ceaf1__teapot__)(%rip),%rdi
             movq %rdi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___972:
@@ -14083,38 +14078,38 @@ otherArray_init:
             movl $45,%esi
             movq %rax,%rdi
             movq %rbx,(scratchpad+524288)
-            movabsq $dift_reg_tags,%rax
-            movb (%rax),%bl
-            movb 12(%rax),%r12b
-            movb %r12b,3(%rax)
-            movb $0,4(%rax)
-            movb %bl,5(%rax)
+            movabsq $dift_reg_tags,%rbx
+            movb (%rbx),%al
+            movb 12(%rbx),%r12b
+            movb %r12b,3(%rbx)
+            movb $0,4(%rbx)
+            movb %al,5(%rbx)
             movq (scratchpad+524288),%rbx
             callq memset__dift_wrapper__@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_otherArray_init__950dc09b_2748_4317_9dfa_236cc09bd6f3__teapot__
+            jne .L__ret_transform_target_otherArray_init__1fc018ef_6d86_4e98_a273_c7541f5de497__teapot__
 
             movl %ebp,%ebp
-            leaq (%rbx,%rbp),%rdi
-            movq %rdi,(scratchpad)
+            leaq (%rbx,%rbp),%r12
+            movq %r12,(scratchpad)
             movb %r13b,(%rbx,%rbp)
             movq %rbx,%rdx
             leaq (.L_203c)(%rip),%rsi
             movl $1,%edi
             movl $0,%eax
             movabsq $dift_reg_tags,%r12
-            movb 7(%r12),%al
-            orb 13(%r12),%al
-            orb 1(%r12),%al
-            movabsq $scratchpad,%rbp
-            movabsq $35184372088832,%r13
-            xorq (%rbp),%r13
-            movb %al,(%r13)
-            movb 1(%r12),%al
-            movb %al,3(%r12)
+            movb 13(%r12),%bpl
+            orb 7(%r12),%bpl
+            orb 1(%r12),%bpl
+            movabsq $scratchpad,%r13
+            movabsq $35184372088832,%rax
+            xorq (%r13),%rax
+            movb %bpl,(%rax)
+            movb 1(%r12),%bpl
+            movb %bpl,3(%r12)
             movw $0,4(%r12)
             movb $0,(%r12)
             callq __printf_chk__dift_wrapper__@PLT
@@ -14122,7 +14117,7 @@ otherArray_init:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_otherArray_init__a6eafa07_baf5_45a2_8d15_bb710d8a0270__teapot__
+            jne .L__ret_transform_target_otherArray_init__cefd4c2d_ebe6_4bb3_a111_64de12342510__teapot__
 .L_1464:
 
             movq %rbx,%rax
@@ -14157,25 +14152,25 @@ otherArray_init:
             movq %rdx,(scratchpad+524312)
             movq %rsi,(scratchpad+524320)
             movabsq $dift_reg_tags,%rdx
-            movb 1(%rdx),%al
-            movb %al,(%rdx)
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%rcx
-            movq (%rbx),%rsi
-            xorq %rcx,%rsi
-            movb (%rsi),%al
-            movb %al,1(%rdx)
-            movq 8(%rbx),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,7(%rdx)
-            movq 16(%rbx),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,12(%rdx)
-            xorq 24(%rbx),%rcx
-            movb (%rcx),%al
-            movb %al,13(%rdx)
+            movb 1(%rdx),%sil
+            movb %sil,(%rdx)
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rbx
+            movq (%rcx),%rax
+            xorq %rbx,%rax
+            movb (%rax),%sil
+            movb %sil,1(%rdx)
+            movq 8(%rcx),%rsi
+            xorq %rbx,%rsi
+            movb (%rsi),%sil
+            movb %sil,7(%rdx)
+            movq 16(%rcx),%rsi
+            xorq %rbx,%rsi
+            movb (%rsi),%sil
+            movb %sil,12(%rdx)
+            xorq 24(%rcx),%rbx
+            movb (%rbx),%sil
+            movb %sil,13(%rdx)
             movq (scratchpad+524320),%rsi
             movq (scratchpad+524312),%rdx
             movq (scratchpad+524304),%rcx
@@ -14186,19 +14181,22 @@ otherArray_init:
 
 .cfi_restore_state 
             leaq (.L_2015)(%rip),%rdi
-            movabsq $dift_reg_tags,%rax
-            movb $0,5(%rax)
+            movabsq $dift_reg_tags,%r12
+            movb $0,5(%r12)
             callq perror@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_otherArray_init__5a4ad75c_f146_427e_91e3_83a84bead813__teapot__
+            jne .L__ret_transform_target_otherArray_init__0d85d26e_8f72_49cf_9e08_7eb0dc2322cc__teapot__
 
             jmp .L_1464
 .cfi_endproc 
 .size otherArray_init, . - otherArray_init
 
+            nop
+            nop
+            nop
             nop
             nop
             nop
@@ -14230,7 +14228,7 @@ random_char:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__indbr_transform_target_random_char__e74ca4e6_a96d_4559_863a_ce2f201788f5__teapot__
+            jne .L__indbr_transform_target_random_char__2257313e_2203_45cc_8bda_37d09ce90e24__teapot__
 
             endbr64 
             movl $90,%eax
@@ -14266,7 +14264,7 @@ csel:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__indbr_transform_target_csel__a7c53e75_c0e5_4595_b147_90f3c026d89a__teapot__
+            jne .L__indbr_transform_target_csel__910821e3_3a21_4274_94f8_869f25df71ab__teapot__
 
             endbr64 
             movq %rdi,%rax
@@ -14289,15 +14287,15 @@ csel:
             movq %rcx,(scratchpad+524304)
             movq %rdx,(scratchpad+524312)
             movabsq $dift_reg_tags,%rbx
-            movb 3(%rbx),%dl
-            movb 5(%rbx),%cl
-            movl %edx,%eax
-            orb %cl,%al
+            movb 3(%rbx),%cl
+            movb 5(%rbx),%dl
+            movl %ecx,%eax
+            orb %dl,%al
             movb %al,5(%rbx)
-            orb 4(%rbx),%dl
-            movb %dl,3(%rbx)
-            orb %cl,%dl
-            movb %dl,(%rbx)
+            orb 4(%rbx),%cl
+            movb %cl,3(%rbx)
+            orb %dl,%cl
+            movb %cl,(%rbx)
             movq (scratchpad+524312),%rdx
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
@@ -14325,11 +14323,11 @@ flush_lines:
             endbr64 
             testq %rdx,%rdx
             movq %rax,(scratchpad)
-            leaq (.__trampoline__1dfb6b67_5990_4ef2_b383_45abe56cebb9__teapot__)(%rip),%rax
+            leaq (.__trampoline__a8f5131e_ffeb_4256_8f88_ea03495e84ce__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___995)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__1dfb6b67_5990_4ef2_b383_45abe56cebb9__teapot__)(%rip),%rax
+            leaq (.__branch_counter__a8f5131e_ffeb_4256_8f88_ea03495e84ce__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -14354,9 +14352,9 @@ flush_lines:
             seto %al
             movq %rax,(scratchpad+524304)
             movq (scratchpad+524312),%rax
-            movabsq $dift_reg_tags,%rbx
-            movb 4(%rbx),%al
-            orb %al,5(%rbx)
+            movabsq $dift_reg_tags,%rax
+            movb 4(%rax),%bl
+            orb %bl,5(%rax)
             movq %rax,(scratchpad+524312)
             movq (scratchpad+524304),%rax
             addb $127,%al
@@ -14365,11 +14363,11 @@ flush_lines:
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__d0f657a3_0524_47d4_ab87_04c3fc9b657b__teapot__)(%rip),%rax
+            leaq (.__trampoline__969e3e57_33e8_48a3_8dab_5c922b275781__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___998)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__d0f657a3_0524_47d4_ab87_04c3fc9b657b__teapot__)(%rip),%rax
+            leaq (.__branch_counter__969e3e57_33e8_48a3_8dab_5c922b275781__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -14418,18 +14416,18 @@ decode_flush_reload_state:
             pushq %r13
 .cfi_def_cfa_offset 24
 .cfi_offset 13, -24
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+16)
+            leaq -8(%rsp),%r13
+            movq %r13,(scratchpad+16)
             pushq %r12
 .cfi_def_cfa_offset 32
 .cfi_offset 12, -32
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+24)
+            leaq -8(%rsp),%r12
+            movq %r12,(scratchpad+24)
             pushq %rbp
 .cfi_def_cfa_offset 40
 .cfi_offset 6, -40
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+32)
+            leaq -8(%rsp),%r12
+            movq %r12,(scratchpad+32)
             pushq %rbx
 .cfi_def_cfa_offset 48
 .cfi_offset 3, -48
@@ -14442,36 +14440,36 @@ decode_flush_reload_state:
             seto %al
             movq %rax,(scratchpad+524304)
             movq (scratchpad+524312),%rax
-            movabsq $dift_reg_tags,%rbx
-            movzbl 14(%rbx),%ecx
+            movabsq $dift_reg_tags,%rbp
+            movzbl 14(%rbp),%r13d
             movabsq $scratchpad,%r12
-            movabsq $35184372088832,%rax
-            movq (%r12),%r13
-            xorq %rax,%r13
-            movabsq $72340172838076673,%rbp
-            imulq %rbp,%rcx
+            movabsq $35184372088832,%rbx
+            movq (%r12),%rcx
+            xorq %rbx,%rcx
+            movabsq $72340172838076673,%rax
+            imulq %rax,%r13
+            movq %r13,(%rcx)
+            movzbl 13(%rbp),%ecx
+            movq 8(%r12),%r13
+            xorq %rbx,%r13
+            imulq %rax,%rcx
             movq %rcx,(%r13)
-            movzbl 13(%rbx),%r13d
-            movq 8(%r12),%rcx
-            xorq %rax,%rcx
-            imulq %rbp,%r13
-            movq %r13,(%rcx)
-            movzbl 12(%rbx),%r13d
-            movq 16(%r12),%rcx
-            xorq %rax,%rcx
-            imulq %rbp,%r13
-            movq %r13,(%rcx)
-            movzbl 7(%rbx),%r13d
-            movq 24(%r12),%rcx
-            xorq %rax,%rcx
-            imulq %rbp,%r13
-            movq %r13,(%rcx)
-            movzbl 1(%rbx),%r13d
-            xorq 32(%r12),%rax
-            imulq %rbp,%r13
-            movq %r13,(%rax)
-            movb 5(%rbx),%al
-            movb %al,14(%rbx)
+            movzbl 12(%rbp),%ecx
+            movq 16(%r12),%r13
+            xorq %rbx,%r13
+            imulq %rax,%rcx
+            movq %rcx,(%r13)
+            movzbl 7(%rbp),%ecx
+            movq 24(%r12),%r13
+            xorq %rbx,%r13
+            imulq %rax,%rcx
+            movq %rcx,(%r13)
+            movzbl 1(%rbp),%ecx
+            xorq 32(%r12),%rbx
+            imulq %rax,%rcx
+            movq %rcx,(%rbx)
+            movb 5(%rbp),%bl
+            movb %bl,14(%rbp)
             movq %rax,(scratchpad+524312)
             movq (scratchpad+524304),%rax
             addb $127,%al
@@ -14479,11 +14477,11 @@ decode_flush_reload_state:
             movq (scratchpad+524312),%rax
             movq (scratchpad+524296),%rcx
             movq (scratchpad+524288),%rax
-            leaq (.__trampoline__b4a2cb74_979f_45c2_b9bc_b1234b30f2f8__teapot__)(%rip),%r12
+            leaq (.__trampoline__acbc9192_05a6_4210_b951_911c97f79d8a__teapot__)(%rip),%r12
             movq %r12,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___1007)(%rip),%r12
             movq %r12,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__b4a2cb74_979f_45c2_b9bc_b1234b30f2f8__teapot__)(%rip),%r12
+            leaq (.__branch_counter__acbc9192_05a6_4210_b951_911c97f79d8a__teapot__)(%rip),%r12
             movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1007:
@@ -14506,11 +14504,11 @@ decode_flush_reload_state:
             addq $1,%rax
             cmpq %rax,%rdx
             movq %rax,(scratchpad)
-            leaq (.__trampoline__95a16d59_e12c_4838_9bfe_d11dfccd92f7__teapot__)(%rip),%rax
+            leaq (.__trampoline__3397588c_3241_4448_966e_9b44c092b5e5__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___1009)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__95a16d59_e12c_4838_9bfe_d11dfccd92f7__teapot__)(%rip),%rax
+            leaq (.__branch_counter__3397588c_3241_4448_966e_9b44c092b5e5__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -14521,11 +14519,11 @@ decode_flush_reload_state:
 
             cmpq $255,%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__08119b96_c39d_4f05_b5d9_1119e4d70971__teapot__)(%rip),%rax
+            leaq (.__trampoline__138b325c_5fe9_4a1a_b86e_20f81eb2c3da__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___1010)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__08119b96_c39d_4f05_b5d9_1119e4d70971__teapot__)(%rip),%rax
+            leaq (.__branch_counter__138b325c_5fe9_4a1a_b86e_20f81eb2c3da__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -14548,14 +14546,14 @@ decode_flush_reload_state:
             seto %al
             movq %rax,(scratchpad+524320)
             movq (scratchpad+524328),%rax
-            movabsq $dift_reg_tags,%rbx
-            movb 4(%rbx),%al
-            orb (%rbx),%al
-            movabsq $scratchpad,%rdx
-            movabsq $35184372088832,%rcx
-            xorq (%rdx),%rcx
-            orb (%rcx),%al
-            movb %al,2(%rbx)
+            movabsq $dift_reg_tags,%rax
+            movb 4(%rax),%cl
+            orb (%rax),%cl
+            movabsq $scratchpad,%rbx
+            movabsq $35184372088832,%rdx
+            xorq (%rbx),%rdx
+            orb (%rdx),%cl
+            movb %cl,2(%rax)
             movq %rax,(scratchpad+524328)
             movq (scratchpad+524320),%rax
             addb $127,%al
@@ -14566,11 +14564,11 @@ decode_flush_reload_state:
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
             movq %rax,(scratchpad)
-            leaq (.__trampoline__c2968379_c685_42b6_bdae_5fca2eecbb95__teapot__)(%rip),%rax
+            leaq (.__trampoline__ae20bfba_6a9b_4b3c_9285_d5eeec099e7e__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___1013)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__c2968379_c685_42b6_bdae_5fca2eecbb95__teapot__)(%rip),%rax
+            leaq (.__branch_counter__ae20bfba_6a9b_4b3c_9285_d5eeec099e7e__teapot__)(%rip),%rax
             movq %rax,(checkpoint_target_metadata+16)
             movq (scratchpad),%rax
             jmp make_checkpoint@PLT
@@ -14586,15 +14584,15 @@ decode_flush_reload_state:
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
-            movabsq $dift_reg_tags,%rbx
-            movb 7(%rbx),%al
-            movb %al,12(%rbx)
-            movb (%rbx),%al
-            movb 1(%rbx),%cl
-            movb %al,7(%rbx)
-            movb %cl,13(%rbx)
-            movb 2(%rbx),%al
-            movb %al,1(%rbx)
+            movabsq $dift_reg_tags,%rax
+            movb 7(%rax),%cl
+            movb %cl,12(%rax)
+            movb (%rax),%cl
+            movb 1(%rax),%bl
+            movb %cl,7(%rax)
+            movb %bl,13(%rax)
+            movb 2(%rax),%cl
+            movb %cl,1(%rax)
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
@@ -14616,37 +14614,37 @@ decode_flush_reload_state:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_decode_flush_reload_state__696574e0_edae_490d_ad6f_245bd733cce0__teapot__
+            jne .L__ret_transform_target_decode_flush_reload_state__a9c7d194_ecf9_48f8_984c_fcdf38c0c0f4__teapot__
 
             movzbl %bpl,%ecx
-            leaq (%rax),%r9
-            movq %r9,(scratchpad)
+            leaq (%rax),%rsi
+            movq %rsi,(scratchpad)
             movq (%rax),%rdx
             testb $64,1(%rdx,%rcx,2)
             movl $63,%edx
-            sete %r9b
-            movq %r9,(scratchpad+8)
+            sete %sil
+            movq %rsi,(scratchpad+8)
             cmovel %edx,%ebp
-            leaq (%r14),%r9
-            movq %r9,(scratchpad+16)
+            leaq (%r14),%rsi
+            movq %rsi,(scratchpad+16)
             movb %bpl,(%r14)
             movzbl %r12b,%edx
-            leaq (%rax),%r9
-            movq %r9,(scratchpad+24)
+            leaq (%rax),%rsi
+            movq %rsi,(scratchpad+24)
             movq (%rax),%rax
             testb $64,1(%rax,%rdx,2)
             movl $63,%r9d
-            setne %r14b
-            movq %r14,(scratchpad+32)
+            setne %sil
+            movq %rsi,(scratchpad+32)
             cmovnel %r12d,%r9d
             movsbl %bpl,%edx
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+40)
+            leaq -8(%rsp),%rsi
+            movq %rsi,(scratchpad+40)
             pushq %r13
 .cfi_def_cfa_offset 56
             movzbl %r12b,%r12d
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+48)
+            leaq -8(%rsp),%rsi
+            movq %rsi,(scratchpad+48)
             pushq %r12
 .cfi_def_cfa_offset 64
             movsbl %r9b,%r9d
@@ -14656,72 +14654,72 @@ decode_flush_reload_state:
             movl $1,%edi
             movl $0,%eax
             movq %rax,(scratchpad+524288)
-            movabsq $dift_reg_tags,%r13
-            movb 7(%r13),%bl
-            movb %bl,2(%r13)
-            movabsq $scratchpad,%r12
-            cmpq $0,8(%r12)
+            movabsq $dift_reg_tags,%rbp
+            movb 7(%rbp),%al
+            movb %al,2(%rbp)
+            movabsq $scratchpad,%r14
+            cmpq $0,8(%r14)
             je .LBB0_2_1024
 
-            movb $0,7(%r13)
-            xorl %ebx,%ebx
+            movb $0,7(%rbp)
+            xorl %eax,%eax
 .LBB0_2_1024:
 
-            orb 14(%r13),%bl
-            movabsq $35184372088832,%rbp
-            movq 16(%r12),%r14
-            xorq %rbp,%r14
-            movb %bl,(%r14)
-            xorl %ebx,%ebx
-            cmpq $0,32(%r12)
+            orb 14(%rbp),%al
+            movabsq $35184372088832,%r12
+            movq 16(%r14),%r13
+            xorq %r12,%r13
+            movb %al,(%r13)
+            xorl %eax,%eax
+            cmpq $0,32(%r14)
             je .LBB0_4_1024
 
-            movl 12(%r13),%ebx
+            movl 12(%rbp),%eax
 .LBB0_4_1024:
 
-            movb %bl,9(%r13)
-            movb 7(%r13),%al
-            movb %al,3(%r13)
-            movzbl 13(%r13),%eax
-            movq 40(%r12),%rbx
-            xorq %rbp,%rbx
-            movabsq $72340172838076673,%r14
-            imulq %r14,%rax
-            movq %rax,(%rbx)
-            movzbl 12(%r13),%eax
-            xorq 48(%r12),%rbp
-            imulq %r14,%rax
-            movq %rax,(%rbp)
-            movb 1(%r13),%al
-            movb 3(%r13),%bpl
-            movb %al,8(%r13)
-            movb %bpl,2(%r13)
-            movw $0,4(%r13)
-            movb $0,(%r13)
+            movb %al,9(%rbp)
+            movb 7(%rbp),%bl
+            movb %bl,3(%rbp)
+            movzbl 13(%rbp),%ebx
+            movq 40(%r14),%rax
+            xorq %r12,%rax
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rbx
+            movq %rbx,(%rax)
+            movzbl 12(%rbp),%ebx
+            xorq 48(%r14),%r12
+            imulq %r13,%rbx
+            movq %rbx,(%r12)
+            movb 1(%rbp),%bl
+            movb 3(%rbp),%r12b
+            movb %bl,8(%rbp)
+            movb %r12b,2(%rbp)
+            movw $0,4(%rbp)
+            movb $0,(%rbp)
             movq (scratchpad+524288),%rax
             callq __printf_chk__dift_wrapper__@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_decode_flush_reload_state__394c2019_60db_47b5_aaee_510955d1ab03__teapot__
+            jne .L__ret_transform_target_decode_flush_reload_state__e44c6f8e_8353_470d_989c_137d422c6558__teapot__
 
             addq $16,%rsp
 .cfi_def_cfa_offset 48
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad)
             popq %rbx
 .cfi_def_cfa_offset 40
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+8)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+8)
             popq %rbp
 .cfi_def_cfa_offset 32
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+16)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+16)
             popq %r12
 .cfi_def_cfa_offset 24
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+24)
+            leaq (%rsp),%r13
+            movq %r13,(scratchpad+24)
             popq %r13
 .cfi_def_cfa_offset 16
             leaq (%rsp),%r14
@@ -14738,28 +14736,28 @@ decode_flush_reload_state:
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
             movq %rdx,(scratchpad+524312)
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%rax
-            movq (%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movabsq $dift_reg_tags,%rcx
-            movb %dl,1(%rcx)
-            movq 8(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,7(%rcx)
-            movq 16(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,12(%rcx)
-            movq 24(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,13(%rcx)
-            xorq 32(%rbx),%rax
-            movb (%rax),%bl
-            movb %bl,14(%rcx)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%rcx
+            movq (%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movabsq $dift_reg_tags,%rdx
+            movb %bl,1(%rdx)
+            movq 8(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,7(%rdx)
+            movq 16(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,12(%rdx)
+            movq 24(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,13(%rdx)
+            xorq 32(%rax),%rcx
+            movb (%rcx),%al
+            movb %al,14(%rdx)
             movq (scratchpad+524312),%rdx
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
@@ -14767,8 +14765,6 @@ decode_flush_reload_state:
             retq 
 .cfi_endproc 
 .size decode_flush_reload_state, . - decode_flush_reload_state
-
-            nop
 .align 2
 #-----------------------------------
 .globl calibrate_latency
@@ -14791,8 +14787,8 @@ calibrate_latency:
             pushq %rbp
 .cfi_def_cfa_offset 16
 .cfi_offset 6, -16
-            leaq -8(%rsp),%rdi
-            movq %rdi,(scratchpad+8)
+            leaq -8(%rsp),%rbp
+            movq %rbp,(scratchpad+8)
             pushq %rbx
 .cfi_def_cfa_offset 24
 .cfi_offset 3, -24
@@ -14803,20 +14799,20 @@ calibrate_latency:
             movq %rcx,(scratchpad+524296)
             movq %rdx,(scratchpad+524304)
             movq %rsi,(scratchpad+524312)
-            movabsq $dift_reg_tags,%rbx
-            movzbl 7(%rbx),%eax
+            movabsq $dift_reg_tags,%rbp
+            movzbl 7(%rbp),%ebx
             movabsq $scratchpad,%rdx
-            movabsq $35184372088832,%rbp
-            movq (%rdx),%rcx
-            xorq %rbp,%rcx
-            movabsq $72340172838076673,%rsi
-            imulq %rsi,%rax
-            movq %rax,(%rcx)
-            movzbl 1(%rbx),%eax
-            xorq 8(%rdx),%rbp
-            imulq %rsi,%rax
-            movq %rax,(%rbp)
-            movb $0,5(%rbx)
+            movabsq $35184372088832,%rax
+            movq (%rdx),%rsi
+            xorq %rax,%rsi
+            movabsq $72340172838076673,%rcx
+            imulq %rcx,%rbx
+            movq %rbx,(%rsi)
+            movzbl 1(%rbp),%ebx
+            xorq 8(%rdx),%rax
+            imulq %rcx,%rbx
+            movq %rbx,(%rax)
+            movb $0,5(%rbp)
             movq (scratchpad+524312),%rsi
             movq (scratchpad+524304),%rdx
             movq (scratchpad+524296),%rcx
@@ -14826,15 +14822,15 @@ calibrate_latency:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_calibrate_latency__5d1edaaf_8962_4b0e_b171_a1b88b4bc70e__teapot__
+            jne .L__ret_transform_target_calibrate_latency__b6db33d9_25b0_444c_b7e4_fcaaf5fd8af1__teapot__
 
             testq %rax,%rax
-            leaq (.__trampoline__5d1edaaf_8962_4b0e_b171_a1b88b4bc70e__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1038)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__5d1edaaf_8962_4b0e_b171_a1b88b4bc70e__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__b6db33d9_25b0_444c_b7e4_fcaaf5fd8af1__teapot__)(%rip),%rsi
+            movq %rsi,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1038)(%rip),%rsi
+            movq %rsi,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__b6db33d9_25b0_444c_b7e4_fcaaf5fd8af1__teapot__)(%rip),%rsi
+            movq %rsi,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1038:
 
@@ -14842,19 +14838,19 @@ calibrate_latency:
             je .L_16b7
 
             movq %rax,%rbx
-            leaq (%rbx),%r9
-            movq %r9,(scratchpad)
+            leaq (%rbx),%rsi
+            movq %rsi,(scratchpad)
             movb (%rbx),%al
             movl $1000,%esi
-            movabsq $dift_reg_tags,%rbp
-            movb (%rbp),%r9b
-            movb %r9b,1(%rbp)
-            movabsq $scratchpad,%rdi
-            movabsq $35184372088832,%rcx
-            xorq (%rdi),%rcx
-            orb (%rcx),%r9b
-            movb %r9b,(%rbp)
-            movw $0,4(%rbp)
+            movabsq $dift_reg_tags,%rdx
+            movb (%rdx),%bpl
+            movb %bpl,1(%rdx)
+            movabsq $scratchpad,%r8
+            movabsq $35184372088832,%r9
+            xorq (%r8),%r9
+            orb (%r9),%bpl
+            movb %bpl,(%rdx)
+            movw $0,4(%rdx)
             movl $0,%edi
 .L_15ce:
 
@@ -14865,8 +14861,8 @@ calibrate_latency:
             orq %rdx,%rax
             lfence 
             movq %rax,%r8
-            leaq (%rbx),%r9
-            movq %r9,(scratchpad)
+            leaq (%rbx),%rdx
+            movq %rdx,(scratchpad)
             movb (%rbx),%al
             rdtscp 
             shlq $32,%rdx
@@ -14880,21 +14876,21 @@ calibrate_latency:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%r9
-            movb $0,8(%r9)
-            movw $0,2(%r9)
-            movb $0,(%r9)
+            movabsq $dift_reg_tags,%rdx
+            movb $0,8(%rdx)
+            movb $0,(%rdx)
+            movw $0,2(%rdx)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__ce579009_9a2b_400a_b2a4_83f065ff1cae__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1043)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__ce579009_9a2b_400a_b2a4_83f065ff1cae__teapot__)(%rip),%r9
-            movq %r9,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__f44d9fb5_9124_4190_ae6b_78059fb6eaa8__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1043)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__f44d9fb5_9124_4190_ae6b_78059fb6eaa8__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1043:
 
@@ -14908,12 +14904,12 @@ calibrate_latency:
             shrq $4,%rdx
             movq %rdx,%r9
             movl $1000,%esi
-            movabsq $dift_reg_tags,%rcx
-            movw $0,3(%rcx)
-            movb 5(%rcx),%bpl
-            movb %bpl,(%rcx)
-            movb $0,9(%rcx)
-            movb $0,5(%rcx)
+            movabsq $dift_reg_tags,%rdx
+            movw $0,3(%rdx)
+            movb 5(%rdx),%r8b
+            movb %r8b,(%rdx)
+            movb $0,9(%rdx)
+            movb $0,5(%rdx)
             movl $0,%edi
 .L_1622:
 
@@ -14925,8 +14921,8 @@ calibrate_latency:
             orq %rdx,%rax
             lfence 
             movq %rax,%r8
-            leaq (%rbx),%rcx
-            movq %rcx,(scratchpad)
+            leaq (%rbx),%rbp
+            movq %rbp,(scratchpad)
             movb (%rbx),%al
             rdtscp 
             shlq $32,%rdx
@@ -14940,21 +14936,21 @@ calibrate_latency:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rbp
-            movb $0,8(%rbp)
-            movw $0,2(%rbp)
-            movb $0,(%rbp)
+            movabsq $dift_reg_tags,%rdx
+            movb $0,8(%rdx)
+            movb $0,(%rdx)
+            movw $0,2(%rdx)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__9a7fa99a_5e71_4eee_8a8b_dd26670154fc__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1047)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__9a7fa99a_5e71_4eee_8a8b_dd26670154fc__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__3f2be5c9_be44_4b3b_9ed0_cf84ebf303b7__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1047)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__3f2be5c9_be44_4b3b_9ed0_cf84ebf303b7__teapot__)(%rip),%rdx
+            movq %rdx,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1047:
 
@@ -14980,16 +14976,16 @@ calibrate_latency:
             movl $0,%eax
             movq %rbx,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
-            movabsq $dift_reg_tags,%rcx
-            movb 5(%rcx),%bl
-            movb 9(%rcx),%al
-            movb %bl,2(%rcx)
-            orb %al,%bl
-            movb %bl,7(%rcx)
-            movb %bl,8(%rcx)
-            movb %al,3(%rcx)
-            movw $0,4(%rcx)
-            movb $0,(%rcx)
+            movabsq $dift_reg_tags,%rbx
+            movb 5(%rbx),%al
+            movb 9(%rbx),%cl
+            movb %al,2(%rbx)
+            orb %cl,%al
+            movb %al,7(%rbx)
+            movb %al,8(%rbx)
+            movb %cl,3(%rbx)
+            movw $0,4(%rbx)
+            movb $0,(%rbx)
             movq (scratchpad+524296),%rcx
             movq (scratchpad+524288),%rbx
             callq __printf_chk__dift_wrapper__@PLT
@@ -14997,25 +14993,25 @@ calibrate_latency:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_calibrate_latency__fc53bdd7_f3a1_4b1e_9a39_bf207940c991__teapot__
+            jne .L__ret_transform_target_calibrate_latency__f2c78883_cafe_4189_9142_3e2e7a7f80f8__teapot__
 
             movq %rbx,%rdi
-            movabsq $dift_reg_tags,%rbx
-            movb 1(%rbx),%al
-            movb %al,5(%rbx)
+            movabsq $dift_reg_tags,%rax
+            movb 1(%rax),%bl
+            movb %bl,5(%rax)
             callq free@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_calibrate_latency__4371d92f_cd07_4f41_9f3c_2805751b9140__teapot__
+            jne .L__ret_transform_target_calibrate_latency__48ba0df4_5a09_4457_9486_7852d5684508__teapot__
 
             movq %rbp,%rax
             addq $8,%rsp
 .cfi_remember_state 
 .cfi_def_cfa_offset 24
-            leaq (%rsp),%rbx
-            movq %rbx,(scratchpad)
+            leaq (%rsp),%rbp
+            movq %rbp,(scratchpad)
             popq %rbx
 .cfi_def_cfa_offset 16
             leaq (%rsp),%rbp
@@ -15034,17 +15030,17 @@ calibrate_latency:
             movq %rdx,(scratchpad+524312)
             movq %rsi,(scratchpad+524320)
             movabsq $dift_reg_tags,%rdx
-            movb 7(%rdx),%al
-            movb %al,(%rdx)
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%rcx
-            movq (%rbx),%rsi
-            xorq %rcx,%rsi
-            movb (%rsi),%al
-            movb %al,1(%rdx)
-            xorq 8(%rbx),%rcx
-            movb (%rcx),%al
-            movb %al,7(%rdx)
+            movb 7(%rdx),%sil
+            movb %sil,(%rdx)
+            movabsq $scratchpad,%rcx
+            movabsq $35184372088832,%rbx
+            movq (%rcx),%rax
+            xorq %rbx,%rax
+            movb (%rax),%sil
+            movb %sil,1(%rdx)
+            xorq 8(%rcx),%rbx
+            movb (%rbx),%sil
+            movb %sil,7(%rdx)
             movq (scratchpad+524320),%rsi
             movq (scratchpad+524312),%rdx
             movq (scratchpad+524304),%rcx
@@ -15058,8 +15054,8 @@ calibrate_latency:
             movl $134,%edx
             leaq (.L_2052)(%rip),%rsi
             leaq (.L_205c)(%rip),%rdi
-            movabsq $dift_reg_tags,%r9
-            movl $0,2(%r9)
+            movabsq $dift_reg_tags,%r12
+            movl $0,2(%r12)
             callq __assert_fail@PLT
 .cfi_endproc 
 .size calibrate_latency, . - calibrate_latency
@@ -15095,18 +15091,18 @@ victim_function:
             pushq %r13
 .cfi_def_cfa_offset 32
 .cfi_offset 13, -32
-            leaq -8(%rsp),%rax
-            movq %rax,(scratchpad+24)
+            leaq -8(%rsp),%r13
+            movq %r13,(scratchpad+24)
             pushq %r12
 .cfi_def_cfa_offset 40
 .cfi_offset 12, -40
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+32)
+            leaq -8(%rsp),%r12
+            movq %r12,(scratchpad+32)
             pushq %rbp
 .cfi_def_cfa_offset 48
 .cfi_offset 6, -48
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+40)
+            leaq -8(%rsp),%r12
+            movq %r12,(scratchpad+40)
             pushq %rbx
 .cfi_def_cfa_offset 56
 .cfi_offset 3, -56
@@ -15133,52 +15129,52 @@ victim_function:
             movq %rax,(scratchpad+524328)
             movq (scratchpad+524336),%rax
             movabsq $dift_reg_tags,%rsi
-            movzbl 15(%rsi),%ebx
+            movzbl 15(%rsi),%edx
             movabsq $scratchpad,%rcx
-            movabsq $35184372088832,%rdx
-            movq (%rcx),%rax
-            xorq %rdx,%rax
-            movabsq $72340172838076673,%r15
-            imulq %r15,%rbx
-            movq %rbx,(%rax)
-            movzbl 14(%rsi),%eax
-            movq 8(%rcx),%rbx
-            xorq %rdx,%rbx
-            imulq %r15,%rax
-            movq %rax,(%rbx)
-            movzbl 13(%rsi),%eax
-            movq 16(%rcx),%rbx
-            xorq %rdx,%rbx
-            imulq %r15,%rax
-            movq %rax,(%rbx)
-            movzbl 12(%rsi),%eax
-            movq 24(%rcx),%rbx
-            xorq %rdx,%rbx
-            imulq %r15,%rax
-            movq %rax,(%rbx)
-            movzbl 7(%rsi),%eax
-            movq 32(%rcx),%rbx
-            xorq %rdx,%rbx
-            imulq %r15,%rax
-            movq %rax,(%rbx)
-            movzbl 1(%rsi),%eax
-            movq 40(%rcx),%rbx
-            xorq %rdx,%rbx
-            imulq %r15,%rax
-            movq %rax,(%rbx)
-            movb 5(%rsi),%al
-            movb %al,13(%rsi)
-            movb 4(%rsi),%al
-            movb %al,7(%rsi)
-            movb 2(%rsi),%r15b
-            movb 3(%rsi),%al
-            movb %al,12(%rsi)
-            movb %r15b,14(%rsi)
-            movb 8(%rsi),%al
-            movb %al,1(%rsi)
-            xorq 48(%rcx),%rdx
-            movb (%rdx),%al
-            movb %al,(%rsi)
+            movabsq $35184372088832,%rbx
+            movq (%rcx),%r15
+            xorq %rbx,%r15
+            movabsq $72340172838076673,%rax
+            imulq %rax,%rdx
+            movq %rdx,(%r15)
+            movzbl 14(%rsi),%r15d
+            movq 8(%rcx),%rdx
+            xorq %rbx,%rdx
+            imulq %rax,%r15
+            movq %r15,(%rdx)
+            movzbl 13(%rsi),%r15d
+            movq 16(%rcx),%rdx
+            xorq %rbx,%rdx
+            imulq %rax,%r15
+            movq %r15,(%rdx)
+            movzbl 12(%rsi),%r15d
+            movq 24(%rcx),%rdx
+            xorq %rbx,%rdx
+            imulq %rax,%r15
+            movq %r15,(%rdx)
+            movzbl 7(%rsi),%r15d
+            movq 32(%rcx),%rdx
+            xorq %rbx,%rdx
+            imulq %rax,%r15
+            movq %r15,(%rdx)
+            movzbl 1(%rsi),%r15d
+            movq 40(%rcx),%rdx
+            xorq %rbx,%rdx
+            imulq %rax,%r15
+            movq %r15,(%rdx)
+            movb 5(%rsi),%r15b
+            movb %r15b,13(%rsi)
+            movb 4(%rsi),%r15b
+            movb %r15b,7(%rsi)
+            movb 2(%rsi),%al
+            movb 3(%rsi),%r15b
+            movb %r15b,12(%rsi)
+            movb %al,14(%rsi)
+            movb 8(%rsi),%r15b
+            movb %r15b,1(%rsi)
+            xorq 48(%rcx),%rbx
+            movb (%rbx),%r15b
+            movb %r15b,(%rsi)
             movq %rax,(scratchpad+524336)
             movq (scratchpad+524328),%rax
             addb $127,%al
@@ -15189,11 +15185,11 @@ victim_function:
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
-            leaq (.__trampoline__2c6708f6_86ca_4eec_a19e_9616d42671b6__teapot__)(%rip),%r15
+            leaq (.__trampoline__3cd42740_ca65_4fa1_ac56_645963515d05__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___1066)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__2c6708f6_86ca_4eec_a19e_9616d42671b6__teapot__)(%rip),%r15
+            leaq (.__branch_counter__3cd42740_ca65_4fa1_ac56_645963515d05__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1066:
@@ -15211,23 +15207,23 @@ victim_function:
             seto %al
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524304),%rax
-            movabsq $scratchpad,%r15
-            movabsq $35184372088832,%rax
-            xorq (%r15),%rax
-            movb (%rax),%r15b
-            movabsq $dift_reg_tags,%rax
-            movb %r15b,(%rax)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%r15
+            xorq (%rax),%r15
+            movb (%r15),%al
+            movabsq $dift_reg_tags,%r15
+            movb %al,(%r15)
             movq %rax,(scratchpad+524304)
             movq (scratchpad+524296),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524304),%rax
             movq (scratchpad+524288),%rax
-            leaq (.__trampoline__da0fcc89_4728_468a_9276_7ba0e5ea4ed5__teapot__)(%rip),%r15
+            leaq (.__trampoline__0c647829_3f6e_424c_8bc4_eec8c4caa290__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata)
             leaq (.L__after_checkpoint__teapot___1069)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__da0fcc89_4728_468a_9276_7ba0e5ea4ed5__teapot__)(%rip),%r15
+            leaq (.__branch_counter__0c647829_3f6e_424c_8bc4_eec8c4caa290__teapot__)(%rip),%r15
             movq %r15,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1069:
@@ -15244,16 +15240,16 @@ victim_function:
             movq %rax,(scratchpad+524288)
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%rax
-            xorq (%rbx),%rax
-            movb (%rax),%bl
-            movabsq $dift_reg_tags,%rax
-            orb 13(%rax),%bl
-            movb %bl,15(%rax)
-            movb 1(%rax),%cl
-            movb %cl,4(%rax)
-            movb %bl,5(%rax)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%rcx
+            xorq (%rax),%rcx
+            movb (%rcx),%al
+            movabsq $dift_reg_tags,%rcx
+            orb 13(%rcx),%al
+            movb %al,15(%rcx)
+            movb 1(%rcx),%bl
+            movb %bl,4(%rcx)
+            movb %al,5(%rcx)
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
             movq (scratchpad+524288),%rax
@@ -15262,11 +15258,11 @@ victim_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_victim_function__b263e65e_7a18_4c16_a8c2_f952cd183195__teapot__
+            jne .L__ret_transform_target_victim_function__cb1729f6_691e_4b83_ad86_0c6f9a6d3b45__teapot__
 
             movq %rax,%rdi
-            leaq (%r13),%rsi
-            movq %rsi,(scratchpad)
+            leaq (%r13),%rdx
+            movq %rdx,(scratchpad)
             movq %rax,(%r13)
             leaq (array_size)(%rip),%rax
             movq %rax,(scratchpad+8)
@@ -15278,22 +15274,22 @@ victim_function:
             movq %rdx,(scratchpad+524304)
             movq %rsi,(scratchpad+524312)
             movabsq $dift_reg_tags,%rax
-            movb (%rax),%bl
-            movb %bl,5(%rax)
-            orb 13(%rax),%bl
+            movb (%rax),%r15b
+            movb %r15b,5(%rax)
+            orb 13(%rax),%r15b
             movabsq $scratchpad,%rdx
-            movabsq $35184372088832,%r15
-            movq (%rdx),%rcx
-            xorq %r15,%rcx
-            movzbl %bl,%ebx
-            movabsq $72340172838076673,%rsi
-            imulq %rbx,%rsi
-            movq %rsi,(%rcx)
-            xorq 8(%rdx),%r15
-            movb (%r15),%bl
-            movb %bl,3(%rax)
-            movb 15(%rax),%bl
-            movb %bl,4(%rax)
+            movabsq $35184372088832,%rbx
+            movq (%rdx),%rsi
+            xorq %rbx,%rsi
+            movzbl %r15b,%r15d
+            movabsq $72340172838076673,%rcx
+            imulq %r15,%rcx
+            movq %rcx,(%rsi)
+            xorq 8(%rdx),%rbx
+            movb (%rbx),%r15b
+            movb %r15b,3(%rax)
+            movb 15(%rax),%r15b
+            movb %r15b,4(%rax)
             movq (scratchpad+524312),%rsi
             movq (scratchpad+524304),%rdx
             movq (scratchpad+524296),%rcx
@@ -15303,7 +15299,7 @@ victim_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_victim_function__5132ced8_b73c_43e1_8092_6c981be6a2bc__teapot__
+            jne .L__ret_transform_target_victim_function__083f6fe9_11da_4735_995b_57df6ce2b8d7__teapot__
 .L_1734:
 
             movl %ebx,%ebx
@@ -15311,38 +15307,38 @@ victim_function:
             cmpq %rbx,%rdx
             sbbq %rdx,%rdx
             andl %r12d,%edx
-            leaq (%r13),%rcx
-            movq %rcx,(scratchpad)
+            leaq (%r13),%r12
+            movq %r12,(scratchpad)
             movq (%r13),%rax
-            leaq (%rax,%rdx),%rcx
-            movq %rcx,(scratchpad+8)
+            leaq (%rax,%rdx),%r12
+            movq %r12,(scratchpad+8)
             movzbl (%rax,%rdx),%ecx
             imull %ecx,%r14d
             addq %r14,%rbp
-            leaq (%rbp),%r14
-            movq %r14,(scratchpad+16)
+            leaq (%rbp),%r12
+            movq %r12,(scratchpad+16)
             movb (%rbp),%bpl
             movl $0,%eax
             addq $8,%rsp
 .cfi_def_cfa_offset 56
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+24)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+24)
             popq %rbx
 .cfi_def_cfa_offset 48
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+32)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+32)
             popq %rbp
 .cfi_def_cfa_offset 40
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+40)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+40)
             popq %r12
 .cfi_def_cfa_offset 32
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+48)
+            leaq (%rsp),%r13
+            movq %r13,(scratchpad+48)
             popq %r13
 .cfi_def_cfa_offset 24
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+56)
+            leaq (%rsp),%r15
+            movq %r15,(scratchpad+56)
             popq %r14
 .cfi_def_cfa_offset 16
             leaq (%rsp),%r15
@@ -15362,52 +15358,52 @@ victim_function:
             movq %rsi,(scratchpad+524320)
             movq %rdi,(scratchpad+524328)
             movabsq $dift_reg_tags,%rsi
-            movb 12(%rsi),%dl
-            movb %dl,3(%rsi)
-            movabsq $scratchpad,%rdi
-            movabsq $35184372088832,%rcx
-            movq (%rdi),%rbx
-            xorq %rcx,%rbx
-            movb (%rbx),%al
-            orb 13(%rsi),%al
-            movb %al,(%rsi)
-            orb %dl,%al
-            movq 8(%rdi),%rbx
-            xorq %rcx,%rbx
-            orb (%rbx),%al
-            movb %al,2(%rsi)
-            orb 14(%rsi),%al
-            movb %al,14(%rsi)
-            orb 7(%rsi),%al
-            movb %al,7(%rsi)
-            movq 16(%rdi),%rbx
-            xorq %rcx,%rbx
-            orb (%rbx),%al
-            movb %al,7(%rsi)
+            movb 12(%rsi),%cl
+            movb %cl,3(%rsi)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%rbx
+            movq (%rax),%rdx
+            xorq %rbx,%rdx
+            movb (%rdx),%dil
+            orb 13(%rsi),%dil
+            movb %dil,(%rsi)
+            orb %cl,%dil
+            movq 8(%rax),%rdx
+            xorq %rbx,%rdx
+            orb (%rdx),%dil
+            movb %dil,2(%rsi)
+            orb 14(%rsi),%dil
+            movb %dil,14(%rsi)
+            orb 7(%rsi),%dil
+            movb %dil,7(%rsi)
+            movq 16(%rax),%rdx
+            xorq %rbx,%rdx
+            orb (%rdx),%dil
+            movb %dil,7(%rsi)
             movb $0,(%rsi)
-            movq 24(%rdi),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,1(%rsi)
-            movq 32(%rdi),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,7(%rsi)
-            movq 40(%rdi),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,12(%rsi)
-            movq 48(%rdi),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,13(%rsi)
-            movq 56(%rdi),%rax
-            xorq %rcx,%rax
-            movb (%rax),%al
-            movb %al,14(%rsi)
-            xorq 64(%rdi),%rcx
-            movb (%rcx),%al
-            movb %al,15(%rsi)
+            movq 24(%rax),%rdi
+            xorq %rbx,%rdi
+            movb (%rdi),%dil
+            movb %dil,1(%rsi)
+            movq 32(%rax),%rdi
+            xorq %rbx,%rdi
+            movb (%rdi),%dil
+            movb %dil,7(%rsi)
+            movq 40(%rax),%rdi
+            xorq %rbx,%rdi
+            movb (%rdi),%dil
+            movb %dil,12(%rsi)
+            movq 48(%rax),%rdi
+            xorq %rbx,%rdi
+            movb (%rdi),%dil
+            movb %dil,13(%rsi)
+            movq 56(%rax),%rdi
+            xorq %rbx,%rdi
+            movb (%rdi),%dil
+            movb %dil,14(%rsi)
+            xorq 64(%rax),%rbx
+            movb (%rbx),%dil
+            movb %dil,15(%rsi)
             movq (scratchpad+524328),%rdi
             movq (scratchpad+524320),%rsi
             movq (scratchpad+524312),%rdx
@@ -15448,139 +15444,139 @@ attacker_function:
             pushq %r13
 .cfi_def_cfa_offset 32
 .cfi_offset 13, -32
-            leaq -8(%rsp),%rax
-            movq %rax,(scratchpad+24)
+            leaq -8(%rsp),%r13
+            movq %r13,(scratchpad+24)
             pushq %r12
 .cfi_def_cfa_offset 40
 .cfi_offset 12, -40
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+32)
+            leaq -8(%rsp),%r12
+            movq %r12,(scratchpad+32)
             pushq %rbp
 .cfi_def_cfa_offset 48
 .cfi_offset 6, -48
-            leaq -8(%rsp),%r14
-            movq %r14,(scratchpad+40)
+            leaq -8(%rsp),%r12
+            movq %r12,(scratchpad+40)
             pushq %rbx
 .cfi_def_cfa_offset 56
 .cfi_offset 3, -56
             subq $2168,%rsp
 .cfi_def_cfa_offset 2224
-            leaq %fs:40,%r14
-            movq %r14,(scratchpad+48)
+            leaq %fs:40,%r12
+            movq %r12,(scratchpad+48)
             movq %fs:40,%rax
-            leaq 2152(%rsp),%r14
-            movq %r14,(scratchpad+56)
+            leaq 2152(%rsp),%r12
+            movq %r12,(scratchpad+56)
             movq %rax,2152(%rsp)
             xorl %eax,%eax
             movq %rax,(scratchpad+524288)
-            movabsq $dift_reg_tags,%r12
-            movzbl 15(%r12),%ebp
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%r14
-            movq (%rbx),%r13
-            xorq %r14,%r13
-            movabsq $72340172838076673,%rax
-            imulq %rax,%rbp
+            movabsq $dift_reg_tags,%r15
+            movzbl 15(%r15),%r13d
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%rbx
+            movq (%rax),%rbp
+            xorq %rbx,%rbp
+            movabsq $72340172838076673,%r14
+            imulq %r14,%r13
+            movq %r13,(%rbp)
+            movzbl 14(%r15),%ebp
+            movq 8(%rax),%r13
+            xorq %rbx,%r13
+            imulq %r14,%rbp
             movq %rbp,(%r13)
-            movzbl 14(%r12),%r13d
-            movq 8(%rbx),%rbp
-            xorq %r14,%rbp
-            imulq %rax,%r13
-            movq %r13,(%rbp)
-            movzbl 13(%r12),%r13d
-            movq 16(%rbx),%rbp
-            xorq %r14,%rbp
-            imulq %rax,%r13
-            movq %r13,(%rbp)
-            movzbl 12(%r12),%r13d
-            movq 24(%rbx),%rbp
-            xorq %r14,%rbp
-            imulq %rax,%r13
-            movq %r13,(%rbp)
-            movzbl 7(%r12),%r13d
-            movq 32(%rbx),%rbp
-            xorq %r14,%rbp
-            imulq %rax,%r13
-            movq %r13,(%rbp)
-            movzbl 1(%r12),%r13d
-            movq 40(%rbx),%rbp
-            xorq %r14,%rbp
-            imulq %rax,%r13
-            movq %r13,(%rbp)
-            movq 48(%rbx),%r13
-            xorq %r14,%r13
-            movb 6(%r12),%r15b
-            orb (%r13),%r15b
-            xorq 56(%rbx),%r14
-            movzbl %r15b,%r13d
-            imulq %rax,%r13
-            movq %r13,(%r14)
-            movb $0,(%r12)
+            movzbl 13(%r15),%ebp
+            movq 16(%rax),%r13
+            xorq %rbx,%r13
+            imulq %r14,%rbp
+            movq %rbp,(%r13)
+            movzbl 12(%r15),%ebp
+            movq 24(%rax),%r13
+            xorq %rbx,%r13
+            imulq %r14,%rbp
+            movq %rbp,(%r13)
+            movzbl 7(%r15),%ebp
+            movq 32(%rax),%r13
+            xorq %rbx,%r13
+            imulq %r14,%rbp
+            movq %rbp,(%r13)
+            movzbl 1(%r15),%ebp
+            movq 40(%rax),%r13
+            xorq %rbx,%r13
+            imulq %r14,%rbp
+            movq %rbp,(%r13)
+            movq 48(%rax),%rbp
+            xorq %rbx,%rbp
+            movb 6(%r15),%r12b
+            orb (%rbp),%r12b
+            xorq 56(%rax),%rbx
+            movzbl %r12b,%ebp
+            imulq %r14,%rbp
+            movq %rbp,(%rbx)
+            movb $0,(%r15)
             movq (scratchpad+524288),%rax
             callq array_init
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__64c25cc8_965c_46e6_83d0_6f4edab78a68__teapot__
+            jne .L__ret_transform_target_attacker_function__8a273969_4093_499e_9dc6_a0f66c7471d8__teapot__
 
-            leaq 88(%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq 88(%rsp),%r12
+            movq %r12,(scratchpad)
             movq %rax,88(%rsp)
             movl $0,%eax
-            movabsq $dift_reg_tags,%rbp
-            movb 6(%rbp),%r14b
-            orb (%rbp),%r14b
+            movabsq $dift_reg_tags,%r12
+            movb (%r12),%r14b
+            orb 6(%r12),%r14b
             movabsq $scratchpad,%r15
-            movabsq $35184372088832,%r12
-            xorq (%r15),%r12
+            movabsq $35184372088832,%r13
+            xorq (%r15),%r13
             movzbl %r14b,%r14d
             movabsq $72340172838076673,%r15
             imulq %r14,%r15
-            movq %r15,(%r12)
-            movb $0,(%rbp)
+            movq %r15,(%r13)
+            movb $0,(%r12)
             callq secret_init
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__c7bcfee9_4f50_499c_aa9d_67dadc4acae5__teapot__
+            jne .L__ret_transform_target_attacker_function__5ffacf72_e75f_4787_b4e6_ad84eef21fef__teapot__
 
-            leaq 72(%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq 72(%rsp),%r12
+            movq %r12,(scratchpad)
             movq %rax,72(%rsp)
             movq %rax,%rdx
-            leaq 88(%rsp),%r14
-            movq %r14,(scratchpad+8)
+            leaq 88(%rsp),%r12
+            movq %r12,(scratchpad+8)
             subq 88(%rsp),%rdx
             leaq (.L_2061)(%rip),%rsi
             movl $1,%edi
             movl $0,%eax
-            movabsq $dift_reg_tags,%r13
-            movb 6(%r13),%r14b
-            orb (%r13),%r14b
-            movabsq $scratchpad,%r12
-            movabsq $35184372088832,%rbx
-            movq (%r12),%rbp
-            xorq %rbx,%rbp
-            movzbl %r14b,%r14d
+            movabsq $dift_reg_tags,%rbp
+            movb (%rbp),%bl
+            orb 6(%rbp),%bl
+            movabsq $scratchpad,%r14
+            movabsq $35184372088832,%r12
+            movq (%r14),%r13
+            xorq %r12,%r13
+            movzbl %bl,%ebx
             movabsq $72340172838076673,%r15
-            imulq %r14,%r15
-            movq %r15,(%rbp)
-            movb (%r13),%r14b
-            movb %r14b,3(%r13)
-            orb 6(%r13),%r14b
-            xorq 8(%r12),%rbx
-            orb (%rbx),%r14b
-            movb %r14b,3(%r13)
-            movw $0,4(%r13)
-            movb $0,(%r13)
+            imulq %rbx,%r15
+            movq %r15,(%r13)
+            movb (%rbp),%bl
+            movb %bl,3(%rbp)
+            orb 6(%rbp),%bl
+            xorq 8(%r14),%r12
+            orb (%r12),%bl
+            movb %bl,3(%rbp)
+            movw $0,4(%rbp)
+            movb $0,(%rbp)
             callq __printf_chk__dift_wrapper__@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__3a1bf459_dbb1_4708_a201_5a43b1ec0055__teapot__
+            jne .L__ret_transform_target_attacker_function__979cd9b7_9ec6_4338_b2e3_f365c2ab1f9f__teapot__
 
             movl $0,%r9d
             movl $4294967295,%r8d
@@ -15588,23 +15584,23 @@ attacker_function:
             movl $3,%edx
             movl $1048576,%esi
             movl $0,%edi
-            movabsq $dift_reg_tags,%r14
-            movw $0,8(%r14)
-            movl $0,2(%r14)
+            movabsq $dift_reg_tags,%r12
+            movw $0,8(%r12)
+            movl $0,2(%r12)
             callq mmap@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__853ba40b_7ec0_493f_bcd9_804f5ba9be01__teapot__
+            jne .L__ret_transform_target_attacker_function__4657c448_5658_48f1_aed9_4ee4ad5a94b3__teapot__
 
             cmpq $-1,%rax
-            leaq (.__trampoline__853ba40b_7ec0_493f_bcd9_804f5ba9be01__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1108)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__853ba40b_7ec0_493f_bcd9_804f5ba9be01__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__4657c448_5658_48f1_aed9_4ee4ad5a94b3__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1108)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__4657c448_5658_48f1_aed9_4ee4ad5a94b3__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1108:
 
@@ -15620,11 +15616,11 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rbp
-            movb (%rbp),%r14b
-            movb %r14b,15(%rbp)
-            movw $0,3(%rbp)
-            movb %r14b,5(%rbp)
+            movabsq $dift_reg_tags,%r12
+            movb (%r12),%r14b
+            movb %r14b,15(%r12)
+            movw $0,3(%r12)
+            movb %r14b,5(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -15635,7 +15631,7 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__f4e382ad_a539_4608_b492_4f168a2ef6d8__teapot__
+            jne .L__ret_transform_target_attacker_function__97097815_8786_468c_bb16_b0f19021c1db__teapot__
 
             movl $0,%eax
             movq %rax,(scratchpad+524296)
@@ -15643,8 +15639,8 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%r14
-            movb $0,(%r14)
+            movabsq $dift_reg_tags,%r12
+            movb $0,(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -15655,7 +15651,7 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__cf6b7941_4066_4a49_bc82_073157f137f4__teapot__
+            jne .L__ret_transform_target_attacker_function__e07ba195_f6ea_44a3_aaeb_75ef67146022__teapot__
 
             movq %rax,%r14
             leaq (.L_2130)(%rip),%rdi
@@ -15665,8 +15661,8 @@ attacker_function:
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
             movabsq $dift_reg_tags,%r12
-            movb (%r12),%bpl
-            movb %bpl,14(%r12)
+            movb (%r12),%r13b
+            movb %r13b,14(%r12)
             movb $0,5(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
@@ -15678,7 +15674,7 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__71ccd55d_f12c_4ae4_b3c0_013e5403934e__teapot__
+            jne .L__ret_transform_target_attacker_function__fc56e38b_81e5_44ac_835e_d465fc6a59b5__teapot__
 
             leaq 96(%rsp),%rdi
             movl $256,%ecx
@@ -15688,8 +15684,8 @@ attacker_function:
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
             movabsq $dift_reg_tags,%r12
-            movb 6(%r12),%bpl
-            movb %bpl,5(%r12)
+            movb 6(%r12),%sil
+            movb %sil,5(%r12)
             movb $0,2(%r12)
             movb $0,(%r12)
             movq %rax,(scratchpad+524296)
@@ -15701,19 +15697,19 @@ attacker_function:
 
             rep stosq (%rdi)
 
-            leaq 2151(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 2151(%rsp),%r12
+            movq %r12,(scratchpad)
             movb $0,2151(%rsp)
-            leaq 88(%rsp),%rbp
-            movq %rbp,(scratchpad+8)
+            leaq 88(%rsp),%r12
+            movq %r12,(scratchpad+8)
             movq 88(%rsp),%rbx
-            leaq 72(%rsp),%rbp
-            movq %rbp,(scratchpad+16)
+            leaq 72(%rsp),%r12
+            movq %r12,(scratchpad+16)
             movq 72(%rsp),%r13
             movq %r13,%rbp
             subq %rbx,%rbp
-            leaq 16(%rsp),%rcx
-            movq %rcx,(scratchpad+24)
+            leaq 16(%rsp),%r12
+            movq %r12,(scratchpad+24)
             movq %rbp,16(%rsp)
             movq %rbx,%rcx
             movq %r13,%rdx
@@ -15723,38 +15719,36 @@ attacker_function:
             movq %rcx,(scratchpad+524296)
             movq %rdx,(scratchpad+524304)
             movq %rsi,(scratchpad+524312)
-            movq %rdi,(scratchpad+524320)
-            movabsq $dift_reg_tags,%rbx
-            movb 6(%rbx),%cl
-            movabsq $scratchpad,%rsi
-            movabsq $35184372088832,%r12
-            movq (%rsi),%rdx
-            xorq %r12,%rdx
-            movb %cl,(%rdx)
-            movb 6(%rbx),%cl
-            movq 8(%rsi),%rdx
-            xorq %r12,%rdx
-            movb (%rdx),%dil
-            orb %cl,%dil
-            movb %dil,1(%rbx)
-            movq 16(%rsi),%rdx
-            xorq %r12,%rdx
-            movb (%rdx),%al
+            movabsq $dift_reg_tags,%r12
+            movb 6(%r12),%al
+            movabsq $scratchpad,%rdx
+            movabsq $35184372088832,%rbx
+            movq (%rdx),%rsi
+            xorq %rbx,%rsi
+            movb %al,(%rsi)
+            movb 6(%r12),%al
+            movq 8(%rdx),%rsi
+            xorq %rbx,%rsi
+            movb (%rsi),%sil
+            movl %esi,%ecx
             orb %al,%cl
-            movb %cl,13(%rbx)
-            orb %al,%dil
-            movb %dil,7(%rbx)
-            xorq 24(%rsi),%r12
-            movzbl %dil,%eax
+            movb %cl,1(%r12)
+            movq 16(%rdx),%rcx
+            xorq %rbx,%rcx
+            orb (%rcx),%al
+            movb %al,13(%r12)
+            orb %sil,%al
+            movb %al,7(%r12)
+            xorq 24(%rdx),%rbx
+            movzbl %al,%eax
             movabsq $72340172838076673,%rcx
             imulq %rax,%rcx
-            movq %rcx,(%r12)
-            movb 1(%rbx),%al
-            movb 13(%rbx),%cl
-            movb %al,2(%rbx)
-            movb %cl,3(%rbx)
-            movw $0,4(%rbx)
-            movq (scratchpad+524320),%rdi
+            movq %rcx,(%rbx)
+            movb 1(%r12),%al
+            movb 13(%r12),%cl
+            movb %al,2(%r12)
+            movb %cl,3(%r12)
+            movw $0,4(%r12)
             movq (scratchpad+524312),%rsi
             movq (scratchpad+524304),%rdx
             movq (scratchpad+524296),%rcx
@@ -15764,7 +15758,7 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__ac4c9ae4_e02b_4dc7_ae55_36b690ebbbec__teapot__
+            jne .L__ret_transform_target_attacker_function__3543858f_250f_4b04_949b_486380d30134__teapot__
 
             movq %rbp,%r8
             movq %rbx,%rcx
@@ -15786,42 +15780,42 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__5b4e800e_cb8b_404a_bf98_f2d202ce7ba4__teapot__
+            jne .L__ret_transform_target_attacker_function__d1b90268_6450_4902_b730_b1f93ab1ed91__teapot__
 
             leaq (.L_2130)(%rip),%rdi
-            movabsq $dift_reg_tags,%rax
-            movb $0,5(%rax)
+            movabsq $dift_reg_tags,%r12
+            movb $0,5(%r12)
             callq puts@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__c3d8f094_9ab9_4aec_9586_f7338a2d4f6a__teapot__
+            jne .L__ret_transform_target_attacker_function__9c5af263_c596_4a94_837d_62fb05aa069a__teapot__
 
-            leaq (array_size)(%rip),%rdi
-            movq %rdi,(scratchpad)
+            leaq (array_size)(%rip),%r12
+            movq %r12,(scratchpad)
             movl (array_size)(%rip),%eax
             leal -1(%rax),%ebx
-            leaq 24(%rsp),%rdi
-            movq %rdi,(scratchpad+8)
+            leaq 24(%rsp),%r12
+            movq %r12,(scratchpad+8)
             movq %rbx,24(%rsp)
-            leaq (array_size)(%rip),%rdi
-            movq %rdi,(scratchpad+16)
+            leaq (array_size)(%rip),%r12
+            movq %r12,(scratchpad+16)
             movl (array_size)(%rip),%eax
             shrl $1,%eax
             movl %eax,%eax
-            leaq 8(%rsp),%rdi
-            movq %rdi,(scratchpad+24)
+            leaq 8(%rsp),%r12
+            movq %r12,(scratchpad+24)
             movq %rax,8(%rsp)
             leaq 1(%rbp),%rax
-            leaq 32(%rsp),%rdi
-            movq %rdi,(scratchpad+32)
+            leaq 32(%rsp),%r12
+            movq %r12,(scratchpad+32)
             movq %rax,32(%rsp)
-            leaq 48(%rsp),%rdi
-            movq %rdi,(scratchpad+40)
+            leaq 48(%rsp),%r12
+            movq %r12,(scratchpad+40)
             movl %ebp,48(%rsp)
-            leaq 52(%rsp),%rdi
-            movq %rdi,(scratchpad+48)
+            leaq 52(%rsp),%r12
+            movq %r12,(scratchpad+48)
             movl %eax,52(%rsp)
             movl $90,%edx
             movl %ebp,%esi
@@ -15835,56 +15829,56 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524320)
             movq (scratchpad+524328),%rax
-            movabsq $scratchpad,%rax
-            movabsq $35184372088832,%rbx
-            movq (%rax),%r13
-            xorq %rbx,%r13
-            movb (%r13),%dl
-            movabsq $dift_reg_tags,%rbp
-            movb %dl,(%rbp)
-            movb %dl,1(%rbp)
-            orb 6(%rbp),%dl
-            movq 8(%rax),%rcx
-            xorq %rbx,%rcx
-            movzbl %dl,%edx
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rdx
-            movq %rdx,(%rcx)
-            movq 16(%rax),%rdx
-            xorq %rbx,%rdx
-            movb 6(%rbp),%r13b
-            orb (%rdx),%r13b
-            movq 24(%rax),%rdx
-            xorq %rbx,%rdx
+            movabsq $scratchpad,%rdx
+            movabsq $35184372088832,%rbp
+            movq (%rdx),%r13
+            xorq %rbp,%r13
+            movb (%r13),%bl
+            movabsq $dift_reg_tags,%rax
+            movb %bl,(%rax)
+            movb %bl,1(%rax)
+            orb 6(%rax),%bl
+            movq 8(%rdx),%r12
+            xorq %rbp,%r12
+            movzbl %bl,%ebx
+            movabsq $72340172838076673,%rcx
+            imulq %rcx,%rbx
+            movq %rbx,(%r12)
+            movq 16(%rdx),%rbx
+            xorq %rbp,%rbx
+            movb 6(%rax),%r13b
+            orb (%rbx),%r13b
+            movq 24(%rdx),%rbx
+            xorq %rbp,%rbx
             movzbl %r13b,%r13d
-            imulq %r12,%r13
-            movq %r13,(%rdx)
-            movb 7(%rbp),%r13b
-            movb %r13b,(%rbp)
-            orb 6(%rbp),%r13b
-            movq 32(%rax),%rdx
-            xorq %rbx,%rdx
+            imulq %rcx,%r13
+            movq %r13,(%rbx)
+            movb 7(%rax),%r13b
+            movb %r13b,(%rax)
+            orb 6(%rax),%r13b
+            movq 32(%rdx),%rbx
+            xorq %rbp,%rbx
             movzbl %r13b,%r13d
-            imulq %r12,%r13
-            movq %r13,(%rdx)
-            movb 7(%rbp),%r13b
-            orb 6(%rbp),%r13b
-            movq 40(%rax),%rdx
-            xorq %rbx,%rdx
-            movzbl %r13b,%r13d
-            imull $16843009,%r13d,%r13d
-            movl %r13d,(%rdx)
-            movb 6(%rbp),%r13b
-            orb (%rbp),%r13b
-            xorq 48(%rax),%rbx
+            imulq %rcx,%r13
+            movq %r13,(%rbx)
+            movb 6(%rax),%r13b
+            orb 7(%rax),%r13b
+            movq 40(%rdx),%rbx
+            xorq %rbp,%rbx
             movzbl %r13b,%r13d
             imull $16843009,%r13d,%r13d
             movl %r13d,(%rbx)
-            movb $0,3(%rbp)
-            movb (%rbp),%r13b
-            movb 7(%rbp),%bl
-            movb %bl,4(%rbp)
-            movb %r13b,5(%rbp)
+            movb (%rax),%r13b
+            orb 6(%rax),%r13b
+            xorq 48(%rdx),%rbp
+            movzbl %r13b,%r13d
+            imull $16843009,%r13d,%r13d
+            movl %r13d,(%rbp)
+            movb $0,3(%rax)
+            movb (%rax),%r13b
+            movb 7(%rax),%bpl
+            movb %bpl,4(%rax)
+            movb %r13b,5(%rax)
             movq %rax,(scratchpad+524328)
             movq (scratchpad+524320),%rax
             addb $127,%al
@@ -15899,37 +15893,37 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__5cc7f1ec_0ef1_41b4_b857_d6a761c1dc4a__teapot__
+            jne .L__ret_transform_target_attacker_function__890c0f0d_6768_4b90_aebd_2c5982c3de2f__teapot__
 
-            leaq 40(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 40(%rsp),%r12
+            movq %r12,(scratchpad)
             movq %rax,40(%rsp)
             movl $0,%edx
-            leaq 64(%rsp),%rbp
-            movq %rbp,(scratchpad+8)
+            leaq 64(%rsp),%r12
+            movq %r12,(scratchpad+8)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rax
-            movb 6(%rax),%bpl
-            orb (%rax),%bpl
-            movabsq $scratchpad,%rdi
-            movabsq $35184372088832,%rsi
-            movq (%rdi),%rcx
-            xorq %rsi,%rcx
-            movzbl %bpl,%ebp
-            movabsq $72340172838076673,%r12
-            imulq %r12,%rbp
-            movq %rbp,(%rcx)
-            movb $0,3(%rax)
-            movb 1(%rax),%bpl
-            orb 6(%rax),%bpl
-            xorq 8(%rdi),%rsi
-            movzbl %bpl,%eax
-            imulq %r12,%rax
-            movq %rax,(%rsi)
+            movabsq $dift_reg_tags,%rdi
+            movb (%rdi),%al
+            orb 6(%rdi),%al
+            movabsq $scratchpad,%r13
+            movabsq $35184372088832,%r12
+            movq (%r13),%rbp
+            xorq %r12,%rbp
+            movzbl %al,%eax
+            movabsq $72340172838076673,%rsi
+            imulq %rsi,%rax
+            movq %rax,(%rbp)
+            movb $0,3(%rdi)
+            movb 1(%rdi),%al
+            orb 6(%rdi),%al
+            xorq 8(%r13),%r12
+            movzbl %al,%edi
+            imulq %rsi,%rdi
+            movq %rdi,(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -15939,8 +15933,8 @@ attacker_function:
 .L_18e1:
 
             movq $-1,%rcx
-            leaq 72(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 72(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 72(%rsp),%rdi
             movq %rax,(scratchpad+524296)
             lahf 
@@ -15949,12 +15943,12 @@ attacker_function:
             movq (scratchpad+524296),%rax
             movabsq $dift_reg_tags,%r12
             movb $0,2(%r12)
-            movabsq $scratchpad,%rbp
-            movabsq $35184372088832,%rax
-            xorq (%rbp),%rax
-            movb (%rax),%bpl
-            orb 6(%r12),%bpl
-            movb %bpl,5(%r12)
+            movabsq $scratchpad,%r13
+            movabsq $35184372088832,%rsi
+            xorq (%r13),%rsi
+            movb (%rsi),%r13b
+            orb 6(%r12),%r13b
+            movb %r13b,5(%r12)
             movb $0,(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
@@ -15974,20 +15968,20 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rdi
-            movb 2(%rdi),%bpl
-            movb %bpl,(%rdi)
+            movabsq $dift_reg_tags,%r12
+            movb 2(%r12),%sil
+            movb %sil,(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__be33b812_40e8_4a45_a7b6_dd0a8718de6f__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1141)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__be33b812_40e8_4a45_a7b6_dd0a8718de6f__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__ee029a32_d540_450c_8c2f_ddab3cb38004__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1141)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__ee029a32_d540_450c_8c2f_ddab3cb38004__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1141:
 
@@ -15995,48 +15989,48 @@ attacker_function:
             jbe .L_1acf
 
             testq %rdx,%rdx
-            leaq (.__trampoline__fb4490f8_bc32_4ec9_9647_e19201b577dd__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1142)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__fb4490f8_bc32_4ec9_9647_e19201b577dd__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__479025d9_6ebc_4cf3_a8d3_04093a6b7dc9__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1142)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__479025d9_6ebc_4cf3_a8d3_04093a6b7dc9__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1142:
 
             nop
             jne .L_1acf
 
-            leaq 56(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 56(%rsp),%r12
+            movq %r12,(scratchpad)
             movq $100,56(%rsp)
-            movabsq $dift_reg_tags,%rdi
-            movzbl 6(%rdi),%edi
-            movabsq $scratchpad,%rbp
-            movabsq $35184372088832,%r12
-            xorq (%rbp),%r12
-            movabsq $72340172838076673,%rbp
-            imulq %rdi,%rbp
-            movq %rbp,(%r12)
+            movabsq $dift_reg_tags,%r12
+            movzbl 6(%r12),%r12d
+            movabsq $scratchpad,%r13
+            movabsq $35184372088832,%rsi
+            xorq (%r13),%rsi
+            movabsq $72340172838076673,%r13
+            imulq %r12,%r13
+            movq %r13,(%rsi)
             jmp .L_19cd
 .L_191e:
 
             leaq (.L_206f)(%rip),%rdi
-            movabsq $dift_reg_tags,%r14
-            movb $0,5(%r14)
+            movabsq $dift_reg_tags,%r12
+            movb $0,5(%r12)
             callq perror@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__a1eaf219_3ce0_46fe_8c81_8dc26136ee60__teapot__
+            jne .L__ret_transform_target_attacker_function__badd2d8b_82e0_47b4_bbbf_7d20a8f1e6b3__teapot__
 
             jmp .L_1b0e
 .L_192f:
 
             movl $13,%esi
-            movabsq $dift_reg_tags,%rbp
-            movb $0,4(%rbp)
+            movabsq $dift_reg_tags,%r12
+            movb $0,4(%r12)
             jmp .L_1985
 .L_1936:
 
@@ -16050,8 +16044,8 @@ attacker_function:
             movq %rdi,%rax
             shlq $12,%rax
             addq %r15,%rax
-            leaq (%rax),%rbp
-            movq %rbp,(scratchpad)
+            leaq (%rax),%r12
+            movq %r12,(scratchpad)
             movb (%rax),%al
             rdtscp 
             shlq $32,%rdx
@@ -16063,31 +16057,31 @@ attacker_function:
             movzbl %al,%eax
             leaq 96(%rsp,%rdi,8),%r12
             movq %r12,(scratchpad+8)
-            movabsq $dift_reg_tags,%r13
-            movb $0,8(%r13)
-            movw $0,2(%r13)
-            movb $0,(%r13)
-            movb 6(%r13),%r12b
-            orb 5(%r13),%r12b
-            movabsq $scratchpad,%r13
-            movabsq $35184372088832,%rbx
-            xorq 8(%r13),%rbx
-            orb (%rbx),%r12b
-            movzbl %r12b,%r13d
-            movabsq $72340172838076673,%r12
-            imulq %r13,%r12
-            movq %r12,(%rbx)
+            movabsq $dift_reg_tags,%r12
+            movb $0,8(%r12)
+            movb $0,(%r12)
+            movw $0,2(%r12)
+            movb 5(%r12),%bpl
+            orb 6(%r12),%bpl
+            movabsq $scratchpad,%r12
+            movabsq $35184372088832,%r13
+            xorq 8(%r12),%r13
+            orb (%r13),%bpl
+            movzbl %bpl,%r12d
+            movabsq $72340172838076673,%rbp
+            imulq %r12,%rbp
+            movq %rbp,(%r13)
             addq %rax,96(%rsp,%rdi,8)
 .L_1975:
 
             addq $167,%rsi
             cmpq $42765,%rsi
-            leaq (.__trampoline__384cf679_7aa0_40d3_bdb6_d7a59bf99751__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1151)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__384cf679_7aa0_40d3_bdb6_d7a59bf99751__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__2d8b2904_dc58_4a0a_bf26_858b40035890__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1151)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__2d8b2904_dc58_4a0a_bf26_858b40035890__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1151:
 
@@ -16103,19 +16097,19 @@ attacker_function:
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
             movabsq $dift_reg_tags,%r12
-            movb 4(%r12),%bpl
-            movb %bpl,5(%r12)
+            movb 4(%r12),%r13b
+            movb %r13b,5(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__f6f7865d_8891_460a_9a2a_90d16ada9601__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1153)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__f6f7865d_8891_460a_9a2a_90d16ada9601__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__3a392698_d00d_43c5_a4bb_0b58dafc3b41__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1153)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__3a392698_d00d_43c5_a4bb_0b58dafc3b41__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1153:
 
@@ -16125,22 +16119,22 @@ attacker_function:
             jmp .L_1975
 .L_1991:
 
-            leaq 88(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 88(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 88(%rsp),%rdi
             movabsq $scratchpad,%r12
-            movabsq $35184372088832,%rbp
-            xorq (%r12),%rbp
-            movb (%rbp),%r12b
-            movabsq $dift_reg_tags,%rbp
-            orb 6(%rbp),%r12b
-            movb %r12b,5(%rbp)
+            movabsq $35184372088832,%r13
+            xorq (%r12),%r13
+            movb (%r13),%r12b
+            movabsq $dift_reg_tags,%r13
+            orb 6(%r13),%r12b
+            movb %r12b,5(%r13)
             callq free@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__5d4ecae0_5119_4582_acba_65513b66b02b__teapot__
+            jne .L__ret_transform_target_attacker_function__b2ead161_26db_4715_aabe_0cdf4bc90288__teapot__
 
             movl $0,%eax
             movabsq $dift_reg_tags,%r12
@@ -16150,41 +16144,41 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__f2c21ec7_ee5f_4836_8207_430fd352ca45__teapot__
+            jne .L__ret_transform_target_attacker_function__deb7c6f2_21d5_4961_84b4_5f92cf40e671__teapot__
 
-            leaq 88(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 88(%rsp),%r12
+            movq %r12,(scratchpad)
             movq %rax,88(%rsp)
             movl $90,%edx
-            leaq 48(%rsp),%rbp
-            movq %rbp,(scratchpad+8)
+            leaq 48(%rsp),%r12
+            movq %r12,(scratchpad+8)
             movl 48(%rsp),%esi
-            leaq 52(%rsp),%rbp
-            movq %rbp,(scratchpad+16)
+            leaq 52(%rsp),%r12
+            movq %r12,(scratchpad+16)
             movl 52(%rsp),%edi
             movq %rax,(scratchpad+524288)
             movq %rcx,(scratchpad+524296)
-            movabsq $dift_reg_tags,%rbx
-            movb 6(%rbx),%al
-            orb (%rbx),%al
+            movabsq $dift_reg_tags,%rbp
+            movb (%rbp),%bl
+            orb 6(%rbp),%bl
             movabsq $scratchpad,%r12
-            movabsq $35184372088832,%rbp
-            movq (%r12),%rcx
-            xorq %rbp,%rcx
-            movzbl %al,%eax
-            movabsq $72340172838076673,%r13
-            imulq %rax,%r13
-            movq %r13,(%rcx)
-            movb $0,3(%rbx)
-            movb 6(%rbx),%al
-            movq 8(%r12),%r13
-            xorq %rbp,%r13
-            movb (%r13),%r13b
-            orb %al,%r13b
-            movb %r13b,4(%rbx)
-            xorq 16(%r12),%rbp
-            orb (%rbp),%al
-            movb %al,5(%rbx)
+            movabsq $35184372088832,%rax
+            movq (%r12),%r13
+            xorq %rax,%r13
+            movzbl %bl,%ebx
+            movabsq $72340172838076673,%rcx
+            imulq %rbx,%rcx
+            movq %rcx,(%r13)
+            movb $0,3(%rbp)
+            movb 6(%rbp),%bl
+            movq 8(%r12),%rcx
+            xorq %rax,%rcx
+            movb (%rcx),%cl
+            orb %bl,%cl
+            movb %cl,4(%rbp)
+            xorq 16(%r12),%rax
+            orb (%rax),%bl
+            movb %bl,5(%rbp)
             movq (scratchpad+524296),%rcx
             movq (scratchpad+524288),%rax
             callq otherArray_init
@@ -16192,47 +16186,47 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__1f04b63c_98f8_45d2_82e0_beaabb550c3d__teapot__
+            jne .L__ret_transform_target_attacker_function__31500b1f_dd7d_45c8_8bf8_60e62467f1b2__teapot__
 
-            leaq 40(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 40(%rsp),%r12
+            movq %r12,(scratchpad)
             movq %rax,40(%rsp)
-            leaq 56(%rsp),%rbp
-            movq %rbp,(scratchpad+8)
+            leaq 56(%rsp),%r12
+            movq %r12,(scratchpad+8)
             subq $1,56(%rsp)
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rax
-            movb 6(%rax),%bpl
-            orb (%rax),%bpl
-            movabsq $scratchpad,%r12
-            movabsq $35184372088832,%rsi
-            movq (%r12),%rdi
-            xorq %rsi,%rdi
-            movzbl %bpl,%ebp
-            movabsq $72340172838076673,%rdx
-            imulq %rdx,%rbp
-            movq %rbp,(%rdi)
-            xorq 8(%r12),%rsi
-            movb (%rsi),%bpl
-            orb 6(%rax),%bpl
-            movzbl %bpl,%eax
-            imulq %rdx,%rax
-            movq %rax,(%rsi)
+            movabsq $dift_reg_tags,%rbp
+            movb (%rbp),%dil
+            orb 6(%rbp),%dil
+            movabsq $scratchpad,%rsi
+            movabsq $35184372088832,%r12
+            movq (%rsi),%rdx
+            xorq %r12,%rdx
+            movzbl %dil,%edi
+            movabsq $72340172838076673,%r13
+            imulq %r13,%rdi
+            movq %rdi,(%rdx)
+            xorq 8(%rsi),%r12
+            movb (%r12),%dil
+            orb 6(%rbp),%dil
+            movzbl %dil,%ebp
+            imulq %r13,%rbp
+            movq %rbp,(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__1f04b63c_98f8_45d2_82e0_beaabb550c3d__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1167)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__1f04b63c_98f8_45d2_82e0_beaabb550c3d__teapot__)(%rip),%rbp
-            movq %rbp,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__31500b1f_dd7d_45c8_8bf8_60e62467f1b2__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1167)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__31500b1f_dd7d_45c8_8bf8_60e62467f1b2__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1167:
 
@@ -16245,46 +16239,46 @@ attacker_function:
             movq %r15,%rdi
             movabsq $dift_reg_tags,%r12
             movw $0,3(%r12)
-            movb 15(%r12),%bpl
-            movb %bpl,5(%r12)
+            movb 15(%r12),%r13b
+            movb %r13b,5(%r12)
             callq flush_lines
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__f9f116f6_1e1b_442e_947e_ea407d7f1313__teapot__
+            jne .L__ret_transform_target_attacker_function__b19b3c19_e5c0_4fd6_8f50_eef720d5cc77__teapot__
 
             clflush (array_size)(%rip)
-            leaq 64(%rsp),%rbp
-            movq %rbp,(scratchpad)
+            leaq 64(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 64(%rsp),%r12
-            leaq 8(%rsp),%rbp
-            movq %rbp,(scratchpad+8)
+            leaq 8(%rsp),%rsi
+            movq %rsi,(scratchpad+8)
             movq 8(%rsp),%rbx
             movl $0,%ebp
             leaq 88(%rsp),%rax
-            leaq (%rsp),%rcx
-            movq %rcx,(scratchpad+16)
-            movabsq $dift_reg_tags,%rsi
-            movzbl 6(%rsi),%ecx
-            movabsq $scratchpad,%r8
-            movabsq $35184372088832,%r13
-            movq (%r8),%rdi
-            xorq %r13,%rdi
-            movb (%rdi),%dl
-            orb %cl,%dl
-            movb %dl,12(%rsi)
-            movq 8(%r8),%rdx
-            xorq %r13,%rdx
-            movb (%rdx),%dl
-            orb %cl,%dl
-            movb %dl,1(%rsi)
-            movb $0,7(%rsi)
-            movb %cl,(%rsi)
-            xorq 16(%r8),%r13
-            movabsq $72340172838076673,%rsi
-            imulq %rcx,%rsi
-            movq %rsi,(%r13)
+            leaq (%rsp),%rsi
+            movq %rsi,(scratchpad+16)
+            movabsq $dift_reg_tags,%rdi
+            movzbl 6(%rdi),%ecx
+            movabsq $scratchpad,%rdx
+            movabsq $35184372088832,%rsi
+            movq (%rdx),%r8
+            xorq %rsi,%r8
+            movb (%r8),%r13b
+            orb %cl,%r13b
+            movb %r13b,12(%rdi)
+            movq 8(%rdx),%r13
+            xorq %rsi,%r13
+            movb (%r13),%r13b
+            orb %cl,%r13b
+            movb %r13b,1(%rdi)
+            movb $0,7(%rdi)
+            movb %cl,(%rdi)
+            xorq 16(%rdx),%rsi
+            movabsq $72340172838076673,%rdi
+            imulq %rcx,%rdi
+            movq %rdi,(%rsi)
             movq %rax,(%rsp)
 .L_19fe:
 
@@ -16294,29 +16288,29 @@ attacker_function:
             movl $4096,%ecx
             movl %ebx,%edx
             movq %r15,%rsi
-            leaq (%rsp),%rdi
-            movq %rdi,(scratchpad)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad)
             movq (%rsp),%rdi
-            movabsq $dift_reg_tags,%r13
-            movb 1(%r13),%r12b
-            movb 12(%r13),%bl
-            movb %bl,8(%r13)
-            movb $0,2(%r13)
-            movb %r12b,3(%r13)
-            movb 15(%r13),%r12b
-            movb %r12b,4(%r13)
-            movabsq $scratchpad,%r12
-            movabsq $35184372088832,%rbx
-            xorq (%r12),%rbx
-            movb (%rbx),%r12b
-            orb 6(%r13),%r12b
-            movb %r12b,5(%r13)
+            movabsq $dift_reg_tags,%r12
+            movb 1(%r12),%bl
+            movb 12(%r12),%r13b
+            movb %r13b,8(%r12)
+            movb $0,2(%r12)
+            movb %bl,3(%r12)
+            movb 15(%r12),%bl
+            movb %bl,4(%r12)
+            movabsq $scratchpad,%rbx
+            movabsq $35184372088832,%r13
+            xorq (%rbx),%r13
+            movb (%r13),%bl
+            orb 6(%r12),%bl
+            movb %bl,5(%r12)
             callq victim_function
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__cdfd276c_8f23_42df_9797_a1bb7b3ade85__teapot__
+            jne .L__ret_transform_target_attacker_function__c362d663_c2e2_43fc_a017_845a8fca99b0__teapot__
 
             xorq %rax,%rax
             addq $1,%rbp
@@ -16326,19 +16320,19 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rdi
-            movb $0,(%rdi)
+            movabsq $dift_reg_tags,%r12
+            movb $0,(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__cdfd276c_8f23_42df_9797_a1bb7b3ade85__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1178)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__cdfd276c_8f23_42df_9797_a1bb7b3ade85__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__c362d663_c2e2_43fc_a017_845a8fca99b0__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1178)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__c362d663_c2e2_43fc_a017_845a8fca99b0__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1178:
 
@@ -16353,8 +16347,8 @@ attacker_function:
             movq %rax,%rdx
             negq %rdx
             subq $1,%rax
-            leaq 32(%rsp),%rcx
-            movq %rcx,(scratchpad)
+            leaq 32(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 32(%rsp),%r12
             andq %rdx,%r12
             leaq 24(%rsp),%rcx
@@ -16380,40 +16374,39 @@ attacker_function:
             movq %rsi,(scratchpad+524320)
             movq %rdi,(scratchpad+524328)
             movabsq $dift_reg_tags,%rsi
-            movb 6(%rsi),%al
-            movb 7(%rsi),%dl
-            movb %dl,13(%rsi)
+            movb 6(%rsi),%dil
+            movb 7(%rsi),%bl
+            movb %bl,13(%rsi)
             movb $0,(%rsi)
             movb $0,3(%rsi)
             movabsq $scratchpad,%rcx
-            movabsq $35184372088832,%rdi
-            movq (%rcx),%rbx
-            xorq %rdi,%rbx
-            movb (%rbx),%bl
-            movl %ebx,%edx
-            orb %al,%dl
-            movb %dl,12(%rsi)
-            movq 8(%rcx),%rdx
-            xorq %rdi,%rdx
-            movb (%rdx),%dl
-            orb %al,%dl
-            movb %dl,2(%rsi)
-            orb %bl,%dl
-            movb %dl,12(%rsi)
-            movq 16(%rcx),%rdx
-            xorq %rdi,%rdx
+            movabsq $35184372088832,%rax
+            movq (%rcx),%rdx
+            xorq %rax,%rdx
             movb (%rdx),%bl
-            movl %ebx,%edx
-            orb %al,%dl
-            movb %dl,3(%rsi)
-            xorq 24(%rcx),%rdi
-            orb (%rdi),%al
-            movb %al,(%rsi)
-            orb %bl,%al
-            movb %al,1(%rsi)
+            orb %dil,%bl
+            movb %bl,12(%rsi)
+            movq 8(%rcx),%rdx
+            xorq %rax,%rdx
+            movb (%rdx),%dl
+            orb %dl,%bl
+            orb %dil,%dl
+            movb %dl,2(%rsi)
+            movb %bl,12(%rsi)
+            movq 16(%rcx),%rbx
+            xorq %rax,%rbx
+            movb (%rbx),%dl
+            movl %edx,%ebx
+            orb %dil,%bl
+            movb %bl,3(%rsi)
+            xorq 24(%rcx),%rax
+            orb (%rax),%dil
+            movb %dil,(%rsi)
+            orb %dl,%dil
+            movb %dil,1(%rsi)
             movw $0,3(%rsi)
-            movb 15(%rsi),%al
-            movb %al,5(%rsi)
+            movb 15(%rsi),%dil
+            movb %dil,5(%rsi)
             movq (scratchpad+524328),%rdi
             movq (scratchpad+524320),%rsi
             movq (scratchpad+524312),%rdx
@@ -16425,40 +16418,40 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__2ef6d49f_ad26_4341_9049_aaf1240f721d__teapot__
+            jne .L__ret_transform_target_attacker_function__a443664a_f1ad_4fd9_a559_5be26ad24f64__teapot__
 
             clflush (array_size)(%rip)
             cmpq $31,%r13
-            leaq (.__trampoline__2ef6d49f_ad26_4341_9049_aaf1240f721d__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1185)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__2ef6d49f_ad26_4341_9049_aaf1240f721d__teapot__)(%rip),%rdi
-            movq %rdi,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__a443664a_f1ad_4fd9_a559_5be26ad24f64__teapot__)(%rip),%r13
+            movq %r13,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1185)(%rip),%r13
+            movq %r13,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__a443664a_f1ad_4fd9_a559_5be26ad24f64__teapot__)(%rip),%r13
+            movq %r13,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1185:
 
             nop
             jne .L_19fe
 
-            leaq 40(%rsp),%rdi
-            movq %rdi,(scratchpad)
+            leaq 40(%rsp),%r13
+            movq %r13,(scratchpad)
             movq 40(%rsp),%rdi
             movq %rax,(scratchpad+524288)
-            movabsq $scratchpad,%r13
-            movabsq $35184372088832,%rax
-            xorq (%r13),%rax
-            movb (%rax),%r13b
-            movabsq $dift_reg_tags,%rax
-            orb 6(%rax),%r13b
-            movb %r13b,5(%rax)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%r13
+            xorq (%rax),%r13
+            movb (%r13),%al
+            movabsq $dift_reg_tags,%r13
+            orb 6(%r13),%al
+            movb %al,5(%r13)
             movq (scratchpad+524288),%rax
             callq free@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__dba9e893_fa73_4602_ae22_bc4e7e6fa84e__teapot__
+            jne .L__ret_transform_target_attacker_function__2e9de1b0_585c_40d0_8ab4_6120d11623c7__teapot__
 
             jmp .L_19fe
 .L_1a9b:
@@ -16473,11 +16466,11 @@ attacker_function:
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
             movabsq $dift_reg_tags,%r12
-            movb 6(%r12),%al
-            movb %al,1(%r12)
-            movb %al,5(%r12)
+            movb 6(%r12),%r13b
+            movb %r13b,1(%r12)
+            movb %r13b,5(%r12)
             movb $0,3(%r12)
-            movb %al,4(%r12)
+            movb %r13b,4(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -16488,7 +16481,7 @@ attacker_function:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__4f2c819e_bbb5_475f_b4ff_dbd6806045d1__teapot__
+            jne .L__ret_transform_target_attacker_function__17d14e56_80cb_4e8d_a489_136d21f4f9e1__teapot__
 
             movl $256,%ecx
             movl $0,%eax
@@ -16497,11 +16490,11 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rdi
-            movb $0,2(%rdi)
-            movb $0,(%rdi)
-            movb 1(%rdi),%bpl
-            movb %bpl,5(%rdi)
+            movabsq $dift_reg_tags,%r12
+            movb $0,2(%r12)
+            movb $0,(%r12)
+            movb 1(%r12),%sil
+            movb %sil,5(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -16517,8 +16510,8 @@ attacker_function:
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $dift_reg_tags,%rbp
-            movb $0,3(%rbp)
+            movabsq $dift_reg_tags,%r12
+            movb $0,3(%r12)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
@@ -16531,99 +16524,99 @@ attacker_function:
             leaq (.L_2074)(%rip),%rsi
             movl $1,%edi
             movl $0,%eax
-            movabsq $dift_reg_tags,%rbp
-            movb 6(%rbp),%r14b
-            movb %r14b,3(%rbp)
-            movw $0,4(%rbp)
-            movb $0,(%rbp)
+            movabsq $dift_reg_tags,%r12
+            movb 6(%r12),%r14b
+            movb %r14b,3(%r12)
+            movw $0,4(%r12)
+            movb $0,(%r12)
             callq __printf_chk__dift_wrapper__@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__5ae6ce85_4c37_44c8_80ae_bcf2b5acf231__teapot__
+            jne .L__ret_transform_target_attacker_function__13b3779c_7e9b_497c_8dd8_ff2fcc636f0e__teapot__
 
             movl $1048576,%esi
             movq %r15,%rdi
-            movabsq $dift_reg_tags,%rbp
-            movb $0,4(%rbp)
-            movb 15(%rbp),%r14b
-            movb %r14b,5(%rbp)
+            movabsq $dift_reg_tags,%r12
+            movb $0,4(%r12)
+            movb 15(%r12),%r15b
+            movb %r15b,5(%r12)
             callq munmap@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__4c639d60_619d_4528_87f7_92413dde0343__teapot__
+            jne .L__ret_transform_target_attacker_function__5ac66119_87dd_4238_aef1_89b82b8fe153__teapot__
 
-            leaq 88(%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq 88(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 88(%rsp),%rdi
-            movabsq $scratchpad,%rbp
-            movabsq $35184372088832,%r14
-            xorq (%rbp),%r14
-            movb (%r14),%bpl
-            movabsq $dift_reg_tags,%r14
-            orb 6(%r14),%bpl
-            movb %bpl,5(%r14)
+            movabsq $scratchpad,%r12
+            movabsq $35184372088832,%r15
+            xorq (%r12),%r15
+            movb (%r15),%r12b
+            movabsq $dift_reg_tags,%r15
+            orb 6(%r15),%r12b
+            movb %r12b,5(%r15)
             callq free@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__942139e7_3409_4fd9_92d4_2c4515dd4f65__teapot__
+            jne .L__ret_transform_target_attacker_function__83be127e_d615_4a37_9c06_e378055b2db2__teapot__
 
-            leaq 72(%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq 72(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 72(%rsp),%rdi
-            movabsq $scratchpad,%rbp
-            movabsq $35184372088832,%r14
-            xorq (%rbp),%r14
-            movb (%r14),%bpl
-            movabsq $dift_reg_tags,%r14
-            orb 6(%r14),%bpl
-            movb %bpl,5(%r14)
+            movabsq $scratchpad,%r12
+            movabsq $35184372088832,%r15
+            xorq (%r12),%r15
+            movb (%r15),%r12b
+            movabsq $dift_reg_tags,%r15
+            orb 6(%r15),%r12b
+            movb %r12b,5(%r15)
             callq free@PLT
 
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_attacker_function__1fb013f5_b055_457c_bd18_4f8d22f8eaba__teapot__
+            jne .L__ret_transform_target_attacker_function__0123dae6_c74c_479f_8df9_d4585205bbe3__teapot__
 .L_1b0e:
 
-            leaq 2152(%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq 2152(%rsp),%r12
+            movq %r12,(scratchpad)
             movq 2152(%rsp),%rax
-            leaq %fs:40,%r14
-            movq %r14,(scratchpad+8)
+            leaq %fs:40,%r12
+            movq %r12,(scratchpad+8)
             xorq %fs:40,%rax
             movq %rax,(scratchpad+524296)
             lahf 
             seto %al
             movq %rax,(scratchpad+524288)
             movq (scratchpad+524296),%rax
-            movabsq $scratchpad,%rbp
+            movabsq $scratchpad,%r12
             movabsq $35184372088832,%r14
-            movq (%rbp),%r15
+            movq (%r12),%r15
             xorq %r14,%r15
             movb (%r15),%r15b
-            movabsq $dift_reg_tags,%r12
-            orb 6(%r12),%r15b
-            movb %r15b,(%r12)
-            xorq 8(%rbp),%r14
+            movabsq $dift_reg_tags,%r13
+            orb 6(%r13),%r15b
+            movb %r15b,(%r13)
+            xorq 8(%r12),%r14
             orb (%r14),%r15b
-            movb %r15b,(%r12)
+            movb %r15b,(%r13)
             movq %rax,(scratchpad+524296)
             movq (scratchpad+524288),%rax
             addb $127,%al
             sahf 
             movq (scratchpad+524296),%rax
-            leaq (.__trampoline__1fb013f5_b055_457c_bd18_4f8d22f8eaba__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata)
-            leaq (.L__after_checkpoint__teapot___1206)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+8)
-            leaq (.__branch_counter__1fb013f5_b055_457c_bd18_4f8d22f8eaba__teapot__)(%rip),%r14
-            movq %r14,(checkpoint_target_metadata+16)
+            leaq (.__trampoline__0123dae6_c74c_479f_8df9_d4585205bbe3__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata)
+            leaq (.L__after_checkpoint__teapot___1206)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+8)
+            leaq (.__branch_counter__0123dae6_c74c_479f_8df9_d4585205bbe3__teapot__)(%rip),%r12
+            movq %r12,(checkpoint_target_metadata+16)
             jmp make_checkpoint@PLT
 .L__after_checkpoint__teapot___1206:
 
@@ -16633,24 +16626,24 @@ attacker_function:
             addq $2168,%rsp
 .cfi_remember_state 
 .cfi_def_cfa_offset 56
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad)
             popq %rbx
 .cfi_def_cfa_offset 48
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+8)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+8)
             popq %rbp
 .cfi_def_cfa_offset 40
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+16)
+            leaq (%rsp),%r12
+            movq %r12,(scratchpad+16)
             popq %r12
 .cfi_def_cfa_offset 32
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+24)
+            leaq (%rsp),%r13
+            movq %r13,(scratchpad+24)
             popq %r13
 .cfi_def_cfa_offset 24
-            leaq (%rsp),%r14
-            movq %r14,(scratchpad+32)
+            leaq (%rsp),%r15
+            movq %r15,(scratchpad+32)
             popq %r14
 .cfi_def_cfa_offset 16
             leaq (%rsp),%r15
@@ -16667,32 +16660,32 @@ attacker_function:
             movq %rbx,(scratchpad+524296)
             movq %rcx,(scratchpad+524304)
             movq %rdx,(scratchpad+524312)
-            movabsq $scratchpad,%rbx
-            movabsq $35184372088832,%rax
-            movq (%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movabsq $dift_reg_tags,%rcx
-            movb %dl,1(%rcx)
-            movq 8(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,7(%rcx)
-            movq 16(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,12(%rcx)
-            movq 24(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,13(%rcx)
-            movq 32(%rbx),%rdx
-            xorq %rax,%rdx
-            movb (%rdx),%dl
-            movb %dl,14(%rcx)
-            xorq 40(%rbx),%rax
-            movb (%rax),%bl
-            movb %bl,15(%rcx)
+            movabsq $scratchpad,%rax
+            movabsq $35184372088832,%rcx
+            movq (%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movabsq $dift_reg_tags,%rdx
+            movb %bl,1(%rdx)
+            movq 8(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,7(%rdx)
+            movq 16(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,12(%rdx)
+            movq 24(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,13(%rdx)
+            movq 32(%rax),%rbx
+            xorq %rcx,%rbx
+            movb (%rbx),%bl
+            movb %bl,14(%rdx)
+            xorq 40(%rax),%rcx
+            movb (%rcx),%al
+            movb %al,15(%rdx)
             movq (scratchpad+524312),%rdx
             movq (scratchpad+524304),%rcx
             movq (scratchpad+524296),%rbx
@@ -16705,8 +16698,6 @@ attacker_function:
 .cfi_endproc 
 .size attacker_function, . - attacker_function
 
-            nop
-            nop
             nop
             nop
             nop
@@ -16730,7 +16721,7 @@ main:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__indbr_transform_target_main__c6127cca_0978_4ace_9486_88c15c1183ef__teapot__
+            jne .L__indbr_transform_target_main__ec6f1844_4465_45c5_87d8_cce69d3ef136__teapot__
 
             endbr64 
             subq $8,%rsp
@@ -16743,7 +16734,7 @@ main:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_main__f5e11276_dfbe_4dd4_8050_8b02e0e2f743__teapot__
+            jne .L__ret_transform_target_main__c505e8ff_37cd_493e_8b89_0ea5bd9ef408__teapot__
 
             movl $0,%eax
             movabsq $dift_reg_tags,%rax
@@ -16753,7 +16744,7 @@ main:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__ret_transform_target_main__7f449455_19f5_4c1a_b66c_65c07f5005c1__teapot__
+            jne .L__ret_transform_target_main__85d0b8a9_4353_4380_8c1f_d9bc94ac93b6__teapot__
 
             movl $0,%eax
             addq $8,%rsp
@@ -16772,7 +16763,7 @@ main:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__indbr_transform_target_main__65137746_70f6_4f34_a86a_fec4361c7201__teapot__
+            jne .L__indbr_transform_target_main__4582e74e_8836_4a6a_909d_d2703c31d825__teapot__
 
             nop
             nop
@@ -16902,7 +16893,7 @@ __libc_csu_fini:
             xchgq %rbx,%rbx
             nop
             cmpq $0,(checkpoint_cnt)
-            jne .L__indbr_transform_target___libc_csu_fini__b407d707_3c73_4108_adab_540e476955f3__teapot__
+            jne .L__indbr_transform_target___libc_csu_fini__738e53dc_024d_4dc5_a63f_51c546cafebf__teapot__
 
             endbr64 
             movq %rax,(scratchpad+524288)
@@ -16923,104 +16914,104 @@ __libc_csu_fini:
 #===================================
 
 .align 8
-.__branch_counter__e67f756f_e3a1_422e_adf9_2418c7255c1f__teapot__:
-.__branch_counter__9ac67204_319e_4ae2_91e9_f61eb271235a__teapot__:
+.__branch_counter__08a9741c_8b6a_4627_a2fd_ba42f066f656__teapot__:
+.__branch_counter__9d890186_5d58_4dc5_b875_330870304b82__teapot__:
           .zero 4
-.__branch_counter__106fc191_6cd3_428a_a5ba_b764d82cb844__teapot__:
-.__branch_counter__b2af70a8_e632_45e0_9b18_0cfa40b8f6f7__teapot__:
+.__branch_counter__0123dae6_c74c_479f_8df9_d4585205bbe3__teapot__:
+.__branch_counter__3637f681_0bfd_4eb1_9855_07b1a9aa101f__teapot__:
           .zero 4
-.__branch_counter__b23f1e21_ade1_4ef0_b4b2_588dfd29b425__teapot__:
-.__branch_counter__b1e7f285_a7f8_436d_af97_c5888aabbd7e__teapot__:
+.__branch_counter__6c1a7b2a_ea4f_4e65_be97_0007a1b2e15c__teapot__:
+.__branch_counter__e7bf71ac_233e_4d96_a5d9_49bd4408bafb__teapot__:
           .zero 4
-.__branch_counter__e268f776_b9e2_40c2_890a_ead0feecd826__teapot__:
-.__branch_counter__f33be396_2d44_44e7_9619_c8311c70b7b1__teapot__:
+.__branch_counter__fa28af4d_7400_489c_a6f6_2260c9c35214__teapot__:
+.__branch_counter__001696f8_80c8_4f62_9bee_301421d5978b__teapot__:
           .zero 4
-.__branch_counter__e75f3894_a53c_4971_9874_35810844b35d__teapot__:
-.__branch_counter__87aeb687_4660_45ad_932c_fb2b8e96e3d1__teapot__:
+.__branch_counter__f6f5e5e5_e408_433c_abc2_049517e56f22__teapot__:
+.__branch_counter__b9212420_fcfa_44cb_9e14_56097bdc3d1e__teapot__:
           .zero 4
-.__branch_counter__1dfb6b67_5990_4ef2_b383_45abe56cebb9__teapot__:
-.__branch_counter__be2a2e06_8e20_4833_8473_7a76673547ac__teapot__:
+.__branch_counter__66486815_7f0e_4589_bda2_01ad7a9bed52__teapot__:
+.__branch_counter__be456ae1_c16a_45bc_a4a9_14a207f75d95__teapot__:
           .zero 4
-.__branch_counter__d0f657a3_0524_47d4_ab87_04c3fc9b657b__teapot__:
-.__branch_counter__d6d1a998_ec62_4579_ad82_405ceff9b656__teapot__:
+.__branch_counter__a8f5131e_ffeb_4256_8f88_ea03495e84ce__teapot__:
+.__branch_counter__2e1eb74e_d668_4c69_8752_a770c9707337__teapot__:
           .zero 4
-.__branch_counter__b4a2cb74_979f_45c2_b9bc_b1234b30f2f8__teapot__:
-.__branch_counter__a0c77b16_9eb5_4428_a951_dff1a4509600__teapot__:
+.__branch_counter__96be25db_daab_49d1_9a80_379c0c0c1674__teapot__:
+.__branch_counter__9998af03_97a2_43e5_93e5_3517e89be9d2__teapot__:
           .zero 4
-.__branch_counter__95a16d59_e12c_4838_9bfe_d11dfccd92f7__teapot__:
-.__branch_counter__f542cbcb_73a3_47bb_a15c_c7f57c03d15c__teapot__:
+.__branch_counter__969e3e57_33e8_48a3_8dab_5c922b275781__teapot__:
+.__branch_counter__345bb64b_5d5d_4273_b3ab_6de102c2ffed__teapot__:
           .zero 4
-.__branch_counter__8e873746_e9d6_44c1_80ae_f8ab75dafe29__teapot__:
-.__branch_counter__08119b96_c39d_4f05_b5d9_1119e4d70971__teapot__:
+.__branch_counter__520c4071_24d9_492e_b6cb_c8b84a573cbf__teapot__:
+.__branch_counter__c8d8c201_2d94_4743_acb2_9d3b329d314c__teapot__:
           .zero 4
-.__branch_counter__e44ee5f2_11a6_488a_933d_6e9fe705b80f__teapot__:
-.__branch_counter__16e4af5c_3cad_4f07_aeec_3bd4fea41db9__teapot__:
+.__branch_counter__acbc9192_05a6_4210_b951_911c97f79d8a__teapot__:
+.__branch_counter__eb026ad7_5c62_47cd_bd9e_40636ce4cc33__teapot__:
           .zero 4
-.__branch_counter__c2968379_c685_42b6_bdae_5fca2eecbb95__teapot__:
-.__branch_counter__cff96331_ded0_4295_aa61_b7129b61bd64__teapot__:
+.__branch_counter__3397588c_3241_4448_966e_9b44c092b5e5__teapot__:
+.__branch_counter__29240a47_21b8_4aff_ab54_968a7ab4cd25__teapot__:
           .zero 4
-.__branch_counter__4e91c35a_b4e0_479f_b2c5_4516a6c24503__teapot__:
-.__branch_counter__40b7015d_4669_404d_b802_18030b8b0e66__teapot__:
+.__branch_counter__138b325c_5fe9_4a1a_b86e_20f81eb2c3da__teapot__:
+.__branch_counter__d9a78565_f49e_4370_ab42_4fcc3f4c2076__teapot__:
           .zero 4
-.__branch_counter__71efcf50_9075_484f_bbdc_fc2f8248b26e__teapot__:
-.__branch_counter__59d61923_598d_4b78_b74c_a7581c516310__teapot__:
+.__branch_counter__0d648235_990a_4d62_8936_daa8a905a9db__teapot__:
+.__branch_counter__f87dc753_2ee9_4bd6_9821_e676ccd8147d__teapot__:
           .zero 4
-.__branch_counter__5d1edaaf_8962_4b0e_b171_a1b88b4bc70e__teapot__:
-.__branch_counter__f3a283a7_776c_4369_a001_1a2fe7eb5bc5__teapot__:
+.__branch_counter__ae20bfba_6a9b_4b3c_9285_d5eeec099e7e__teapot__:
+.__branch_counter__d4b3ab72_cc21_4c54_a149_64390f6b9b56__teapot__:
           .zero 4
-.__branch_counter__ce579009_9a2b_400a_b2a4_83f065ff1cae__teapot__:
-.__branch_counter__ebbbbfa1_4208_4a69_aced_b9e374f22135__teapot__:
+.__branch_counter__8102deb9_fe07_4f28_9772_f41855e0b4e1__teapot__:
+.__branch_counter__8de62071_7928_4381_a7eb_0b62b6f1f7b7__teapot__:
           .zero 4
-.__branch_counter__be33b812_40e8_4a45_a7b6_dd0a8718de6f__teapot__:
-.__branch_counter__135eb19f_24ed_4364_aeef_bc0f72cc8f4f__teapot__:
+.__branch_counter__9f7cd845_a005_4068_9b29_f581d8b4e79e__teapot__:
+.__branch_counter__871aa948_cddd_4f5b_8eb7_1facbb9d78c1__teapot__:
           .zero 4
-.__branch_counter__9a7fa99a_5e71_4eee_8a8b_dd26670154fc__teapot__:
-.__branch_counter__db001040_0995_4d63_ace6_32d4b7cd41cc__teapot__:
+.__branch_counter__0f1a0ba5_030a_4d24_82a6_5dc94d3afaf7__teapot__:
+.__branch_counter__9ed98da6_eadc_4929_9866_9d34a66fdecf__teapot__:
           .zero 4
-.__branch_counter__fb4490f8_bc32_4ec9_9647_e19201b577dd__teapot__:
-.__branch_counter__0b6006c7_a177_45cf_8bcb_4e0810f87912__teapot__:
+.__branch_counter__47750739_4dbe_4b09_814d_88018b305708__teapot__:
+.__branch_counter__2349f3b9_d480_4280_a9a2_353d9ea4c4c9__teapot__:
           .zero 4
-.__branch_counter__1fb013f5_b055_457c_bd18_4f8d22f8eaba__teapot__:
-.__branch_counter__633e0687_2091_4128_92ba_f60fd46353ff__teapot__:
+.__branch_counter__b6db33d9_25b0_444c_b7e4_fcaaf5fd8af1__teapot__:
+.__branch_counter__66ed920a_c1ea_40bd_9954_18d11801e056__teapot__:
           .zero 4
-.__branch_counter__2c6708f6_86ca_4eec_a19e_9616d42671b6__teapot__:
-.__branch_counter__5efddf78_4c98_490c_b578_b723671923bb__teapot__:
+.__branch_counter__f44d9fb5_9124_4190_ae6b_78059fb6eaa8__teapot__:
+.__branch_counter__d49eeba5_904a_4187_b78a_e46d8c7310ac__teapot__:
           .zero 4
-.__branch_counter__da0fcc89_4728_468a_9276_7ba0e5ea4ed5__teapot__:
-.__branch_counter__133c87ac_2a09_47a4_b9d9_d3c5225f2834__teapot__:
+.__branch_counter__ee029a32_d540_450c_8c2f_ddab3cb38004__teapot__:
+.__branch_counter__732d7cd7_aa82_4282_ae2d_2df653e22ee0__teapot__:
           .zero 4
-.__branch_counter__384cf679_7aa0_40d3_bdb6_d7a59bf99751__teapot__:
-.__branch_counter__f09ce298_2bd3_4fff_b467_2ca312ad87e4__teapot__:
+.__branch_counter__3f2be5c9_be44_4b3b_9ed0_cf84ebf303b7__teapot__:
+.__branch_counter__70a0842c_7442_4079_80d5_8a6e361514d1__teapot__:
           .zero 4
-.__branch_counter__f6f7865d_8891_460a_9a2a_90d16ada9601__teapot__:
-.__branch_counter__879171fc_c261_43f7_a1e5_ba8dedc7fc02__teapot__:
+.__branch_counter__479025d9_6ebc_4cf3_a8d3_04093a6b7dc9__teapot__:
+.__branch_counter__a84f83ad_1e7c_4966_8724_0854a0275058__teapot__:
           .zero 4
-.__branch_counter__2b1ab097_f86c_4bf6_aa90_c318cb206118__teapot__:
-.__branch_counter__01262193_ac48_4fbe_b828_49a992f290b6__teapot__:
+.__branch_counter__3cd42740_ca65_4fa1_ac56_645963515d05__teapot__:
+.__branch_counter__56a60200_76a9_4348_afec_f9d08a4fb692__teapot__:
           .zero 4
-.__branch_counter__1f04b63c_98f8_45d2_82e0_beaabb550c3d__teapot__:
-.__branch_counter__8861aade_eb1b_495f_b351_ece101d6a33e__teapot__:
+.__branch_counter__0c647829_3f6e_424c_8bc4_eec8c4caa290__teapot__:
+.__branch_counter__73454647_e019_4b26_ac47_096045cba6c2__teapot__:
           .zero 4
-.__branch_counter__b38589ae_25bb_4b74_b333_932a4e49149b__teapot__:
-.__branch_counter__fd5641e4_e267_4951_b96a_dbc788d665c2__teapot__:
+.__branch_counter__2d8b2904_dc58_4a0a_bf26_858b40035890__teapot__:
+.__branch_counter__a0b2349d_d497_44ab_adc1_f79988d7df99__teapot__:
           .zero 4
-.__branch_counter__085c0535_89c0_4e36_b02f_7e8d9eb54dc1__teapot__:
-.__branch_counter__853ba40b_7ec0_493f_bcd9_804f5ba9be01__teapot__:
+.__branch_counter__3a392698_d00d_43c5_a4bb_0b58dafc3b41__teapot__:
+.__branch_counter__19a633a3_58ec_450c_a1a7_e5cecca00a47__teapot__:
           .zero 4
-.__branch_counter__d8ccb866_3a17_41e9_8f34_3ec4c2c9ab16__teapot__:
-.__branch_counter__52363970_9b97_4e01_ac2e_d434946027e3__teapot__:
+.__branch_counter__31500b1f_dd7d_45c8_8bf8_60e62467f1b2__teapot__:
+.__branch_counter__ef3bf9f5_b46a_4d7a_9b10_8b9b47f68315__teapot__:
           .zero 4
-.__branch_counter__cdfd276c_8f23_42df_9797_a1bb7b3ade85__teapot__:
-.__branch_counter__56cc3ed5_95b1_485d_87db_7f46ea4f109f__teapot__:
+.__branch_counter__4657c448_5658_48f1_aed9_4ee4ad5a94b3__teapot__:
+.__branch_counter__b88d08a0_3a05_4252_8951_2ed6bfab4973__teapot__:
           .zero 4
-.__branch_counter__2ef6d49f_ad26_4341_9049_aaf1240f721d__teapot__:
-.__branch_counter__29f74a48_66a9_4470_a76e_7d8f29f226b9__teapot__:
+.__branch_counter__643980ef_5071_4300_a67b_3238470ceaf1__teapot__:
+.__branch_counter__f3d0f919_f7e0_480f_9dfd_b16b351dfcd9__teapot__:
           .zero 4
-.__branch_counter__83aab3c4_d0fb_4141_9468_9c5921c07def__teapot__:
-.__branch_counter__5d594b8d_9c60_4744_bb93_441ddbc388a5__teapot__:
+.__branch_counter__c362d663_c2e2_43fc_a017_845a8fca99b0__teapot__:
+.__branch_counter__b8e70c93_4c51_48a8_b0b2_7b514a43b309__teapot__:
           .zero 4
-.__branch_counter__ca04d35d_d303_453a_811a_57c7127756ba__teapot__:
-.__branch_counter__d3b52477_7339_4e5c_8604_1a905a450826__teapot__:
+.__branch_counter__a443664a_f1ad_4fd9_a559_5be26ad24f64__teapot__:
+.__branch_counter__0fb98d1e_c46e_40b6_a492_bc4dd330d8a3__teapot__:
           .zero 4
 #===================================
 # end section .teapot_branch_counters

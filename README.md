@@ -83,3 +83,11 @@ $ ./a.inst input.txt
 ## Troubleshooting
 
 See [TROUBLESHOOTING.md](https://github.com/lin-toto/teapot/blob/main/TROUBLESHOOTING.md) for common issues.
+
+## Spectre setup
+
+Move the Spectre executable into the teapot directory
+
+Run usage.sh as `sh usage.sh`
+
+
