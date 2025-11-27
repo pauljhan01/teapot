@@ -10,6 +10,14 @@ The submodule `libcheckpoint_x64` contains the runtime library.
 
 ## Spectre setup
 
+This assumes you are in the teapot directory
+`docker build -t spectre-poc .`
+
+`docker run -it --name spectre-poc spectre-poc`
+
+If you want to access the same Docker container
+`docker start -i spectre-poc`
+
 Assuming the newest Spectre executable is in the teapot directory
 
 Run usage.sh as `sh usage.sh`
