@@ -4,5 +4,9 @@ teapot mimalloc.out.gtirb mimalloc.inst.gtirb
 gtirb-pprinter --ir mimalloc.inst.gtirb --asm mimalloc.inst.S
 sed -i -f scripts/fix_asm.sed mimalloc.inst.S
 
-gcc -o libmimalloc.inst.so mimalloc.inst.S -shared -fPIC \
+gcc -c teapot_stubs.c -fPIC -o teapot_stubs.o
+
+gcc -o libmimalloc.inst.so mimalloc.inst.S teapot_stubs.o \
+    -shared -fPIC -nostartfiles \
+    -lcheckpoint_x64 -lhfuzz -lasan \
     -lm -lz -lpthread -ldl
