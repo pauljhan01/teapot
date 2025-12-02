@@ -28,6 +28,6 @@ RUN cd /tmp/teapot/honggfuzz && make && make install && \
 # RUN rm -rf /tmp/teapot
 
 RUN mkdir /workspace
-RUN cd /workspace && git clone --recursive https://github.com/pauljhan01/teapot.git && git clone https://github.com/pauljhan01/spectre-poc.git
+RUN cd /workspace && git clone --recursive https://github.com/pauljhan01/teapot.git
 # RUN cd /workspace/spectre-poc && make && mv spectre /workspace/teapot
 WORKDIR /workspace
