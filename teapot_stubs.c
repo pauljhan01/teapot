@@ -9,7 +9,7 @@
 void* __dso_handle __attribute__((visibility("hidden"))) = &__dso_handle;
 
 // Thread-local storage for teapot instrumentation
-__thread char scratchpad[8192];
+char scratchpad[8192];
 __thread void* memory_history_top;
 __thread void* dift_reg_tags[16];
 __thread void* dift_reg_queued_tag;

@@ -6,7 +6,7 @@
 #include <sys/resource.h>
 
 // Thread-local storage declarations
-extern __thread char scratchpad[8192];
+extern char scratchpad[8192];
 extern __thread void* memory_history_top;
 extern __thread void* dift_reg_tags[16];
 extern __thread void* dift_reg_queued_tag;
