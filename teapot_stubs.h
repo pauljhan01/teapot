@@ -7,14 +7,14 @@
 
 // Thread-local storage declarations
 extern char scratchpad[8192];
-extern __thread void* memory_history_top;
-extern __thread void* dift_reg_tags[16];
-extern __thread void* dift_reg_queued_tag;
-extern __thread void* dift_reg_queued_id;
-extern __thread void* old_rsp;
-extern __thread unsigned long instruction_cnt;
-extern __thread void* guard_list_top;
-extern __thread void* checkpoint_target_metadata;
+extern void* memory_history_top;
+extern void* dift_reg_tags[16];
+extern void* dift_reg_queued_tag;
+extern void* dift_reg_queued_id;
+extern void* old_rsp;
+extern unsigned long instruction_cnt;
+extern void* guard_list_top;
+extern void* checkpoint_target_metadata;
 
 // Function declarations
 void report_gadget_KASPER_PORT(void);

@@ -10,14 +10,14 @@ void* __dso_handle __attribute__((visibility("hidden"))) = &__dso_handle;
 
 // Thread-local storage for teapot instrumentation
 char scratchpad[8192];
-__thread void* memory_history_top;
-__thread void* dift_reg_tags[16];
-__thread void* dift_reg_queued_tag;
-__thread void* dift_reg_queued_id;
-__thread void* old_rsp;
-__thread unsigned long instruction_cnt;
-__thread void* guard_list_top;
-__thread void* checkpoint_target_metadata;
+void* memory_history_top;
+void* dift_reg_tags[16];
+void* dift_reg_queued_tag;
+void* dift_reg_queued_id;
+void* old_rsp;
+unsigned long instruction_cnt;
+void* guard_list_top;
+void* checkpoint_target_metadata;
 
 // KASPER gadget reporting (security monitoring)
 void report_gadget_KASPER_PORT(void) {}
